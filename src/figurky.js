@@ -412,6 +412,8 @@ const Figurky = (() => {
     if (!linkyBezi) return;
     const dt = Math.min(0.05, (t - linkyPosledni) / 1000 || 0.016); linkyPosledni = t;
     for (const L of linky) {
+      // spodní linka prvku, který mění výšku (karta s otázkou): plátno sleduje spodní okraj
+      if (L.side === 'bottom' && L.canvas) { const bt = parseFloat(getComputedStyle(L.el).borderTopWidth) || 0; const top = L.el.offsetHeight - bt - 1 - Math.round(L.H / 2); if (L.posledniTop !== top) { L.posledniTop = top; L.canvas.style.top = top + 'px'; } }
       L.ctx.clearRect(0, 0, L.W, L.H);
       for (const f of L.fig) {
         f.faze += dt * 2.4; if (f.lezic) lezicKrok(f, dt);
