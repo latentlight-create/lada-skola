@@ -1,0 +1,719 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Český jazyk test">
+<meta name="theme-color" content="#bfe6ff">
+<link rel="apple-touch-icon" href="icon.png">
+<link rel="icon" href="icon.png">
+<title>Český jazyk test</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap">
+<style>
+:root{
+  --ink:#1d2a44; --muted:#5b6b85; --card:#fff;
+  --blue:#2f7ff0; --green:#2fb36a; --red:#e8454d; --yellow:#ffc93c; --orange:#ff8a3d; --purple:#8a5cf0; --pink:#ff5d8f;
+  --lane:clamp(118px,19vh,180px);
+  --font:"Nunito","Arial Rounded MT Bold",system-ui,-apple-system,sans-serif;
+  color-scheme:light;
+}
+[hidden]{display:none!important}
+*{box-sizing:border-box}
+html,body{min-height:100%}
+body{margin:0;font-family:var(--font);color:var(--ink);font-size:19px;line-height:1.4;
+  background:linear-gradient(180deg,#bfe6ff 0%,#e3f4ff 45%,#fff4d6 100%) fixed;
+  -webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none;
+  -webkit-user-select:none;user-select:none;touch-action:manipulation;overflow-x:hidden}
+button{font:inherit;color:inherit;cursor:pointer;touch-action:manipulation;background:none;border:0;padding:0;-webkit-appearance:none;appearance:none}
+button:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+
+/* mraky */
+.mrak{position:fixed;z-index:0;width:130px;height:42px;background:#fff;border-radius:42px;opacity:.9;pointer-events:none;animation:mrak linear infinite}
+.mrak::before,.mrak::after{content:"";position:absolute;background:#fff;border-radius:50%}
+.mrak::before{width:54px;height:54px;top:-26px;left:18px}
+.mrak::after{width:70px;height:70px;top:-38px;left:50px}
+.m1{top:9%;animation-duration:95s;animation-delay:-20s}
+.m2{top:30%;animation-duration:130s;animation-delay:-70s;transform:scale(.7)}
+.m3{top:18%;animation-duration:110s;animation-delay:-45s}
+@keyframes mrak{from{left:-220px}to{left:110vw}}
+
+#app{position:relative;z-index:1;max-width:1040px;margin:0 auto;
+  padding:calc(env(safe-area-inset-top) + 12px) 16px calc(var(--lane) + env(safe-area-inset-bottom) + 18px)}
+.top{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.ttl{flex:1;min-width:0}
+h1{font-weight:900;font-size:clamp(26px,4.2vw,42px);line-height:1.05;margin:0;letter-spacing:-.01em}
+#sub{margin:4px 0 0;color:var(--muted);font-weight:700;font-size:clamp(15px,1.9vw,18px)}
+.topR{display:flex;align-items:center;gap:8px}
+.pill{display:inline-flex;align-items:center;gap:6px;background:#fff;border-radius:999px;padding:8px 14px;font-weight:900;font-size:18px;box-shadow:0 3px 0 rgba(29,42,68,.12)}
+.pill:active,.iconbtn:active{transform:translateY(2px);box-shadow:0 1px 0 rgba(29,42,68,.12)}
+.iconbtn{background:#fff;border-radius:999px;min-width:48px;height:48px;padding:0 14px;font-weight:900;font-size:20px;box-shadow:0 3px 0 rgba(29,42,68,.12)}
+#back{font-size:22px}
+
+/* domů */
+.karty{display:grid;grid-template-columns:1fr;gap:16px}
+@media (min-width:720px){.karty{grid-template-columns:1fr 1fr}}
+.exCard{position:relative;display:flex;align-items:center;gap:14px;text-align:left;background:#fff;border:4px solid var(--c);border-radius:26px;padding:16px 14px 16px 16px;
+  box-shadow:0 7px 0 var(--c);transition:transform .08s;min-height:150px}
+.exCard:active{transform:translateY(5px);box-shadow:0 2px 0 var(--c)}
+.exCard .num{flex:none;width:46px;height:46px;border-radius:50%;background:var(--c);color:#fff;font-weight:900;font-size:24px;display:grid;place-items:center}
+.exCard .tx{flex:1;min-width:0}
+.exCard b{display:block;font-size:clamp(20px,2.5vw,25px);font-weight:900;line-height:1.15}
+.exCard small{display:block;color:var(--muted);font-weight:700;font-size:15px;margin-top:4px;line-height:1.3}
+.exCard .hv{display:block;margin-top:6px;font-size:24px;color:var(--yellow);letter-spacing:2px;text-shadow:0 2px 0 #e0a800}
+.hv .off{color:#dde3ee;text-shadow:none}
+.exCard .mini{flex:none;width:96px;height:76px}
+.exCard .mini svg{width:100%;height:100%}
+.exCard.hotove::after{content:"✓";position:absolute;top:-12px;right:-10px;width:36px;height:36px;border-radius:50%;background:var(--green);color:#fff;font-weight:900;display:grid;place-items:center;font-size:20px;box-shadow:0 3px 0 #1d8a4f}
+.banner{margin-top:18px;background:linear-gradient(90deg,#ffe17a,#ffc93c);border-radius:20px;padding:14px 18px;font-weight:900;font-size:21px;text-align:center;box-shadow:0 5px 0 #e0a800;animation:houpe 1.4s ease-in-out infinite alternate}
+@keyframes houpe{from{transform:rotate(-1deg)}to{transform:rotate(1deg)}}
+.tip{color:var(--muted);font-weight:800;text-align:center;margin:18px 0 0}
+
+/* cvičení */
+.exHead{display:flex;align-items:center;gap:10px;margin:0 0 10px}
+.dots{display:flex;flex-wrap:wrap;gap:6px;flex:1}
+.dots i{width:16px;height:16px;border-radius:50%;background:#fff;box-shadow:inset 0 0 0 2px #c9d6ea}
+.dots i.cur{background:var(--yellow);box-shadow:0 0 0 3px #fff;animation:tep 1s ease-in-out infinite alternate}
+.dots i.done{background:#9fd7b5}
+.dots i.ok{background:var(--green)}
+@keyframes tep{from{transform:scale(1)}to{transform:scale(1.25)}}
+.pocet{font-weight:900;color:var(--muted);font-size:17px;white-space:nowrap}
+.card{background:#fff;border-radius:28px;padding:clamp(18px,3vw,30px);box-shadow:0 8px 0 rgba(29,42,68,.1)}
+.card.vjezd{animation:vjezd .35s cubic-bezier(.25,1.4,.5,1)}
+@keyframes vjezd{from{transform:translateX(40px) rotate(1deg);opacity:0}to{transform:none;opacity:1}}
+.ukol{font-weight:800;font-size:clamp(19px,2.4vw,23px);line-height:1.3}
+.ukol small{display:block;color:var(--muted);font-weight:700;font-size:16px;margin-top:3px}
+.veta{font-weight:700;margin:16px 0 18px}
+.veta.big{font-size:clamp(23px,3.3vw,34px);line-height:1.75}
+.gap{display:inline-block;min-width:1.05em;text-align:center;border-bottom:4px solid #9fb2cc;border-radius:7px 7px 0 0;line-height:1.15;margin:0 1px;color:var(--green);font-weight:900}
+.gap.cur{background:#fff1a6;border-color:var(--orange);animation:blik .9s ease-in-out infinite alternate}
+.gap.ok{background:#e3f8ec;border-color:var(--green)}
+.gap.bad{animation:cervena .5s}
+@keyframes blik{from{background:#fff1a6}to{background:#ffd75e}}
+@keyframes cervena{0%,100%{background:#fff1a6}30%{background:#ff9aa0}}
+.pismena{display:flex;justify-content:center;gap:clamp(10px,2vw,18px);flex-wrap:wrap}
+.pism{min-width:clamp(74px,11vw,104px);height:clamp(74px,11vw,104px);padding:0 14px;border-radius:24px;color:#fff;font-weight:900;font-size:clamp(38px,5.4vw,52px);line-height:1;
+  background:var(--b);box-shadow:0 7px 0 var(--bs);transition:transform .07s}
+.pism:active{transform:translateY(5px);box-shadow:0 2px 0 var(--bs)}
+.pism:disabled{opacity:.3;filter:grayscale(1);transform:translateY(5px);box-shadow:0 2px 0 var(--bs)}
+.p-i{--b:var(--blue);--bs:#1c5ec2}.p-ii{--b:var(--purple);--bs:#6538c9}.p-y{--b:var(--orange);--bs:#d0631d}.p-yy{--b:var(--pink);--bs:#cf3a6a}
+.pism.kon{font-size:clamp(26px,3.6vw,36px);--b:var(--blue);--bs:#1c5ec2}
+.pism.kon:nth-child(2){--b:var(--orange);--bs:#d0631d}.pism.kon:nth-child(3){--b:var(--purple);--bs:#6538c9}
+.pism.kon b{text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:4px}
+.fb{min-height:2.5em;margin-top:18px;padding:10px 16px;border-radius:16px;font-weight:700;font-size:clamp(17px,2vw,20px);line-height:1.35;background:#f3f6fb;color:var(--muted)}
+.fb:empty{background:transparent}
+.fb.good{background:#e3f8ec;color:#176a3c}
+.fb.bad{background:#ffe7e8;color:#a3262c}
+.nav{display:flex;justify-content:flex-end;margin-top:14px;min-height:10px}
+.dalsi{background:var(--green);color:#fff;font-weight:900;font-size:clamp(22px,2.8vw,28px);padding:14px 34px;border-radius:22px;box-shadow:0 7px 0 #1d8a4f;animation:pulz 1.1s ease-in-out infinite alternate}
+.dalsi:active{transform:translateY(5px);box-shadow:0 2px 0 #1d8a4f;animation:none}
+@keyframes pulz{from{transform:scale(1)}to{transform:scale(1.05)}}
+.sek{background:#fff;border:3px solid #c9d6ea;font-weight:900;font-size:20px;padding:12px 22px;border-radius:20px;box-shadow:0 5px 0 #c9d6ea}
+.sek:active{transform:translateY(4px);box-shadow:0 1px 0 #c9d6ea}
+.shake{animation:shake .4s}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-9px)}40%{transform:translateX(8px)}60%{transform:translateX(-6px)}80%{transform:translateX(4px)}}
+
+.volby2{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.vol{min-width:min(280px,42%);padding:18px 22px;border-radius:22px;background:#fff;border:4px solid var(--blue);color:var(--blue);font-weight:900;font-size:clamp(21px,2.7vw,27px);box-shadow:0 7px 0 var(--blue)}
+.vol:nth-child(2){border-color:var(--orange);color:#c95a14;box-shadow:0 7px 0 var(--orange)}
+.vol:nth-child(3){border-color:var(--purple);color:var(--purple);box-shadow:0 7px 0 var(--purple)}
+.vol:active{transform:translateY(5px);box-shadow:0 2px 0 currentColor}
+.vol:disabled{opacity:.3}
+.vol.spravne{background:var(--green);border-color:var(--green);color:#fff;box-shadow:0 7px 0 #1d8a4f}
+.slovo{display:inline-block;border-radius:10px;padding:0 3px;line-height:1.35}
+.slovo.sloveso{background:#ffe08a;box-shadow:0 0 0 3px #ffe08a}
+.tap .slovo{background:#eef4ff;margin:3px 1px;padding:0 7px;cursor:pointer}
+.tap .slovo:active{background:#d6e6ff}
+.slovo.pod,.pod{background:#e3f8ec!important;box-shadow:inset 0 -5px 0 var(--green)}
+.slovo.pris{background:#ffecec url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='8'%3E%3Cpath d='M0 5 Q3.5 0 7 5 T14 5' fill='none' stroke='%23e8454d' stroke-width='2.4'/%3E%3C/svg%3E") repeat-x left bottom/14px 8px!important;padding-bottom:4px}
+.legenda{display:flex;gap:18px;flex-wrap:wrap;font-weight:800;color:var(--muted);font-size:16px}
+.legenda span{padding:0 4px 4px}
+.lp{box-shadow:inset 0 -4px 0 var(--green)}
+.lpr{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='8'%3E%3Cpath d='M0 5 Q3.5 0 7 5 T14 5' fill='none' stroke='%23e8454d' stroke-width='2.4'/%3E%3C/svg%3E") repeat-x left bottom/14px 8px}
+.tp{color:var(--green)}.tpr{color:var(--red)}
+.chips{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:6px 0 4px}
+.chip{padding:10px 20px;border-radius:999px;background:#fff;border:3px solid #c9d6ea;font-weight:900;font-size:clamp(20px,2.6vw,26px);box-shadow:0 4px 0 #c9d6ea}
+.chip:active{transform:translateY(3px);box-shadow:0 1px 0 #c9d6ea}
+.chip.found{background:var(--green);border-color:var(--green);color:#fff;box-shadow:0 4px 0 #1d8a4f;animation:pop .35s cubic-bezier(.3,1.7,.5,1)}
+.chip:disabled:not(.found){opacity:.35;text-decoration:line-through}
+@keyframes pop{from{transform:scale(.6)}to{transform:scale(1)}}
+.pocit{text-align:center;font-weight:900;font-size:22px;color:var(--green);margin:10px 0}
+.new{color:var(--green)}
+
+/* škrtání */
+.pr{display:inline-block;font:inherit;font-weight:800;color:#1f7a45;background:#f2fbf5;border:3px dashed #9cd3b1;border-radius:14px;padding:0 10px;margin:4px 2px;line-height:1.5}
+.pr:active{transform:scale(.96)}
+.pr.skrt{color:#b8323a;border-color:#f3a7ab;background:#fff1f1 linear-gradient(to top right,transparent calc(50% - 2.5px),var(--red) calc(50% - 2.5px),var(--red) calc(50% + 2.5px),transparent calc(50% + 2.5px));text-decoration:line-through;text-decoration-thickness:3px;animation:skrt .3s}
+.pr.dobre{border-style:solid;border-color:var(--green);background:#e3f8ec}
+@keyframes skrt{0%{transform:scale(1)}40%{transform:scale(1.12) rotate(-3deg)}100%{transform:scale(1)}}
+.pomlc{color:#9fb2cc;margin:0 2px}
+.podm{color:var(--ink);font-weight:900}
+.nav2{display:flex;justify-content:center;margin-top:4px}
+
+/* vzorce */
+.kl{border-radius:10px;padding:2px 4px;transition:background .3s}
+.barvy .kl.k1{background:#d8e8ff;box-shadow:inset 0 -4px 0 var(--blue)}
+.barvy .kl.k2{background:#ffe6d2;box-shadow:inset 0 -4px 0 var(--orange)}
+.barvy .kl::before{font-size:.5em;font-weight:900;vertical-align:super;margin-right:3px}
+.barvy .kl.k1::before{content:"V1";color:var(--blue)}
+.barvy .kl.k2::before{content:"V2";color:#c95a14}
+.spoj{color:var(--purple);font-weight:900}
+.vol.vz{font-size:clamp(22px,2.9vw,30px);min-width:min(220px,40%)}
+
+/* podmět + koncovka */
+.sub{display:inline-block;font:inherit;font-weight:800;color:#1f5fbf;background:#eef4ff;border:4px solid transparent;border-radius:999px;padding:0 12px;margin:3px 1px;line-height:1.45}
+.sub:active{transform:scale(.96)}
+.sub.kruh{border-color:var(--red);background:#fff;color:var(--ink);animation:kruh .45s cubic-bezier(.3,1.7,.5,1)}
+.sub.ne{opacity:.35;text-decoration:line-through}
+.sub.pryc{opacity:.4}
+@keyframes kruh{from{transform:scale(1.35) rotate(-6deg)}to{transform:none}}
+.pred{white-space:nowrap}
+.volby3{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:6px}
+
+/* závod */
+.vyber{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin-top:16px}
+.zbtn{background:#f3f8ff;border:3px solid #c9d6ea;border-radius:22px;padding:10px 6px;font-weight:900;font-size:17px;box-shadow:0 5px 0 #c9d6ea;display:flex;flex-direction:column;align-items:center;gap:4px}
+.zbtn:active{transform:translateY(4px);box-shadow:0 1px 0 #c9d6ea}
+.zb{width:110px;height:86px}.zb svg{width:100%;height:100%}
+.trat{position:relative;height:clamp(180px,25vh,216px);border-radius:22px;overflow:hidden;margin:14px 0 8px;background:linear-gradient(#a6dc80,#74c454)}
+.draha{position:relative;height:50%;border-bottom:3px dashed rgba(255,255,255,.75)}
+.draha:last-of-type{border-bottom:0}
+.draha.ja{background:rgba(255,255,255,.12)}
+.cil{position:absolute;right:8px;top:0;bottom:0;width:18px;background:repeating-conic-gradient(#222 0 25%,#fff 0 50%) 0 0/18px 18px;opacity:.9}
+.zv{position:absolute;bottom:2px;left:calc(var(--p,0) * (100% - 104px));transition:left .45s cubic-bezier(.3,1.35,.5,1);--zh:66px}
+#zO{transition:none}
+.zv .zvire{position:relative;left:auto;bottom:auto}
+.zstav{text-align:center;font-weight:900;color:var(--muted)}
+.otazka{text-align:center;font-weight:900;font-size:clamp(30px,4.6vw,46px);margin:8px 0 14px;min-height:1.3em}
+.odpocet{display:inline-block;color:var(--orange);animation:pop .4s cubic-bezier(.3,1.7,.5,1)}
+.zakop{animation:shake .4s}
+
+/* zvířátka */
+#lane{position:fixed;left:0;right:0;bottom:0;height:calc(var(--lane) + 90px + env(safe-area-inset-bottom));pointer-events:none;z-index:60;overflow:hidden}
+.louka{position:absolute;left:0;bottom:0;width:100%;height:calc(var(--lane)*.42 + env(safe-area-inset-bottom))}
+.kytka{position:absolute;font-size:clamp(16px,2.4vw,24px);line-height:1}
+.zvire{--zh:calc(var(--lane)*.72);position:absolute;left:0;bottom:calc(var(--lane)*.13 + env(safe-area-inset-bottom));height:var(--zh);width:calc(var(--zh)*1.273);will-change:transform}
+.zvire.idle{--zh:calc(var(--lane)*.62);pointer-events:auto;cursor:pointer}
+.zvire.delfin,.zvire.velryba{bottom:calc(var(--lane)*.05 + env(safe-area-inset-bottom))}
+.zvire svg{width:100%;height:100%;display:block;overflow:visible}
+.zvire .noha,.zvire .mava,.zvire .ocas,.zvire .hlava,.zvire .gejzir{transform-box:view-box}
+.run .nA{animation:krokA .28s ease-in-out infinite alternate}
+.run .nB{animation:krokB .28s ease-in-out infinite alternate}
+@keyframes krokA{from{transform:rotate(-28deg)}to{transform:rotate(28deg)}}
+@keyframes krokB{from{transform:rotate(28deg)}to{transform:rotate(-28deg)}}
+.run svg{animation:hop .14s ease-in-out infinite alternate}
+@keyframes hop{from{transform:translateY(0)}to{transform:translateY(-5%)}}
+.run .ocas{animation:vrt .28s ease-in-out infinite alternate}
+.stoji svg{animation:dych 1.5s ease-in-out infinite alternate}
+@keyframes dych{from{transform:translateY(0)}to{transform:translateY(-3%)}}
+.stoji .ocas{animation:vrt .9s ease-in-out infinite alternate}
+.mav svg{animation:poskok .45s ease-in-out infinite alternate}
+@keyframes poskok{from{transform:translateY(0)}to{transform:translateY(-7%)}}
+.mav .mava{animation:mavL .4s ease-in-out infinite alternate}
+@keyframes mavL{from{transform:rotate(-112deg)}to{transform:rotate(-158deg)}}
+.mav .ocas{animation:vrt .16s ease-in-out infinite alternate}
+@keyframes vrt{from{transform:rotate(-15deg)}to{transform:rotate(15deg)}}
+.mav .hlava{animation:kyv .45s ease-in-out infinite alternate}
+@keyframes kyv{from{transform:rotate(-7deg)}to{transform:rotate(6deg)}}
+.delfin.mav .mava,.velryba.mav .mava{animation:mavF .32s ease-in-out infinite alternate}
+@keyframes mavF{from{transform:rotate(12deg)}to{transform:rotate(-60deg)}}
+.delfin.run svg{animation:skok .8s ease-in-out infinite}
+@keyframes skok{0%{transform:translateY(16%) rotate(-24deg)}50%{transform:translateY(-34%) rotate(0deg)}100%{transform:translateY(16%) rotate(24deg)}}
+.velryba.run svg{animation:plav .45s ease-in-out infinite alternate}
+@keyframes plav{from{transform:translateY(0) rotate(-3deg)}to{transform:translateY(-6%) rotate(3deg)}}
+.gejzir{opacity:0}
+.mav .gejzir{animation:gejz .8s ease-out infinite}
+@keyframes gejz{0%{opacity:0;transform:scaleY(.2)}30%{opacity:1;transform:scaleY(1)}100%{opacity:0;transform:translateY(-5px) scaleY(1.1)}}
+.vlna{position:absolute;left:-14%;width:128%;bottom:-8%;height:36%;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='20' viewBox='0 0 40 20'%3E%3Cpath d='M0 7 Q10 0 20 7 T40 7 V20 H0Z' fill='%2357b8f2'/%3E%3Cpath d='M0 12 Q10 6 20 12 T40 12 V20 H0Z' fill='%233a9be0'/%3E%3C/svg%3E") repeat-x 0 0/34px 100%;
+  border-radius:0 0 40% 40%;animation:vlnit 1.2s linear infinite}
+@keyframes vlnit{from{background-position:0 0}to{background-position:34px 0}}
+.bub{position:absolute;left:55%;bottom:98%;transform:translateX(-50%) scale(0);transform-origin:40% 100%;background:#fff;border:3px solid var(--ink);border-radius:18px;
+  padding:5px 12px;font-weight:900;font-size:clamp(15px,2.1vw,20px);white-space:nowrap;transition:transform .28s cubic-bezier(.3,1.7,.5,1);box-shadow:0 4px 0 rgba(29,42,68,.15);z-index:2}
+.bub.on{transform:translateX(-50%) scale(1)}
+.bub::after{content:"";position:absolute;left:38%;top:100%;border:9px solid transparent;border-top-color:var(--ink)}
+.bub.vys{bottom:130%}
+
+/* efekty */
+#fx{position:fixed;inset:0;pointer-events:none;z-index:70}
+.jiskra{position:fixed;width:11px;height:11px;border-radius:50%}
+#fw{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:55}
+
+/* finále + tahák */
+.ovl{position:fixed;inset:0;z-index:50;background:rgba(18,44,92,.38);display:flex;align-items:flex-start;justify-content:center;overflow:auto;
+  padding:calc(env(safe-area-inset-top) + 20px) 16px calc(var(--lane) + 30px)}
+.fcard,.tcard{position:relative;background:#fff;border-radius:30px;padding:22px 26px 24px;max-width:580px;width:100%;text-align:center;box-shadow:0 10px 0 rgba(0,0,0,.15);animation:vyskoc .5s cubic-bezier(.3,1.5,.5,1)}
+@keyframes vyskoc{from{transform:scale(.6);opacity:0}to{transform:none;opacity:1}}
+.fmedal{width:120px;height:120px;margin:-6px auto 0;border-radius:50%;background:radial-gradient(circle at 50% 40%,#fff6c9,#ffd75e);box-shadow:0 0 0 6px #ffc93c,0 6px 0 6px #e0a800;display:grid;place-items:center}
+.fmedal svg{width:96px;height:76px}
+.fcard h2{font-size:clamp(30px,4.6vw,44px);font-weight:900;margin:16px 0 0;line-height:1.1}
+.fsub{margin:4px 0 0;color:var(--muted);font-weight:800}
+.fhv{font-size:62px;line-height:1;margin:10px 0 2px;letter-spacing:6px}
+.fhv span{color:#dde3ee;display:inline-block}
+.fhv span.on{color:var(--yellow);text-shadow:0 4px 0 #e0a800;animation:hvezda .55s cubic-bezier(.3,1.8,.5,1) both}
+@keyframes hvezda{from{transform:scale(0) rotate(-90deg)}to{transform:none}}
+.fch{font-weight:800;font-size:20px;margin:6px 0 14px}
+.fbtns{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.fbtns .dalsi{font-size:24px;padding:12px 26px}
+.tcard{text-align:left;max-width:720px}
+.tcard h2{margin:0 0 6px;font-size:30px;font-weight:900}
+.tcard h3{margin:16px 0 6px;font-size:21px;font-weight:900;color:var(--blue)}
+.tcard ul{margin:0;padding-left:22px;font-weight:700;line-height:1.5}
+.tt{width:100%;border-collapse:collapse;font-weight:700;font-size:17px}
+.tt td{padding:7px 8px;border-bottom:2px solid #edf1f7;vertical-align:top}
+.tt .k{font-weight:900;font-size:22px;color:var(--red);text-align:center;white-space:nowrap}
+.zavri{position:absolute;top:12px;right:12px;width:46px;height:46px;border-radius:50%;background:#f0f4fa;font-weight:900;font-size:22px}
+@media (prefers-reduced-motion:reduce){.mrak{animation:none}}
+</style>
+</head>
+<body>
+<div class="mrak m1"></div><div class="mrak m2"></div><div class="mrak m3"></div>
+<div id="app">
+  <header class="top">
+    <button id="back" class="iconbtn" hidden aria-label="Zpět domů">← Domů</button>
+    <div class="ttl"><h1 id="h1">Český jazyk test</h1><p id="sub"></p></div>
+    <div class="topR">
+      <span class="pill" title="Hvězdičky">⭐ <b id="hvezdy">0</b></span>
+      <button id="tahakB" class="iconbtn" aria-label="Tahák">📝</button>
+      <button id="mute" class="iconbtn" aria-label="Zvuk">🔊</button>
+    </div>
+  </header>
+  <main id="home"></main>
+  <main id="ex" hidden>
+    <div class="exHead"><div class="dots" id="dots"></div><span class="pocet" id="pocet"></span></div>
+    <section class="card" id="card"></section>
+  </main>
+</div>
+
+<div id="lane" aria-hidden="true">
+  <svg class="louka" viewBox="0 0 1000 100" preserveAspectRatio="none"><path d="M0 28 Q120 2 250 22 T500 18 T750 26 T1000 12 V100 H0Z" fill="#9ad874"/><path d="M0 56 Q150 36 300 52 T600 46 T1000 50 V100 H0Z" fill="#6cbf4a"/></svg>
+</div>
+<canvas id="fw" hidden></canvas>
+<div id="fx"></div>
+<div id="finale" class="ovl" hidden></div>
+<div id="tahak" class="ovl" hidden>
+  <div class="tcard">
+    <button class="zavri" id="tahakX" aria-label="Zavřít">✕</button>
+    <h2>📝 Tahák</h2>
+    <h3>Shoda přísudku s podmětem</h3>
+    <table class="tt">
+      <tr><td><b>ten</b> – mužský životný</td><td>sportovci běhal<b>i</b>, skokani se sjel<b>i</b></td><td class="k">-i</td></tr>
+      <tr><td><b>ten</b> – mužský neživotný</td><td>stadiony se zaplnil<b>y</b>, hrady patřil<b>y</b></td><td class="k">-y</td></tr>
+      <tr><td><b>ta</b> – ženský</td><td>trubky hrál<b>y</b>, myšky pobíhal<b>y</b></td><td class="k">-y</td></tr>
+      <tr><td><b>to</b> – střední</td><td>auta přijel<b>a</b>, těsta vykynul<b>a</b></td><td class="k">-a</td></tr>
+      <tr><td>pozor: <b>děti</b></td><td>děti se koupal<b>y</b></td><td class="k">-y</td></tr>
+    </table>
+    <h3>i / y v textu o přírodě</h3>
+    <ul>
+      <li>předpona <b>vy-</b> → vždycky y: <b>vy</b>žaduje, <b>vy</b>sílené, <b>vy</b>lučováním</li>
+      <li>vyjmenovaná slova: b<b>ý</b>vá (být), s<b>y</b>tý, obv<b>y</b>kle (zvykat)</li>
+      <li>jako hrad → organism<b>y</b>, reflex<b>y</b>, zub<b>y</b></li>
+      <li>jako stavení → počas<b>í</b>, množstv<b>í</b>, obdob<b>í</b></li>
+      <li>zákonitost<b>mi</b> – jako kost<b>mi</b></li>
+    </ul>
+    <h3>Věta</h3>
+    <ul>
+      <li><b>podmět</b> = kdo? co? (rovná čára) · <b>přísudek</b> = co dělá? (vlnovka)</li>
+      <li><b>holý</b> podmět = jedno slovo (tělo) · <b>rozvitý</b> = s dalším slovem (lidské tělo)</li>
+      <li>1 sloveso v určitém tvaru = věta jednoduchá · víc sloves = souvětí</li>
+      <li>větné vzorce: V1 a V2 · V1, ale V2 · V1, protože V2 · V1, když V2</li>
+    </ul>
+  </div>
+</div>
+
+<script src="zvirata.js"></script>
+<script>
+'use strict';
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const TEST=/[?&]test\b/.test(location.search);
+const wait=ms=>new Promise(r=>setTimeout(r,ms));
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const cap=t=>t.charAt(0).toUpperCase()+t.slice(1);
+const holy=w=>w.replace(/[.,!?;:„“]/g,'').toLowerCase();
+
+/* ---------- zvuky ---------- */
+const Snd={ctx:null,muted:false,
+  init(){ if(!this.ctx){ try{ this.ctx=new (window.AudioContext||window.webkitAudioContext)(); }catch(e){} } if(this.ctx&&this.ctx.state==='suspended') this.ctx.resume().catch(()=>{}); },
+  tone(f,dur,o={}){ if(!this.ctx||this.muted) return; const c=this.ctx,t=c.currentTime+(o.at||0),os=c.createOscillator(),g=c.createGain(); os.type=o.type||'sine'; os.frequency.setValueAtTime(f,t); if(o.slide) os.frequency.exponentialRampToValueAtTime(o.slide,t+dur); g.gain.setValueAtTime(0.0001,t); g.gain.linearRampToValueAtTime(o.vol||0.12,t+0.012); g.gain.exponentialRampToValueAtTime(0.0001,t+dur); os.connect(g).connect(c.destination); os.start(t); os.stop(t+dur+0.05); },
+  noise(dur,o={}){ if(!this.ctx||this.muted) return; const c=this.ctx,n=Math.floor(c.sampleRate*dur),b=c.createBuffer(1,n,c.sampleRate),d=b.getChannelData(0); for(let i=0;i<n;i++) d[i]=(Math.random()*2-1)*Math.pow(1-i/n,1.5); const s=c.createBufferSource(); s.buffer=b; const f=c.createBiquadFilter(); f.type=o.type||'highpass'; f.frequency.value=o.f||1800; const g=c.createGain(); g.gain.value=o.vol||.15; s.connect(f).connect(g).connect(c.destination); s.start(c.currentTime+(o.at||0)); },
+  tick(){ this.tone(880,.06,{type:'triangle',vol:.08}); },
+  ok(){ this.tone(660,.09,{type:'triangle',vol:.1}); this.tone(990,.16,{type:'triangle',vol:.08,at:.07}); },
+  ding(){ [[784,0],[988,.08],[1319,.16]].forEach(([f,d])=>this.tone(f,.24,{type:'triangle',vol:.09,at:d})); },
+  buzz(){ this.tone(170,.22,{type:'sawtooth',vol:.05,slide:110}); },
+  boing(){ this.tone(300,.25,{vol:.1,slide:520}); },
+  skrt(){ this.noise(.16,{f:2400,vol:.2}); },
+  fanfare(){ [[523,0],[659,.12],[784,.24],[1047,.36],[784,.52],[1047,.64]].forEach(([f,d])=>this.tone(f,.3,{type:'triangle',vol:.09,at:d})); },
+  pop(){ this.tone(140,.25,{vol:.07,slide:60}); this.noise(.22,{type:'lowpass',f:1300,vol:.09}); },
+  hlas(z){ const t=this; const H={
+    pes(){ t.tone(560,.1,{type:'square',vol:.05,slide:330}); t.tone(610,.12,{type:'square',vol:.05,slide:340,at:.18}); },
+    kun(){ for(let i=0;i<7;i++) t.tone(1250-i*90,.07,{type:'triangle',vol:.07,at:i*.055}); t.tone(500,.18,{type:'sawtooth',vol:.03,at:.4,slide:380}); },
+    delfin(){ t.tone(1700,.22,{vol:.08,slide:2700}); t.tone(2600,.2,{vol:.07,slide:1500,at:.22}); for(let i=0;i<4;i++) t.tone(3000,.02,{type:'square',vol:.03,at:.46+i*.05}); },
+    leopard(){ t.tone(120,.32,{type:'sawtooth',vol:.06,slide:95}); t.tone(640,.3,{type:'triangle',vol:.08,slide:430,at:.34}); },
+    velryba(){ t.tone(240,.75,{vol:.13,slide:150}); t.tone(330,.55,{vol:.08,slide:210,at:.32}); }
+  }; if(H[z]) H[z](); }
+};
+document.addEventListener('pointerdown',()=>Snd.init(),{passive:true});
+
+/* ---------- zvířátka ---------- */
+const PORADI=['pes','kun','delfin','leopard','velryba'];
+const JMENA={pes:'pejsek Alík',kun:'koník Blesk',delfin:'delfín Šplouch',leopard:'leopardice Skvrnka',velryba:'velryba Bublina'};
+const ZENA={leopard:1,velryba:1};
+const VODA={delfin:1,velryba:1};
+const HLASKY={
+  pes:['Haf! Paráda, Lado!','Haf haf, to je ono!','Vrtím ocasem – super!','Haf! Jsi jednička!'],
+  kun:['Íhahá! Bezva, Lado!','Přicválal jsem gratulovat!','Hyjé, jedeme dál!','Íhahá, to je ono!'],
+  delfin:['Ííí! Super práce!','Skáču radostí!','Šplouch! Výborně!','Jsi hvězda, Lado!'],
+  leopard:['Mňau! Rychlá jak já!','Skvělá práce, Lado!','Vrrr, gratuluju!','Mňau, to je ono!'],
+  velryba:['Bubli bubli, výborně!','Velrybí gratulace!','Šplouch! Paráda!','To je hustý, Lado!']
+};
+const BEZCHYBY=['Bez chyby! 🌟','Ani jedna chyba! 🌟','Čistá práce! 🌟'];
+const IDLE={pes:'Haf! Jdeme trénovat?',kun:'Íhahá! Vyber cvičení!',delfin:'Ííí! Ten test dáme!',leopard:'Mňau! Jsem nejrychlejší!',velryba:'Bubli bubli, ahoj Lado!'};
+const FINAL={pes:'Haf! Bravo!',kun:'Íhahá!',delfin:'Ííí! Super!',leopard:'Mňau! Hustý!',velryba:'Gratuluju!'};
+function zvireSVG(z){ return `<svg viewBox="0 0 140 110" aria-hidden="true">${ZV[z]}</svg>`; }
+function zvireHTML(z,cls){ return `<div class="zvire ${z} ${cls||''}">${zvireSVG(z)}${VODA[z]?'<div class="vlna"></div>':''}<div class="bub"></div></div>`; }
+const lane=$('#lane');
+function bubli(el,text,vys){ const b=el.querySelector('.bub'); if(!b) return; b.textContent=text; b.classList.toggle('vys',!!vys); b.style.marginLeft='0px';
+  const er=el.getBoundingClientRect(), bw=b.offsetWidth, left=er.left+er.width*.55-bw/2; let dx=0;
+  if(left<8) dx=8-left; else if(left+bw>innerWidth-8) dx=innerWidth-8-(left+bw); b.style.marginLeft=dx+'px'; b.classList.add('on'); }
+function anim(el,a,b,dur,easing){ return new Promise(res=>{ const tf=x=>`translateX(${x}px)`; if(!el.animate){ el.style.transform=tf(b); setTimeout(res,dur); return; }
+  const an=el.animate([{transform:tf(a)},{transform:tf(b)}],{duration:dur,easing,fill:'forwards'}); an.onfinish=res; an.oncancel=res; }); }
+let beziOdmen=0, odmI=0;
+async function probehni(z,text){
+  if(beziOdmen>=2) return; beziOdmen++;
+  lane.insertAdjacentHTML('beforeend',zvireHTML(z,'run'));
+  const el=lane.lastElementChild, W=lane.clientWidth, w=el.offsetWidth;
+  const cx=Math.round((W-w)/2+(Math.random()-.5)*W*.3);
+  try{
+    await anim(el,-w-30,cx,1100,'cubic-bezier(.2,.75,.35,1)');
+    el.classList.replace('run','mav'); bubli(el,text); Snd.hlas(z);
+    await wait(1750);
+    el.querySelector('.bub').classList.remove('on'); el.classList.replace('mav','run');
+    await anim(el,cx,W+30,950,'cubic-bezier(.55,0,.9,.55)');
+  } finally { el.remove(); beziOdmen--; }
+}
+function odmena(){ const z=PORADI[odmI++%PORADI.length]; const t=(st&&st.ck===0&&Math.random()<.35)?pick(BEZCHYBY):pick(HLASKY[z]); probehni(z,t); }
+function xPozice(i,w){ const W=lane.clientWidth; return Math.round(Math.max(4,Math.min(W-w-4,W*(.1+.2*i)-w/2))); }
+function idleZvirata(on){
+  $$('#lane .idle').forEach(e=>e.remove()); if(!on) return;
+  PORADI.forEach((z,i)=>{
+    lane.insertAdjacentHTML('beforeend',zvireHTML(z,'stoji idle'));
+    const el=lane.lastElementChild; el.style.transform=`translateX(${xPozice(i,el.offsetWidth)}px)`;
+    el.querySelector('svg').style.animationDelay=(-i*.37)+'s';
+    el.addEventListener('click',()=>{ if(el.classList.contains('mav')) return; el.classList.add('mav'); bubli(el,IDLE[z],i%2); Snd.init(); Snd.hlas(z); jiskry(el,8);
+      setTimeout(()=>{ el.classList.remove('mav'); const b=el.querySelector('.bub'); if(b) b.classList.remove('on'); },1900); });
+  });
+}
+function kytky(){ const f=['🌼','🌷','🌸','🌼','🌻','🌼','🌷','🌸','🌼']; f.forEach((k,i)=>{ const s=document.createElement('span'); s.className='kytka'; s.textContent=k; s.style.left=(4+i*11+Math.random()*5)+'%'; s.style.bottom=`calc(var(--lane)*${(.02+Math.random()*.12).toFixed(3)} + env(safe-area-inset-bottom))`; lane.appendChild(s); }); }
+
+/* ---------- efekty ---------- */
+function jiskry(el,n=10){ const r=el.getBoundingClientRect(), x=r.left+r.width/2, y=r.top+r.height/2, fx=$('#fx'); const B=['#ffc93c','#2fb36a','#2f7ff0','#ff5d8f','#8a5cf0','#ff8a3d'];
+  for(let i=0;i<n;i++){ const s=document.createElement('i'); s.className='jiskra'; s.style.background=B[i%B.length]; s.style.left=(x-5)+'px'; s.style.top=(y-5)+'px'; fx.appendChild(s);
+    const a=Math.random()*Math.PI*2, d=40+Math.random()*55;
+    if(s.animate) s.animate([{transform:'translate(0,0) scale(1)',opacity:1},{transform:`translate(${Math.cos(a)*d}px,${Math.sin(a)*d}px) scale(.3)`,opacity:0}],{duration:600+Math.random()*250,easing:'cubic-bezier(.2,.7,.4,1)',fill:'forwards'});
+    setTimeout(()=>s.remove(),900); } }
+function shake(el){ el.classList.remove('shake'); void el.offsetWidth; el.classList.add('shake'); }
+const FW={cv:null,cx:null,raf:0,end:0,rk:[],pt:[],W:0,H:0,
+  start(ms){ this.cv=$('#fw'); this.cx=this.cv.getContext('2d'); this.cv.hidden=false; this.fit(); this.end=performance.now()+ms; if(!this.raf) this.raf=requestAnimationFrame(t=>this.loop(t)); },
+  fit(){ if(!this.cv) return; const d=Math.min(2,window.devicePixelRatio||1); this.W=innerWidth; this.H=innerHeight; this.cv.width=this.W*d; this.cv.height=this.H*d; this.cx.setTransform(d,0,0,d,0,0); },
+  stop(){ this.end=0; this.rk=[]; this.pt=[]; },
+  loop(t){ const c=this.cx,W=this.W,H=this.H;
+    if(t<this.end&&Math.random()<.065) this.rk.push({x:W*(.12+Math.random()*.76),y:H,vx:(Math.random()-.5)*1.6,vy:-(H*.012+Math.random()*H*.006),h:Math.floor(Math.random()*360)});
+    c.clearRect(0,0,W,H);
+    for(const r of this.rk){ r.x+=r.vx; r.y+=r.vy; r.vy+=H*.00018; c.fillStyle=`hsl(${r.h},100%,60%)`; c.beginPath(); c.arc(r.x,r.y,3.2,0,7); c.fill(); if(r.vy>=-1){ r.dead=1; this.boom(r); } }
+    this.rk=this.rk.filter(r=>!r.dead);
+    c.lineWidth=3.6; c.lineCap='round';
+    for(const p of this.pt){ const px=p.x,py=p.y; p.x+=p.vx; p.y+=p.vy; p.vx*=.985; p.vy=p.vy*.985+.06; p.a-=p.d; c.strokeStyle=`hsla(${p.h},100%,${p.l}%,${Math.max(0,p.a)})`; c.beginPath(); c.moveTo(px,py); c.lineTo(p.x,p.y); c.stroke(); }
+    this.pt=this.pt.filter(p=>p.a>0);
+    if(t<this.end||this.rk.length||this.pt.length) this.raf=requestAnimationFrame(t2=>this.loop(t2)); else { this.raf=0; c.clearRect(0,0,W,H); this.cv.hidden=true; } },
+  boom(r){ const n=48+Math.floor(Math.random()*26), sp=2.2+Math.random()*2.6, h2=(r.h+40+Math.random()*90)%360;
+    for(let i=0;i<n;i++){ const a=Math.PI*2*i/n, s=sp*(.55+Math.random()*.6); this.pt.push({x:r.x,y:r.y,vx:Math.cos(a)*s,vy:Math.sin(a)*s,a:1,d:.011+Math.random()*.01,h:i%3?r.h:h2,l:48+Math.random()*16}); }
+    Snd.pop(); }
+};
+
+/* ---------- obsah ze strany 25 ---------- */
+const TEXT16=[
+  ['Život v přírodě se řídí časovými zákonitostm{i}.',['zákonitostmi – 7. pád končí na -mi, jako s kostmi']],
+  ['Některé organism{y} překonávají z{i}mní obdob{í} spánkem.',['organismy – ten organismus, jako hrad → hrady, tvrdé y','zimní – od slova zima, to není vyjmenované slovo','období – jako stavení → na konci dlouhé í']],
+  ['Aktuální proměny počas{í} ovl{i}vňují i naše tělo.',['počasí – jako stavení → dlouhé í','ovlivňují – od slova vliv, není vyjmenované po L → i']],
+  ['Dostatečné množstv{í} odpočinku mu prosp{í}vá.',['množství – jako stavení → dlouhé í','prospívá – prospívat, není vyjmenované po P → í']],
+  ['Reflex{y} nám pomáhají se v chladu zahřát.',['reflexy – ten reflex, jako hrad → hrady']],
+  ['Obv{y}kle nám naskočí husí kůže, třeme se a cvakáme zub{y}.',['obvykle – příbuzné k vyjmenovanému slovu zvykat → y','zuby – ten zub, jako hrad → hrady']],
+  ['Z{i}ma se lépe snáší, když je člověk s{y}tý.',['zima – není vyjmenované slovo po Z → i','sytý – vyjmenované slovo sytý → y']],
+  ['Na jaře b{ý}vá tělo v{y}s{í}lené a v{y}žaduje dostatek nové energie.',['bývá – vyjmenované slovo být → ý','vysílené – předpona vy- → y','vysílené – od slova síla → í','vyžaduje – předpona vy- → y']],
+  ['V horku se tělo chladí v{y}lučováním potu.',['vylučováním – předpona vy- → y']],
+];
+const VETY=[
+  {v:'Život v přírodě se řídí časovými zákonitostmi.',s:['řídí'],j:true},
+  {v:'Některé organismy překonávají zimní období spánkem.',s:['překonávají'],j:true},
+  {v:'Aktuální proměny počasí ovlivňují i naše tělo.',s:['ovlivňují'],j:true},
+  {v:'Dostatečné množství odpočinku mu prospívá.',s:['prospívá'],j:true},
+  {v:'Reflexy nám pomáhají se v chladu zahřát.',s:['pomáhají'],j:true,pozn:'„Zahřát“ je neurčitý tvar (infinitiv), ten se nepočítá.'},
+  {v:'Obvykle nám naskočí husí kůže, třeme se a cvakáme zuby.',s:['naskočí','třeme','cvakáme'],j:false},
+  {v:'Zima se lépe snáší, když je člověk sytý.',s:['snáší','je'],j:false},
+  {v:'V horku se tělo chladí vylučováním potu.',s:['chladí'],j:true},
+];
+const PP=[
+  {v:'Život v přírodě se řídí časovými zákonitostmi.',p:[0],pr:[3,4],qp:'Kdo nebo co se řídí zákonitostmi?',qpr:'Co dělá život?'},
+  {v:'Některé organismy překonávají zimní období spánkem.',p:[1],pr:[2],qp:'Kdo nebo co překonává zimní období?',qpr:'Co dělají organismy?'},
+  {v:'Aktuální proměny počasí ovlivňují i naše tělo.',p:[1],pr:[3],qp:'Co ovlivňuje naše tělo? (Počasí jen říká, jaké proměny.)',qpr:'Co dělají proměny?'},
+  {v:'Dostatečné množství odpočinku mu prospívá.',p:[1],pr:[4],qp:'Co mu prospívá? Množství (čeho? odpočinku).',qpr:'Co dělá množství?'},
+  {v:'Reflexy nám pomáhají se v chladu zahřát.',p:[0],pr:[2],qp:'Kdo nebo co nám pomáhá?',qpr:'Co dělají reflexy?'},
+  {v:'V horku se tělo chladí vylučováním potu.',p:[3],pr:[2,4],qp:'Kdo nebo co se chladí?',qpr:'Co dělá tělo? (I „se“ patří k přísudku.)'},
+];
+const KLIC={ok:['příroda','zima','spánek','tělo','počasí','odpočinek','reflexy','chlad','energie','horko','pot'],
+  ne:['se','nám','mu','když','i','a','některé','lépe','obvykle','dostatečné']};
+const SKRT=[
+  {pod:'Sportovci',moz:[['běhaly',0],['leželi',1],['cvičili',1]],po:'.',pr:'sportovci – ten sportovec, rod mužský životný → -i'},
+  {pod:'Lenoši',moz:[['odpočívali',1],['lenošily',0],['uklízeli',1]],po:'.',pr:'lenoši – ten lenoch, rod mužský životný → -i'},
+  {pod:'Děti',moz:[['se brouzdali',0],['se koupaly',1],['se koupala',0]],po:' na koupališti.',pr:'děti – v množném čísle vždycky → -y (děti se koupaly)'},
+  {pod:'Trubky',moz:[['hrály',1],['zpívaly',1],['bzučely',1]],po:' krásnou fanfáru.',pr:'trubky – ta trubka, rod ženský → -y. Tady sedí všechny tři!'},
+  {pod:'Stadiony',moz:[['se rozsvítili',0],['se zaplnily',1],['se zavřeli',0]],po:'.',pr:'stadiony – ten stadion, rod mužský neživotný → -y'},
+  {pod:'Sportovní auta',moz:[['přijeli',0],['přijela',1],['odjely',0]],po:' na závody.',pr:'auta – to auto, rod střední → -a'},
+  {pod:'Rychlé motocykly',moz:[['závodily',1],['se rozbili',0],['odjeli',0]],po:'.',pr:'motocykly – ten motocykl, rod mužský neživotný → -y'},
+  {pod:'Míče',moz:[['se ztratily',1],['se vypouštěli',0],['praskly',1]],po:'.',pr:'míče – ten míč, rod mužský neživotný → -y'},
+];
+const VZ=[
+  {casti:[['Sportovci cvičili',1],[' a ',0],['lenoši odpočívali',2],['.',0]],ok:'V1 a V2'},
+  {casti:[['Trubky hrály krásnou fanfáru',1],[', protože ',0],['se stadiony zaplnily',2],['.',0]],ok:'V1, protože V2'},
+  {casti:[['Míče se ztratily',1],[', ale ',0],['děti se koupaly na koupališti',2],['.',0]],ok:'V1, ale V2'},
+  {casti:[['Sportovci cvičili',1],[', když ',0],['se stadiony rozsvítily',2],['.',0]],ok:'V1, když V2'},
+];
+const VZ_ALL=['V1 a V2','V1, protože V2','V1, ale V2','V1, když V2'];
+const PODM=[
+  {t:'Na stole {P} {S}, které nám paní učitelka opravila.',kmen:'ležel',moz:[
+    {w:'pera',why:'Pera paní učitelka neopravuje.'},{w:'sešity',ok:1,kon:'y',rod:'sešity – ten sešit, rod mužský neživotný'},{w:'tužky',why:'Tužky paní učitelka neopravuje.'}]},
+  {t:'{S} {P} zmateně po spižírně.',kmen:'pobíhal',moz:[
+    {w:'Housata',why:'Housátka do spižírny nechodí, ta jsou na dvoře.'},{w:'Kocourci',ok:1,kon:'i',rod:'kocourci – ten kocourek, rod mužský životný'},{w:'Myšky',ok:1,kon:'y',rod:'myšky – ta myška, rod ženský'}]},
+  {t:'Na závod ve skoku dalekém se {P} {S} z celé naší vlasti.',kmen:'sjel',moz:[
+    {w:'hokejisté',why:'Hokejisté hrají hokej, do dálky neskáčou.'},{w:'malířky',why:'Malířky malují, do dálky neskáčou.'},{w:'skokani',ok:1,kon:'i',rod:'skokani – ten skokan, rod mužský životný'}]},
+  {t:'První den nás {P} {S} ze čtvrtého ročníku gymnázia.',kmen:'provázel',moz:[
+    {w:'učni',why:'Učni chodí do učiliště, ne na gymnázium.'},{w:'kamarádky',ok:1,kon:'y',rod:'kamarádky – ta kamarádka, rod ženský'},{w:'studenti',ok:1,kon:'i',rod:'studenti – ten student, rod mužský životný'}]},
+  {t:'{S} {P} k našim nejčastěji dobývaným památkám.',kmen:'patřil',moz:[
+    {w:'Hrady',ok:1,kon:'y',rod:'hrady – ten hrad, rod mužský neživotný'},{w:'Plovárny',why:'Plovárny se nedobývají, tam se plave.'},{w:'Hřiště',why:'Hřiště nejsou památky.'}]},
+  {t:'{S} nám rychle {P}.',kmen:'vykynul',moz:[
+    {w:'Saláty',why:'Salát nekyne.'},{w:'Těsta',ok:1,kon:'a',rod:'těsta – to těsto, rod střední'},{w:'Omáčky',why:'Omáčka nekyne.'}]},
+];
+const KONC={i:'-i',y:'-y',a:'-a'};
+const ZAVOD=[
+  ['Pera','ležel','a','to pero, rod střední'],['Tužky','ležel','y','ta tužka, rod ženský'],['Sešity','ležel','y','ten sešit, mužský neživotný'],
+  ['Housata','pobíhal','a','to house, rod střední'],['Kocourci','pobíhal','i','ten kocourek, mužský životný'],['Myšky','pobíhal','y','ta myška, rod ženský'],
+  ['Hokejisté se','sjel','i','ten hokejista, mužský životný'],['Malířky se','sjel','y','ta malířka, rod ženský'],['Skokani se','sjel','i','ten skokan, mužský životný'],
+  ['Učni nás','provázel','i','ten učeň, mužský životný'],['Kamarádky nás','provázel','y','ta kamarádka, rod ženský'],['Studenti nás','provázel','i','ten student, mužský životný'],
+  ['Hrady','patřil','y','ten hrad, mužský neživotný'],['Plovárny','patřil','y','ta plovárna, rod ženský'],['Hřiště','patřil','a','to hřiště, rod střední'],
+  ['Těsta','vykynul','a','to těsto, rod střední'],['Sportovci','běhal','i','ten sportovec, mužský životný'],['Lenoši','lenošil','i','ten lenoch, mužský životný'],
+  ['Děti se','koupal','y','děti – vždycky -y'],['Trubky','hrál','y','ta trubka, rod ženský'],['Stadiony se','rozsvítil','y','ten stadion, mužský neživotný'],
+  ['Auta','přijel','a','to auto, rod střední'],['Motocykly se','rozbil','y','ten motocykl, mužský neživotný'],['Míče se','vypouštěl','y','ten míč, mužský neživotný'],
+];
+const EX=[
+  {id:'e1',title:'Doplň i, í, y, ý',desc:'Text o přírodě a našem těle – 18 mezer, věta po větě',zvire:'pes',barva:'#2f7ff0',
+    kroky:()=>TEXT16.map(([t,h])=>({typ:'gaps',t,h,cast:'Cvičení 16 · Doplň i, í, y, ý'}))},
+  {id:'e2',title:'Podmět a přísudek',desc:'Věta jednoduchá, nebo souvětí? Podtrhni podmět a přísudek, rozvitý podmět, klíčová slova',zvire:'kun',barva:'#2fb36a',
+    kroky:()=>[...VETY.map(v=>({typ:'sort',...v,cast:'Část A · Věta jednoduchá, nebo souvětí?'})),...PP.map(p=>({typ:'pp',...p,cast:'Část B · Podtrhni podmět a přísudek'})),
+      {typ:'rozvit',cast:'Část C · Holý podmět změň v rozvitý'},{typ:'klic',cast:'Část D · Klíčová slova z textu'}]},
+  {id:'e3',title:'Škrtni nevhodné přísudky',desc:'Sportovci, lenoši, děti, trubky, auta… a větné vzorce souvětí',zvire:'delfin',barva:'#ff8a3d',
+    kroky:()=>[...SKRT.map(s=>({typ:'skrt',...s,cast:'Cvičení 17 · Škrtni nevhodné přísudky'})),...VZ.map(v=>({typ:'vzorec',...v,cast:'Cvičení 17 · Souvětí a větné vzorce'}))]},
+  {id:'e4',title:'Podmět a koncovka',desc:'Zakroužkuj vhodný podmět, doplň -i, -y, -a – a nakonec velký závod!',zvire:'leopard',barva:'#8a5cf0',
+    kroky:()=>[...PODM.map(p=>({typ:'podmet',...p,cast:'Cvičení 18 · Zakroužkuj podmět a doplň koncovku'})),{typ:'zavod',cast:'Velký závod koncovek 🏁'}]},
+];
+
+/* ---------- stav ---------- */
+const KEY='cj-test-v1';
+let store={hv:{},muted:false};
+function load(){ try{ const s=JSON.parse(localStorage.getItem(KEY)||'null'); if(s&&typeof s==='object') store=Object.assign(store,s); }catch(e){} if(!store.hv||typeof store.hv!=='object') store.hv={}; Snd.muted=!!store.muted; }
+function save(){ try{ localStorage.setItem(KEY,JSON.stringify(store)); }catch(e){} }
+let st=null, cleanupFn=null;
+function cleanup(){ if(cleanupFn){ const f=cleanupFn; cleanupFn=null; f(); } }
+function updateHvezdy(){ $('#hvezdy').textContent=Object.values(store.hv).reduce((a,b)=>a+(+b||0),0); }
+function updateMute(){ $('#mute').textContent=store.muted?'🔇':'🔊'; }
+function show(id){ cleanup(); $('#home').hidden=id!=='home'; $('#ex').hidden=id!=='ex'; $('#back').hidden=id==='home'; window.scrollTo(0,0); idleZvirata(id==='home'); }
+const FOOT='<div class="fb" id="fb"></div><div class="nav" id="nav"></div>';
+function fb(t,cls){ const f=$('#fb'); if(!f) return; f.innerHTML=t||''; f.className='fb '+(cls||''); }
+
+function renderHome(){
+  st=null; $('#h1').textContent='Český jazyk test'; $('#sub').textContent='Opakování – pravopis · Lado, v úterý je test, tak trénujeme! 💪';
+  const vse=EX.every(e=>store.hv[e.id]);
+  $('#home').innerHTML=`<div class="karty">${EX.map((e,i)=>{ const h=store.hv[e.id]||0;
+    return `<button class="exCard${h?' hotove':''}" data-i="${i}" style="--c:${e.barva}"><span class="num">${i+1}</span><span class="tx"><b>${e.title}</b><small>${e.desc}</small><span class="hv">${'★'.repeat(h)}<span class="off">${'★'.repeat(3-h)}</span></span></span><span class="mini">${zvireSVG(e.zvire)}</span></button>`; }).join('')}</div>
+    ${vse?'<div class="banner">🏆 Všechno máš procvičené – na test jsi připravená!</div>':''}<p class="tip">Ťukni dole na zvířátka 👇</p>`;
+  updateHvezdy(); show('home');
+}
+function startEx(i){ zavriFinale(); const ex=EX[i]; st={idx:i,ex,kroky:ex.kroky(),i:0,chyby:0,ck:0,done:false,perf:[]}; $('#h1').textContent=ex.title; show('ex'); renderKrok(); }
+function renderKrok(){ cleanup(); const k=st.kroky[st.i]; st.done=false; st.ck=0; $('#sub').textContent=k.cast; renderDots();
+  const c=$('#card'); c.className='card typ-'+k.typ; c.innerHTML=''; R[k.typ](k,c); void c.offsetWidth; c.classList.add('vjezd'); window.scrollTo(0,0); }
+function renderDots(){ $('#dots').innerHTML=st.kroky.map((k,i)=>`<i class="${i<st.i||(i===st.i&&st.done)?(st.perf[i]?'ok':'done'):i===st.i?'cur':''}"></i>`).join(''); $('#pocet').textContent=`${st.i+1} / ${st.kroky.length}`; }
+function chyba(msg){ st.chyby++; st.ck++; Snd.buzz(); fb(msg,'bad'); }
+function hotovo(msg,opt={}){ if(!st||st.done) return; st.done=true; st.perf[st.i]=st.ck===0; Snd.ding(); if(msg) fb(msg,'good'); if(!opt.bezOdmeny) odmena(); renderDots();
+  const last=st.i===st.kroky.length-1; $('#nav').innerHTML=`<button class="dalsi" id="dalsiB">${last?'Dokončit 🎉':'Další →'}</button>`; $('#dalsiB').addEventListener('click',dalsi); }
+function dalsi(){ if(!st||!st.done) return; if(st.i>=st.kroky.length-1) finale(); else { st.i++; renderKrok(); } }
+function slovaHTML(v){ return v.split(' ').map((w,i)=>`<span class="slovo" data-i="${i}">${esc(w)}</span>`).join(' '); }
+
+/* ---------- jednotlivé typy úkolů ---------- */
+const R={};
+R.gaps=(k,c)=>{
+  const parts=k.t.split(/\{([^}]+)\}/), ans=[]; let html='';
+  parts.forEach((p,i)=>{ if(i%2){ html+=`<span class="gap" data-g="${ans.length}">&nbsp;</span>`; ans.push(p); } else html+=esc(p); });
+  const tr={i:'p-i','í':'p-ii',y:'p-y','ý':'p-yy'};
+  c.innerHTML=`<div class="ukol">Doplň <b>i, í, y, ý</b> do blikající mezery.<small>Věta ${st.i+1} z ${st.kroky.length} · mezer v této větě: ${ans.length}</small></div><div class="veta big">${html}</div>
+    <div class="pismena">${['i','í','y','ý'].map(l=>`<button class="pism ${tr[l]}" data-l="${l}">${l}</button>`).join('')}</div>${FOOT}`;
+  let cur=0; const gaps=[...c.querySelectorAll('.gap')], btns=[...c.querySelectorAll('.pism')];
+  const mark=()=>gaps.forEach((g,j)=>g.classList.toggle('cur',j===cur)); mark();
+  btns.forEach(b=>b.addEventListener('click',()=>{
+    if(st.done||cur>=ans.length||b.disabled) return; const g=gaps[cur];
+    if(b.dataset.l===ans[cur]){ g.textContent=ans[cur]; g.classList.remove('cur','bad'); g.classList.add('ok'); Snd.ok(); jiskry(g,8); btns.forEach(x=>x.disabled=false);
+      const h=k.h[cur]; cur++; if(cur>=ans.length) hotovo('✓ '+h+'<br><b>Věta je hotová!</b>'); else { fb('✓ '+h,'good'); mark(); } }
+    else { b.disabled=true; g.classList.remove('bad'); void g.offsetWidth; g.classList.add('bad'); shake(b); chyba('Nápověda: '+k.h[cur]); }
+  }));
+};
+R.sort=(k,c)=>{
+  c.innerHTML=`<div class="ukol">Je to <b>věta jednoduchá</b>, nebo <b>souvětí</b>?<small>Najdi slovesa v určitém tvaru (co kdo dělá) – kolik jich je?</small></div><div class="veta big">${slovaHTML(k.v)}</div>
+    <div class="volby2"><button class="vol" data-a="1">Věta jednoduchá</button><button class="vol" data-a="0">Souvětí</button></div>${FOOT}`;
+  const n=k.s.length;
+  const vysvet=()=>{ c.querySelectorAll('.veta .slovo').forEach(w=>{ if(k.s.includes(holy(w.textContent))) w.classList.add('sloveso'); });
+    return `${n} ${n===1?'sloveso':n<5?'slovesa':'sloves'} v určitém tvaru (<b>${k.s.join(', ')}</b>) → <b>${k.j?'věta jednoduchá':'souvětí'}</b>.${k.pozn?' '+k.pozn:''}`; };
+  c.querySelectorAll('.vol').forEach(b=>b.addEventListener('click',()=>{ if(st.done||b.disabled) return;
+    if((b.dataset.a==='1')===k.j){ b.classList.add('spravne'); jiskry(b,10); hotovo('✓ '+vysvet()); }
+    else { b.disabled=true; shake(b); chyba('Ještě ne. '+vysvet()); } }));
+};
+R.pp=(k,c)=>{
+  let faze='p';
+  c.innerHTML=`<div class="ukol" id="ppU"></div><div class="veta big tap">${slovaHTML(k.v)}</div><div class="legenda"><span class="lp">podmět = rovná čára</span><span class="lpr">přísudek = vlnovka</span></div>${FOOT}`;
+  const W=[...c.querySelectorAll('.veta .slovo')], txt=ix=>ix.map(j=>holy(W[j].textContent)).join(' ');
+  const U=()=>{ $('#ppU').innerHTML=faze==='p'?'1️⃣ Ťukni na <b class="tp">PODMĚT</b> – kdo nebo co?':'2️⃣ Teď <b class="tpr">PŘÍSUDEK</b> – co dělá?'; }; U();
+  W.forEach((w,i)=>w.addEventListener('click',()=>{ if(st.done) return;
+    if(faze==='p'){
+      if(k.p.includes(i)){ k.p.forEach(j=>W[j].classList.add('pod')); Snd.ok(); jiskry(w,6); faze='pr'; U(); fb(`✓ Podmět je <b>${txt(k.p)}</b>. ${k.qpr}`,'good'); }
+      else { shake(w); chyba((k.pr.includes(i)?'To je přísudek – ten přijde hned potom. ':`„${holy(w.textContent)}“ podmět není. `)+k.qp); }
+    } else {
+      if(k.pr.includes(i)){ k.pr.forEach(j=>W[j].classList.add('pris')); jiskry(w,8); hotovo(`✓ Podmět: <b>${txt(k.p)}</b> · přísudek: <b>${txt(k.pr)}</b>`); }
+      else if(k.p.includes(i)) fb('Podmět už máš 🙂 Teď přísudek: '+k.qpr,'');
+      else { shake(w); chyba(`„${holy(w.textContent)}“ přísudek není. `+k.qpr); }
+    } }));
+};
+R.rozvit=(k,c)=>{
+  const opts=shuffle([['lidské',1],['naše',1],['rozpálené',1],['chladí',0,'„Chladí“ je přísudek – říká, co tělo dělá.'],['v horku',0,'„V horku“ říká kdy, k tělu nepatří.'],['potu',0,'„Potu“ patří k vylučování, ne k tělu.']]);
+  c.innerHTML=`<div class="ukol">Poslední <b>holý podmět</b> v textu je <b>tělo</b>. Změň ho v <b>rozvitý</b> – ťukni na slovo, které k tělu přidáš.<small>Zeptej se: Jaké tělo? Čí tělo?</small></div>
+    <div class="veta big">V horku se <span class="pod" id="rvP">tělo</span> chladí vylučováním potu.</div><div class="chips">${opts.map((o,i)=>`<button class="chip" data-i="${i}">${o[0]}</button>`).join('')}</div>${FOOT}`;
+  c.querySelectorAll('.chip').forEach(b=>b.addEventListener('click',()=>{ if(st.done||b.disabled) return; const o=opts[+b.dataset.i];
+    if(o[1]){ b.classList.add('found'); $('#rvP').innerHTML=`<b class="new">${o[0]}</b> tělo`; jiskry($('#rvP'),12); hotovo(`✓ <b>${o[0]} tělo</b> je rozvitý podmět. Holý podmět = jedno slovo, rozvitý = podmět a slovo, které ho rozvíjí.`); }
+    else { b.disabled=true; shake(b); chyba(o[2]); } }));
+};
+R.klic=(k,c)=>{
+  const N=6, all=shuffle([...shuffle(KLIC.ok).slice(0,10).map(w=>[w,1]),...shuffle(KLIC.ne).slice(0,8).map(w=>[w,0])]); let n=0; const nasel=[];
+  c.innerHTML=`<div class="ukol">Vypiš z textu <b>klíčová slova</b> – najdi ${N} slov, která říkají, o čem text je.<small>Text je o přírodě a o tom, jak se naše tělo chová v zimě, na jaře a v horku.</small></div>
+    <div class="pocit" id="kn">0 / ${N}</div><div class="chips">${all.map((o,i)=>`<button class="chip" data-i="${i}">${o[0]}</button>`).join('')}</div>${FOOT}`;
+  c.querySelectorAll('.chip').forEach(b=>b.addEventListener('click',()=>{ if(st.done||b.disabled) return; const o=all[+b.dataset.i]; b.disabled=true;
+    if(o[1]){ b.classList.add('found'); n++; nasel.push(o[0]); Snd.ok(); jiskry(b,6); $('#kn').textContent=`${n} / ${N}`; if(n>=N) hotovo('✓ Klíčová slova: <b>'+nasel.join(', ')+'</b>'); else fb(`✓ ${o[0]} – to je klíčové slovo!`,'good'); }
+    else { shake(b); chyba(`„${o[0]}“ o tématu textu nic neříká. Hledej důležitá podstatná jména.`); } }));
+};
+R.skrt=(k,c)=>{
+  const skrt=[];
+  c.innerHTML=`<div class="ukol">Škrtni <b>nevhodné přísudky</b> – ťukni na ty, které k podmětu nepasují.<small>Podívej se na koncovku: -i, -y, nebo -a?</small></div>
+    <div class="veta big"><span class="podm">${k.pod}</span> ${k.moz.map((m,i)=>`<button class="pr" data-i="${i}">${m[0]}</button>`).join('<span class="pomlc">–</span>')}${k.po}</div>
+    <div class="nav2"><button class="sek" id="vse">Všechny sedí 👍</button></div>${FOOT}`;
+  const zbyva=()=>k.moz.filter((m,i)=>!m[1]&&!skrt[i]).length;
+  const konec=()=>{ c.querySelectorAll('.pr').forEach((b,i)=>{ if(k.moz[i][1]) b.classList.add('dobre'); }); $('#vse').disabled=true; hotovo('✓ '+k.pr); };
+  c.querySelectorAll('.pr').forEach(b=>b.addEventListener('click',()=>{ const i=+b.dataset.i; if(st.done||skrt[i]) return; const m=k.moz[i];
+    if(!m[1]){ skrt[i]=1; b.classList.add('skrt'); Snd.skrt(); jiskry(b,6); if(zbyva()===0) konec(); else fb(`✓ „${k.pod} ${m[0]}“ – to nejde, škrtnuto! Je tu ještě něco?`,'good'); }
+    else { shake(b); chyba(`„${k.pod} ${m[0]}“ je dobře – to neškrtej!`); } }));
+  $('#vse').addEventListener('click',()=>{ if(st.done) return; if(zbyva()===0) konec(); else { shake($('#vse')); chyba('Ještě tu něco nesedí – podívej se na koncovky.'); } });
+};
+R.vzorec=(k,c)=>{
+  const opts=shuffle([k.ok,...shuffle(VZ_ALL.filter(v=>v!==k.ok)).slice(0,2)]);
+  const spoj=(k.casti.find(([t,n])=>!n&&t.replace(/[ ,.]/g,''))||[', '])[0].replace(/[ ,]/g,'')||'čárka';
+  c.innerHTML=`<div class="ukol">Ze dvou vět ze cvičení vzniklo <b>souvětí</b>. Jaký má <b>větný vzorec</b>?<small>Každé souvětí má jiný vzorec – rozhoduje spojka.</small></div>
+    <div class="veta big" id="vzV">${k.casti.map(([t,n])=>n?`<span class="kl k${n}">${esc(t)}</span>`:`<span class="spoj">${esc(t)}</span>`).join('')}</div>
+    <div class="volby2">${opts.map(o=>`<button class="vol vz">${o}</button>`).join('')}</div>${FOOT}`;
+  c.querySelectorAll('.vol').forEach(b=>b.addEventListener('click',()=>{ if(st.done||b.disabled) return;
+    if(b.textContent===k.ok){ b.classList.add('spravne'); $('#vzV').classList.add('barvy'); jiskry(b,10); hotovo(`✓ Vzorec je <b>${k.ok}</b> – první věta, spojka „${spoj}“, druhá věta.`); }
+    else { b.disabled=true; shake(b); chyba(`Podívej se, jaká spojka věty spojuje: „${spoj}“.`); } }));
+};
+R.podmet=(k,c)=>{
+  let faze='s', vyb=null;
+  const sHTML=k.moz.map((m,i)=>`<button class="sub" data-i="${i}">${m.w}</button>`).join('<span class="pomlc">–</span>');
+  const pHTML=`<span class="pred">${k.kmen}<span class="gap" id="kon">&nbsp;</span></span>`;
+  c.innerHTML=`<div class="ukol" id="pU"></div><div class="veta big">${esc(k.t).replace('{S}',sHTML).replace('{P}',pHTML)}</div><div class="volby3" id="kon3" hidden>${['i','y','a'].map(l=>`<button class="pism kon" data-l="${l}">${k.kmen}<b>${l}</b></button>`).join('')}</div>${FOOT}`;
+  const U=()=>{ $('#pU').innerHTML=faze==='s'?'1️⃣ <b>Zakroužkuj</b> jeden vhodný podmět – který dává smysl?':`2️⃣ Doplň <b>koncovku</b> přísudku: ${k.kmen}_`; }; U();
+  c.querySelectorAll('.sub').forEach(b=>b.addEventListener('click',()=>{ if(faze!=='s'||st.done||b.disabled) return; const m=k.moz[+b.dataset.i];
+    if(m.ok){ vyb=m; b.classList.add('kruh'); c.querySelectorAll('.sub').forEach(x=>{ if(x!==b) x.classList.add('pryc'); }); faze='k'; $('#kon').classList.add('cur'); $('#kon3').hidden=false; U(); Snd.ok(); jiskry(b,8);
+      fb(`✓ Ano, <b>${m.w.toLowerCase()}</b> sem pasují. Teď koncovka!`,'good'); }
+    else { b.classList.add('ne'); b.disabled=true; Snd.boing(); fb('🙂 '+m.why+' Zkus jiný podmět.',''); } }));
+  c.querySelectorAll('.kon').forEach(b=>b.addEventListener('click',()=>{ if(faze!=='k'||st.done||b.disabled) return;
+    if(b.dataset.l===vyb.kon){ const g=$('#kon'); g.textContent=vyb.kon; g.classList.remove('cur'); g.classList.add('ok'); jiskry(g,10); hotovo(`✓ ${vyb.rod} → <b>${k.kmen}${vyb.kon}</b>`); }
+    else { b.disabled=true; shake(b); chyba(`Nápověda: ${vyb.rod}. Jaká koncovka k tomu patří?`); } }));
+};
+const ZN=12, ZDUR=62000;
+R.zavod=(k,c)=>{
+  c.innerHTML=`<div class="ukol">🏁 <b>Velký závod koncovek!</b> Vyber si závodníka. Každá správná koncovka = skok dopředu.<small>Potřebuješ ${ZN} správných odpovědí. Soupeř běží pořád – stihneš ho předběhnout?</small></div>
+    <div class="vyber">${PORADI.map(z=>`<button class="zbtn" data-z="${z}"><span class="zb">${zvireSVG(z)}</span><span>${cap(JMENA[z])}</span></button>`).join('')}</div>${FOOT}`;
+  c.querySelectorAll('.zbtn').forEach(b=>b.addEventListener('click',()=>{ Snd.hlas(b.dataset.z); zavodStart(b.dataset.z,c); }));
+};
+function zavodStart(ja,c){
+  const on=pick(PORADI.filter(z=>z!==ja));
+  c.innerHTML=`<div class="ukol">Ty jsi <b>${JMENA[ja]}</b>, soupeř je <b>${JMENA[on]}</b>. Doplň koncovku přísudku!</div>
+    <div class="trat"><div class="draha"><div class="zv" id="zO">${zvireHTML(on,'')}</div></div><div class="draha ja"><div class="zv" id="zJ">${zvireHTML(ja,'')}</div></div><div class="cil"></div></div>
+    <div class="zstav">Správně: <b id="zN">0</b> / ${ZN}</div><div class="otazka" id="zQ"></div><div class="volby3" id="zA"></div>${FOOT}`;
+  const zJ=$('#zJ'), zO=$('#zO'), Q=$('#zQ'), A=$('#zA'), eJ=zJ.firstElementChild, eO=zO.firstElementChild;
+  let fronta=shuffle(ZAVOD), n=0, t0=0, raf=0, onCil=false, konec=false, cur=null, lock=false;
+  cleanupFn=()=>{ konec=true; cancelAnimationFrame(raf); };
+  const loop=t=>{ if(konec) return; const p=Math.min(1,(t-t0)/ZDUR); zO.style.setProperty('--p',p);
+    if(p>=1&&!onCil){ onCil=true; eO.classList.replace('run','mav'); bubli(eO,'Jsem v cíli!'); fb(`🏁 ${cap(JMENA[on])} je v cíli! Doběhni to – zvládneš to!`,''); }
+    if(!onCil) raf=requestAnimationFrame(loop); };
+  const dalsiOtazka=()=>{ if(konec) return; cur=fronta.shift(); if(!cur){ fronta=shuffle(ZAVOD); cur=fronta.shift(); }
+    Q.innerHTML=`${esc(cur[0])} ${esc(cur[1])}<span class="gap cur">&nbsp;</span>`;
+    A.innerHTML=['i','y','a'].map(l=>`<button class="pism kon" data-l="${l}">${cur[1]}<b>${l}</b></button>`).join(''); lock=false;
+    A.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>odpoved(b))); };
+  const odpoved=b=>{ if(lock||konec||b.disabled) return; const [s,kmen,ans,rule]=cur, kdo=s.split(' ')[0];
+    if(b.dataset.l===ans){ lock=true; n++; const g=Q.querySelector('.gap'); g.textContent=ans; g.classList.replace('cur','ok'); Snd.ok(); jiskry(b,8);
+      zJ.style.setProperty('--p',n/ZN); eJ.classList.add('run'); clearTimeout(eJ._t); eJ._t=setTimeout(()=>eJ.classList.remove('run'),520);
+      $('#zN').textContent=n; fb(`✓ ${kdo} – ${rule} → ${KONC[ans]}`,'good'); setTimeout(n>=ZN?cil:dalsiOtazka,450); }
+    else { b.disabled=true; shake(b); eJ.classList.remove('zakop'); void eJ.offsetWidth; eJ.classList.add('zakop'); chyba(`Nápověda: ${kdo.toLowerCase()} – ${rule}.`); fronta.push(cur); } };
+  const cil=()=>{ konec=true; cancelAnimationFrame(raf); const vyhra=!onCil; eJ.classList.remove('run'); eJ.classList.add('mav'); if(!onCil) eO.classList.remove('run');
+    bubli(eJ,vyhra?(ZENA[ja]?'Vyhrála jsem!':'Vyhrál jsem!'):'Taky jsem v cíli!'); A.innerHTML=''; Q.innerHTML=vyhra?'🏆 Vyhrála jsi závod!':'🏁 Doběhla jsi!';
+    if(vyhra){ Snd.fanfare(); jiskry(zJ,18); }
+    hotovo(vyhra?`🏆 ${cap(JMENA[ja])} je první v cíli! Paráda, Lado!`:`Doběhla jsi! ${cap(JMENA[on])} ${ZENA[on]?'byla':'byl'} tentokrát rychlejší – příště ${ZENA[on]?'ji':'ho'} předběhneš.`,{bezOdmeny:true}); };
+  (async()=>{ for(const t of ['3','2','1']){ if(konec) return; Q.innerHTML=`<span class="odpocet">${t}</span>`; Snd.tick(); await wait(650); }
+    if(konec) return; Q.innerHTML='<span class="odpocet">Teď!</span>'; Snd.ok(); eO.classList.add('run'); t0=performance.now(); raf=requestAnimationFrame(loop); await wait(380); dalsiOtazka(); })();
+}
+
+/* ---------- finále ---------- */
+let parade=[];
+function finale(){
+  cleanup(); const ex=st.ex, ch=st.chyby, h=ch<=1?3:ch<=4?2:1, idx=st.idx;
+  store.hv[ex.id]=Math.max(store.hv[ex.id]||0,h); save(); updateHvezdy();
+  const dalsiEx=EX[idx+1];
+  $('#finale').innerHTML=`<div class="fcard"><div class="fmedal">${zvireSVG(ex.zvire)}</div><h2>Hotovo, Lado! 🎉</h2><p class="fsub">${ex.title}</p>
+    <div class="fhv">${[0,1,2].map(i=>`<span class="${i<h?'on':''}" style="animation-delay:${.35+i*.35}s">★</span>`).join('')}</div>
+    <p class="fch">${ch===0?'Bez jediné chyby! 🤩':ch===1?'Jen jedna chybička! 👏':'Chyb: '+ch+' – příště to bude ještě lepší!'}</p>
+    <div class="fbtns">${dalsiEx?`<button class="dalsi" data-f="next">Další cvičení →</button>`:''}<button class="sek" data-f="again">Znovu 🔁</button><button class="sek" data-f="home">Domů 🏠</button></div></div>`;
+  $('#finale').hidden=false; Snd.fanfare(); FW.start(6500); prehlidka();
+}
+function prehlidka(){ parade.forEach(e=>e.remove()); parade=[];
+  PORADI.forEach((z,i)=>{ lane.insertAdjacentHTML('beforeend',zvireHTML(z,'run')); const el=lane.lastElementChild; parade.push(el); const w=el.offsetWidth, x=xPozice(i,w);
+    el.style.transform=`translateX(${-w-30}px)`;
+    setTimeout(async()=>{ if(!el.isConnected) return; await anim(el,-w-30,x,1300+i*150,'cubic-bezier(.2,.75,.35,1)'); if(!el.isConnected) return;
+      el.classList.replace('run','mav'); setTimeout(()=>{ if(el.isConnected){ bubli(el,FINAL[z],i%2); Snd.hlas(z); } },i*420); },i*230); }); }
+function zavriFinale(){ if($('#finale').hidden) return; $('#finale').hidden=true; FW.stop(); const W=lane.clientWidth;
+  parade.forEach(el=>{ const b=el.querySelector('.bub'); if(b) b.classList.remove('on'); el.classList.remove('mav'); el.classList.add('run');
+    const x=el.getBoundingClientRect().left; anim(el,x,W+40,800,'cubic-bezier(.55,0,.9,.55)').then(()=>el.remove()); }); parade=[]; }
+$('#finale').addEventListener('click',e=>{ const b=e.target.closest('[data-f]'); if(!b) return; const f=b.dataset.f, idx=st?st.idx:0;
+  zavriFinale(); if(f==='next') startEx(idx+1); else if(f==='again') startEx(idx); else renderHome(); });
+
+/* ---------- ovládání ---------- */
+$('#home').addEventListener('click',e=>{ const b=e.target.closest('.exCard'); if(b) startEx(+b.dataset.i); });
+$('#back').addEventListener('click',()=>{ zavriFinale(); renderHome(); });
+$('#mute').addEventListener('click',()=>{ store.muted=!store.muted; Snd.muted=store.muted; save(); updateMute(); if(!store.muted){ Snd.init(); Snd.ok(); } });
+$('#tahakB').addEventListener('click',()=>{ $('#tahak').hidden=false; });
+$('#tahakX').addEventListener('click',()=>{ $('#tahak').hidden=true; });
+$('#tahak').addEventListener('click',e=>{ if(e.target.id==='tahak') $('#tahak').hidden=true; });
+let rT=0; addEventListener('resize',()=>{ clearTimeout(rT); rT=setTimeout(()=>{ if(!$('#home').hidden) idleZvirata(true); if(FW.raf) FW.fit(); },150); });
+
+load(); updateMute(); kytky(); renderHome();
+if(TEST) window.__cj={st:()=>st,startEx,dalsi,finale,R,EX};
+</script>
+</body>
+</html>
