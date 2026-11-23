@@ -15,3 +15,11 @@ Samostatná appka na plochu: procvičení strany 25 z pracovního sešitu (Opako
 Po každém kroku proběhne zvířátko (pes, kůň, delfín, leopard, velryba), zamává a pogratuluje; na konci rachejtle a přehlídka.
 
 - `cesky-test/index.html` – celá appka (bez sestavování), `cesky-test/zvirata.js` – kresby zvířátek, `?test` zpřístupní `window.__cj`
+
+## Marie Terezie (`marie-terezie/`)
+
+Vlastivěda pro 5. třídu: osvícenství, Marie Terezie a její reformy, navazující Josef II.
+Šest oddílů – Příběh (8 kapitol s otázkou), Pravda, nebo výmysl?, Kdo to zavedl? (Marie Terezie × Josef II.),
+Časová osa (1717, 1740, 1774, 1780), Do školy! (padací hra s věcmi z roku 1774 + otázky), Velký test (12 náhodných otázek).
+Obsah podle Malované vlastivědy 5 (osvícenství, reformy) a pracovního listu Žili byli (ČRo Junior).
+Používá stejný engine jako `cesky-test/`; zvířátka doplnila císařovna (`ZV.marie`) a portréty `BUSTA` v `zvirata.js`. `?test` zpřístupní `window.__mt`.

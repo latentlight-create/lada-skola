@@ -1,0 +1,731 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Marie Terezie">
+<meta name="theme-color" content="#bfe6ff">
+<link rel="apple-touch-icon" href="icon.png">
+<link rel="icon" href="icon.png">
+<title>Marie Terezie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap">
+<style>
+:root{
+  --ink:#1d2a44; --muted:#5b6b85; --card:#fff;
+  --blue:#2f7ff0; --green:#2fb36a; --red:#e8454d; --yellow:#ffc93c; --orange:#ff8a3d; --purple:#8a5cf0; --pink:#ff5d8f;
+  --lane:clamp(118px,19vh,180px);
+  --font:"Nunito","Arial Rounded MT Bold",system-ui,-apple-system,sans-serif;
+  color-scheme:light;
+}
+[hidden]{display:none!important}
+*{box-sizing:border-box}
+html,body{min-height:100%}
+body{margin:0;font-family:var(--font);color:var(--ink);font-size:19px;line-height:1.4;
+  background:linear-gradient(180deg,#bfe6ff 0%,#e3f4ff 45%,#fff4d6 100%) fixed;
+  -webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none;
+  -webkit-user-select:none;user-select:none;touch-action:manipulation;overflow-x:hidden}
+button{font:inherit;color:inherit;cursor:pointer;touch-action:manipulation;background:none;border:0;padding:0;-webkit-appearance:none;appearance:none}
+button:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+
+/* mraky */
+.mrak{position:fixed;z-index:0;width:130px;height:42px;background:#fff;border-radius:42px;opacity:.9;pointer-events:none;animation:mrak linear infinite}
+.mrak::before,.mrak::after{content:"";position:absolute;background:#fff;border-radius:50%}
+.mrak::before{width:54px;height:54px;top:-26px;left:18px}
+.mrak::after{width:70px;height:70px;top:-38px;left:50px}
+.m1{top:9%;animation-duration:95s;animation-delay:-20s}
+.m2{top:30%;animation-duration:130s;animation-delay:-70s;transform:scale(.7)}
+.m3{top:18%;animation-duration:110s;animation-delay:-45s}
+@keyframes mrak{from{left:-220px}to{left:110vw}}
+
+#app{position:relative;z-index:1;max-width:1040px;margin:0 auto;
+  padding:calc(env(safe-area-inset-top) + 12px) 16px calc(var(--lane) + env(safe-area-inset-bottom) + 18px)}
+.top{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.ttl{flex:1;min-width:0}
+h1{font-weight:900;font-size:clamp(26px,4.2vw,42px);line-height:1.05;margin:0;letter-spacing:-.01em}
+#sub{margin:4px 0 0;color:var(--muted);font-weight:700;font-size:clamp(15px,1.9vw,18px)}
+.topR{display:flex;align-items:center;gap:8px}
+.pill{display:inline-flex;align-items:center;gap:6px;background:#fff;border-radius:999px;padding:8px 14px;font-weight:900;font-size:18px;box-shadow:0 3px 0 rgba(29,42,68,.12)}
+.pill:active,.iconbtn:active{transform:translateY(2px);box-shadow:0 1px 0 rgba(29,42,68,.12)}
+.iconbtn{background:#fff;border-radius:999px;min-width:48px;height:48px;padding:0 14px;font-weight:900;font-size:20px;box-shadow:0 3px 0 rgba(29,42,68,.12)}
+#back{font-size:22px}
+
+/* domů */
+.karty{display:grid;grid-template-columns:1fr;gap:16px}
+@media (min-width:720px){.karty{grid-template-columns:1fr 1fr}}
+.exCard{position:relative;display:flex;align-items:center;gap:14px;text-align:left;background:#fff;border:4px solid var(--c);border-radius:26px;padding:16px 14px 16px 16px;
+  box-shadow:0 7px 0 var(--c);transition:transform .08s;min-height:150px}
+.exCard:active{transform:translateY(5px);box-shadow:0 2px 0 var(--c)}
+.exCard .num{flex:none;width:46px;height:46px;border-radius:50%;background:var(--c);color:#fff;font-weight:900;font-size:24px;display:grid;place-items:center}
+.exCard .tx{flex:1;min-width:0}
+.exCard b{display:block;font-size:clamp(20px,2.5vw,25px);font-weight:900;line-height:1.15}
+.exCard small{display:block;color:var(--muted);font-weight:700;font-size:15px;margin-top:4px;line-height:1.3}
+.exCard .hv{display:block;margin-top:6px;font-size:24px;color:var(--yellow);letter-spacing:2px;text-shadow:0 2px 0 #e0a800}
+.hv .off{color:#dde3ee;text-shadow:none}
+.exCard .mini{flex:none;width:96px;height:76px}
+.exCard .mini svg{width:100%;height:100%}
+.exCard.hotove::after{content:"✓";position:absolute;top:-12px;right:-10px;width:36px;height:36px;border-radius:50%;background:var(--green);color:#fff;font-weight:900;display:grid;place-items:center;font-size:20px;box-shadow:0 3px 0 #1d8a4f}
+.banner{margin-top:18px;background:linear-gradient(90deg,#ffe17a,#ffc93c);border-radius:20px;padding:14px 18px;font-weight:900;font-size:21px;text-align:center;box-shadow:0 5px 0 #e0a800;animation:houpe 1.4s ease-in-out infinite alternate}
+@keyframes houpe{from{transform:rotate(-1deg)}to{transform:rotate(1deg)}}
+.tip{color:var(--muted);font-weight:800;text-align:center;margin:18px 0 0}
+
+/* cvičení */
+.exHead{display:flex;align-items:center;gap:10px;margin:0 0 10px}
+.dots{display:flex;flex-wrap:wrap;gap:6px;flex:1}
+.dots i{width:16px;height:16px;border-radius:50%;background:#fff;box-shadow:inset 0 0 0 2px #c9d6ea}
+.dots i.cur{background:var(--yellow);box-shadow:0 0 0 3px #fff;animation:tep 1s ease-in-out infinite alternate}
+.dots i.done{background:#9fd7b5}
+.dots i.ok{background:var(--green)}
+@keyframes tep{from{transform:scale(1)}to{transform:scale(1.25)}}
+.pocet{font-weight:900;color:var(--muted);font-size:17px;white-space:nowrap}
+.card{background:#fff;border-radius:28px;padding:clamp(18px,3vw,30px);box-shadow:0 8px 0 rgba(29,42,68,.1)}
+.card.vjezd{animation:vjezd .35s cubic-bezier(.25,1.4,.5,1)}
+@keyframes vjezd{from{transform:translateX(40px) rotate(1deg);opacity:0}to{transform:none;opacity:1}}
+.ukol{font-weight:800;font-size:clamp(19px,2.4vw,23px);line-height:1.3}
+.ukol small{display:block;color:var(--muted);font-weight:700;font-size:16px;margin-top:3px}
+.veta{font-weight:700;margin:16px 0 18px}
+.veta.big{font-size:clamp(23px,3.3vw,34px);line-height:1.75}
+.gap{display:inline-block;min-width:1.05em;text-align:center;border-bottom:4px solid #9fb2cc;border-radius:7px 7px 0 0;line-height:1.15;margin:0 1px;color:var(--green);font-weight:900}
+.gap.cur{background:#fff1a6;border-color:var(--orange);animation:blik .9s ease-in-out infinite alternate}
+.gap.ok{background:#e3f8ec;border-color:var(--green)}
+.gap.bad{animation:cervena .5s}
+@keyframes blik{from{background:#fff1a6}to{background:#ffd75e}}
+@keyframes cervena{0%,100%{background:#fff1a6}30%{background:#ff9aa0}}
+.pismena{display:flex;justify-content:center;gap:clamp(10px,2vw,18px);flex-wrap:wrap}
+.pism{min-width:clamp(74px,11vw,104px);height:clamp(74px,11vw,104px);padding:0 14px;border-radius:24px;color:#fff;font-weight:900;font-size:clamp(38px,5.4vw,52px);line-height:1;
+  background:var(--b);box-shadow:0 7px 0 var(--bs);transition:transform .07s}
+.pism:active{transform:translateY(5px);box-shadow:0 2px 0 var(--bs)}
+.pism:disabled{opacity:.3;filter:grayscale(1);transform:translateY(5px);box-shadow:0 2px 0 var(--bs)}
+.p-i{--b:var(--blue);--bs:#1c5ec2}.p-ii{--b:var(--purple);--bs:#6538c9}.p-y{--b:var(--orange);--bs:#d0631d}.p-yy{--b:var(--pink);--bs:#cf3a6a}
+.pism.kon{font-size:clamp(26px,3.6vw,36px);--b:var(--blue);--bs:#1c5ec2}
+.pism.kon:nth-child(2){--b:var(--orange);--bs:#d0631d}.pism.kon:nth-child(3){--b:var(--purple);--bs:#6538c9}
+.pism.kon b{text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:4px}
+.fb{min-height:2.5em;margin-top:18px;padding:10px 16px;border-radius:16px;font-weight:700;font-size:clamp(17px,2vw,20px);line-height:1.35;background:#f3f6fb;color:var(--muted)}
+.fb:empty{background:transparent}
+.fb.good{background:#e3f8ec;color:#176a3c}
+.fb.bad{background:#ffe7e8;color:#a3262c}
+.nav{display:flex;justify-content:flex-end;margin-top:14px;min-height:10px}
+.dalsi{background:var(--green);color:#fff;font-weight:900;font-size:clamp(22px,2.8vw,28px);padding:14px 34px;border-radius:22px;box-shadow:0 7px 0 #1d8a4f;animation:pulz 1.1s ease-in-out infinite alternate}
+.dalsi:active{transform:translateY(5px);box-shadow:0 2px 0 #1d8a4f;animation:none}
+@keyframes pulz{from{transform:scale(1)}to{transform:scale(1.05)}}
+.sek{background:#fff;border:3px solid #c9d6ea;font-weight:900;font-size:20px;padding:12px 22px;border-radius:20px;box-shadow:0 5px 0 #c9d6ea}
+.sek:active{transform:translateY(4px);box-shadow:0 1px 0 #c9d6ea}
+.shake{animation:shake .4s}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-9px)}40%{transform:translateX(8px)}60%{transform:translateX(-6px)}80%{transform:translateX(4px)}}
+
+.volby2{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.vol{min-width:min(280px,42%);padding:18px 22px;border-radius:22px;background:#fff;border:4px solid var(--blue);color:var(--blue);font-weight:900;font-size:clamp(21px,2.7vw,27px);box-shadow:0 7px 0 var(--blue)}
+.vol:nth-child(2){border-color:var(--orange);color:#c95a14;box-shadow:0 7px 0 var(--orange)}
+.vol:nth-child(3){border-color:var(--purple);color:var(--purple);box-shadow:0 7px 0 var(--purple)}
+.vol:active{transform:translateY(5px);box-shadow:0 2px 0 currentColor}
+.vol:disabled{opacity:.3}
+.vol.spravne{background:var(--green);border-color:var(--green);color:#fff;box-shadow:0 7px 0 #1d8a4f}
+.slovo{display:inline-block;border-radius:10px;padding:0 3px;line-height:1.35}
+.slovo.sloveso{background:#ffe08a;box-shadow:0 0 0 3px #ffe08a}
+.tap .slovo{background:#eef4ff;margin:3px 1px;padding:0 7px;cursor:pointer}
+.tap .slovo:active{background:#d6e6ff}
+.slovo.pod,.pod{background:#e3f8ec!important;box-shadow:inset 0 -5px 0 var(--green)}
+.slovo.pris{background:#ffecec url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='8'%3E%3Cpath d='M0 5 Q3.5 0 7 5 T14 5' fill='none' stroke='%23e8454d' stroke-width='2.4'/%3E%3C/svg%3E") repeat-x left bottom/14px 8px!important;padding-bottom:4px}
+.legenda{display:flex;gap:18px;flex-wrap:wrap;font-weight:800;color:var(--muted);font-size:16px}
+.legenda span{padding:0 4px 4px}
+.lp{box-shadow:inset 0 -4px 0 var(--green)}
+.lpr{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='8'%3E%3Cpath d='M0 5 Q3.5 0 7 5 T14 5' fill='none' stroke='%23e8454d' stroke-width='2.4'/%3E%3C/svg%3E") repeat-x left bottom/14px 8px}
+.tp{color:var(--green)}.tpr{color:var(--red)}
+.chips{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:6px 0 4px}
+.chip{padding:10px 20px;border-radius:999px;background:#fff;border:3px solid #c9d6ea;font-weight:900;font-size:clamp(20px,2.6vw,26px);box-shadow:0 4px 0 #c9d6ea}
+.chip:active{transform:translateY(3px);box-shadow:0 1px 0 #c9d6ea}
+.chip.found{background:var(--green);border-color:var(--green);color:#fff;box-shadow:0 4px 0 #1d8a4f;animation:pop .35s cubic-bezier(.3,1.7,.5,1)}
+.chip:disabled:not(.found){opacity:.35;text-decoration:line-through}
+@keyframes pop{from{transform:scale(.6)}to{transform:scale(1)}}
+.pocit{text-align:center;font-weight:900;font-size:22px;color:var(--green);margin:10px 0}
+.new{color:var(--green)}
+
+/* škrtání */
+.pr{display:inline-block;font:inherit;font-weight:800;color:#1f7a45;background:#f2fbf5;border:3px dashed #9cd3b1;border-radius:14px;padding:0 10px;margin:4px 2px;line-height:1.5}
+.pr:active{transform:scale(.96)}
+.pr.skrt{color:#b8323a;border-color:#f3a7ab;background:#fff1f1 linear-gradient(to top right,transparent calc(50% - 2.5px),var(--red) calc(50% - 2.5px),var(--red) calc(50% + 2.5px),transparent calc(50% + 2.5px));text-decoration:line-through;text-decoration-thickness:3px;animation:skrt .3s}
+.pr.dobre{border-style:solid;border-color:var(--green);background:#e3f8ec}
+@keyframes skrt{0%{transform:scale(1)}40%{transform:scale(1.12) rotate(-3deg)}100%{transform:scale(1)}}
+.pomlc{color:#9fb2cc;margin:0 2px}
+.podm{color:var(--ink);font-weight:900}
+.nav2{display:flex;justify-content:center;margin-top:4px}
+
+/* vzorce */
+.kl{border-radius:10px;padding:2px 4px;transition:background .3s}
+.barvy .kl.k1{background:#d8e8ff;box-shadow:inset 0 -4px 0 var(--blue)}
+.barvy .kl.k2{background:#ffe6d2;box-shadow:inset 0 -4px 0 var(--orange)}
+.barvy .kl::before{font-size:.5em;font-weight:900;vertical-align:super;margin-right:3px}
+.barvy .kl.k1::before{content:"V1";color:var(--blue)}
+.barvy .kl.k2::before{content:"V2";color:#c95a14}
+.spoj{color:var(--purple);font-weight:900}
+.vol.vz{font-size:clamp(22px,2.9vw,30px);min-width:min(220px,40%)}
+
+/* podmět + koncovka */
+.sub{display:inline-block;font:inherit;font-weight:800;color:#1f5fbf;background:#eef4ff;border:4px solid transparent;border-radius:999px;padding:0 12px;margin:3px 1px;line-height:1.45}
+.sub:active{transform:scale(.96)}
+.sub.kruh{border-color:var(--red);background:#fff;color:var(--ink);animation:kruh .45s cubic-bezier(.3,1.7,.5,1)}
+.sub.ne{opacity:.35;text-decoration:line-through}
+.sub.pryc{opacity:.4}
+@keyframes kruh{from{transform:scale(1.35) rotate(-6deg)}to{transform:none}}
+.pred{white-space:nowrap}
+.volby3{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:6px}
+
+/* závod */
+.vyber{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin-top:16px}
+.zbtn{background:#f3f8ff;border:3px solid #c9d6ea;border-radius:22px;padding:10px 6px;font-weight:900;font-size:17px;box-shadow:0 5px 0 #c9d6ea;display:flex;flex-direction:column;align-items:center;gap:4px}
+.zbtn:active{transform:translateY(4px);box-shadow:0 1px 0 #c9d6ea}
+.zb{width:110px;height:86px}.zb svg{width:100%;height:100%}
+.trat{position:relative;height:clamp(180px,25vh,216px);border-radius:22px;overflow:hidden;margin:14px 0 8px;background:linear-gradient(#a6dc80,#74c454)}
+.draha{position:relative;height:50%;border-bottom:3px dashed rgba(255,255,255,.75)}
+.draha:last-of-type{border-bottom:0}
+.draha.ja{background:rgba(255,255,255,.12)}
+.cil{position:absolute;right:8px;top:0;bottom:0;width:18px;background:repeating-conic-gradient(#222 0 25%,#fff 0 50%) 0 0/18px 18px;opacity:.9}
+.zv{position:absolute;bottom:2px;left:calc(var(--p,0) * (100% - 104px));transition:left .45s cubic-bezier(.3,1.35,.5,1);--zh:66px}
+#zO{transition:none}
+.zv .zvire{position:relative;left:auto;bottom:auto}
+.zstav{text-align:center;font-weight:900;color:var(--muted)}
+.otazka{text-align:center;font-weight:900;font-size:clamp(30px,4.6vw,46px);margin:8px 0 14px;min-height:1.3em}
+.odpocet{display:inline-block;color:var(--orange);animation:pop .4s cubic-bezier(.3,1.7,.5,1)}
+.zakop{animation:shake .4s}
+
+/* zvířátka */
+#lane{position:fixed;left:0;right:0;bottom:0;height:calc(var(--lane) + 90px + env(safe-area-inset-bottom));pointer-events:none;z-index:60;overflow:hidden}
+.louka{position:absolute;left:0;bottom:0;width:100%;height:calc(var(--lane)*.42 + env(safe-area-inset-bottom))}
+.kytka{position:absolute;font-size:clamp(16px,2.4vw,24px);line-height:1}
+.zvire{--zh:calc(var(--lane)*.72);position:absolute;left:0;bottom:calc(var(--lane)*.13 + env(safe-area-inset-bottom));height:var(--zh);width:calc(var(--zh)*1.273);will-change:transform}
+.zvire.idle{--zh:calc(var(--lane)*.56);pointer-events:auto;cursor:pointer}
+.zvire.delfin,.zvire.velryba{bottom:calc(var(--lane)*.05 + env(safe-area-inset-bottom))}
+.zvire svg{width:100%;height:100%;display:block;overflow:visible}
+.zvire .noha,.zvire .mava,.zvire .ocas,.zvire .hlava,.zvire .gejzir{transform-box:view-box}
+.run .nA{animation:krokA .28s ease-in-out infinite alternate}
+.run .nB{animation:krokB .28s ease-in-out infinite alternate}
+@keyframes krokA{from{transform:rotate(-28deg)}to{transform:rotate(28deg)}}
+@keyframes krokB{from{transform:rotate(28deg)}to{transform:rotate(-28deg)}}
+.run svg{animation:hop .14s ease-in-out infinite alternate}
+@keyframes hop{from{transform:translateY(0)}to{transform:translateY(-5%)}}
+.run .ocas{animation:vrt .28s ease-in-out infinite alternate}
+.stoji svg{animation:dych 1.5s ease-in-out infinite alternate}
+@keyframes dych{from{transform:translateY(0)}to{transform:translateY(-3%)}}
+.stoji .ocas{animation:vrt .9s ease-in-out infinite alternate}
+.mav svg{animation:poskok .45s ease-in-out infinite alternate}
+@keyframes poskok{from{transform:translateY(0)}to{transform:translateY(-7%)}}
+.mav .mava{animation:mavL .4s ease-in-out infinite alternate}
+@keyframes mavL{from{transform:rotate(-112deg)}to{transform:rotate(-158deg)}}
+.mav .ocas{animation:vrt .16s ease-in-out infinite alternate}
+@keyframes vrt{from{transform:rotate(-15deg)}to{transform:rotate(15deg)}}
+.mav .hlava{animation:kyv .45s ease-in-out infinite alternate}
+@keyframes kyv{from{transform:rotate(-7deg)}to{transform:rotate(6deg)}}
+.delfin.mav .mava,.velryba.mav .mava{animation:mavF .32s ease-in-out infinite alternate}
+@keyframes mavF{from{transform:rotate(12deg)}to{transform:rotate(-60deg)}}
+.delfin.run svg{animation:skok .8s ease-in-out infinite}
+@keyframes skok{0%{transform:translateY(16%) rotate(-24deg)}50%{transform:translateY(-34%) rotate(0deg)}100%{transform:translateY(16%) rotate(24deg)}}
+.velryba.run svg{animation:plav .45s ease-in-out infinite alternate}
+@keyframes plav{from{transform:translateY(0) rotate(-3deg)}to{transform:translateY(-6%) rotate(3deg)}}
+.gejzir{opacity:0}
+.mav .gejzir{animation:gejz .8s ease-out infinite}
+@keyframes gejz{0%{opacity:0;transform:scaleY(.2)}30%{opacity:1;transform:scaleY(1)}100%{opacity:0;transform:translateY(-5px) scaleY(1.1)}}
+.vlna{position:absolute;left:-14%;width:128%;bottom:-8%;height:36%;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='20' viewBox='0 0 40 20'%3E%3Cpath d='M0 7 Q10 0 20 7 T40 7 V20 H0Z' fill='%2357b8f2'/%3E%3Cpath d='M0 12 Q10 6 20 12 T40 12 V20 H0Z' fill='%233a9be0'/%3E%3C/svg%3E") repeat-x 0 0/34px 100%;
+  border-radius:0 0 40% 40%;animation:vlnit 1.2s linear infinite}
+@keyframes vlnit{from{background-position:0 0}to{background-position:34px 0}}
+.bub{position:absolute;left:55%;bottom:98%;transform:translateX(-50%) scale(0);transform-origin:40% 100%;background:#fff;border:3px solid var(--ink);border-radius:18px;
+  padding:5px 12px;font-weight:900;font-size:clamp(15px,2.1vw,20px);white-space:nowrap;transition:transform .28s cubic-bezier(.3,1.7,.5,1);box-shadow:0 4px 0 rgba(29,42,68,.15);z-index:2}
+.bub.on{transform:translateX(-50%) scale(1)}
+.bub::after{content:"";position:absolute;left:38%;top:100%;border:9px solid transparent;border-top-color:var(--ink)}
+.bub.vys{bottom:130%}
+
+/* efekty */
+#fx{position:fixed;inset:0;pointer-events:none;z-index:70}
+.jiskra{position:fixed;width:11px;height:11px;border-radius:50%}
+#fw{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:55}
+
+/* finále + tahák */
+.ovl{position:fixed;inset:0;z-index:50;background:rgba(18,44,92,.38);display:flex;align-items:flex-start;justify-content:center;overflow:auto;
+  padding:calc(env(safe-area-inset-top) + 20px) 16px calc(var(--lane) + 30px)}
+.fcard,.tcard{position:relative;background:#fff;border-radius:30px;padding:22px 26px 24px;max-width:580px;width:100%;text-align:center;box-shadow:0 10px 0 rgba(0,0,0,.15);animation:vyskoc .5s cubic-bezier(.3,1.5,.5,1)}
+@keyframes vyskoc{from{transform:scale(.6);opacity:0}to{transform:none;opacity:1}}
+.fmedal{width:120px;height:120px;margin:-6px auto 0;border-radius:50%;background:radial-gradient(circle at 50% 40%,#fff6c9,#ffd75e);box-shadow:0 0 0 6px #ffc93c,0 6px 0 6px #e0a800;display:grid;place-items:center}
+.fmedal svg{width:96px;height:76px}
+.fcard h2{font-size:clamp(30px,4.6vw,44px);font-weight:900;margin:16px 0 0;line-height:1.1}
+.fsub{margin:4px 0 0;color:var(--muted);font-weight:800}
+.fhv{font-size:62px;line-height:1;margin:10px 0 2px;letter-spacing:6px}
+.fhv span{color:#dde3ee;display:inline-block}
+.fhv span.on{color:var(--yellow);text-shadow:0 4px 0 #e0a800;animation:hvezda .55s cubic-bezier(.3,1.8,.5,1) both}
+@keyframes hvezda{from{transform:scale(0) rotate(-90deg)}to{transform:none}}
+.fch{font-weight:800;font-size:20px;margin:6px 0 14px}
+.fbtns{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.fbtns .dalsi{font-size:24px;padding:12px 26px}
+.tcard{text-align:left;max-width:720px}
+.tcard h2{margin:0 0 6px;font-size:30px;font-weight:900}
+.tcard h3{margin:16px 0 6px;font-size:21px;font-weight:900;color:var(--blue)}
+.tcard ul{margin:0;padding-left:22px;font-weight:700;line-height:1.5}
+.tt{width:100%;border-collapse:collapse;font-weight:700;font-size:17px}
+.tt td{padding:7px 8px;border-bottom:2px solid #edf1f7;vertical-align:top}
+.tt .k{font-weight:900;font-size:22px;color:var(--red);text-align:center;white-space:nowrap}
+.zavri{position:absolute;top:12px;right:12px;width:46px;height:46px;border-radius:50%;background:#f0f4fa;font-weight:900;font-size:22px}
+@media (prefers-reduced-motion:reduce){.mrak{animation:none}}
+
+/* ---- Marie Terezie ---- */
+.pribeh{display:flex;gap:18px;align-items:center;background:#fff7e3;border:3px solid #ffd98a;border-radius:24px;padding:14px 18px;margin:0 0 16px}
+.pribeh p{margin:0;font-weight:700;font-size:clamp(19px,2.4vw,24px);line-height:1.45}
+.pribeh p b{color:#c2185b}
+.obr{flex:none;width:clamp(96px,16vw,150px);display:grid;place-items:center}
+.obr>svg{width:100%;height:auto;display:block}
+.obrMT{width:min(100%,112px);aspect-ratio:68/112}.obrMT svg{width:100%;height:100%;overflow:visible;animation:dych 1.6s ease-in-out infinite alternate}
+.obrE{font-size:clamp(64px,10vw,96px);line-height:1}
+@media (max-width:600px){.pribeh{flex-direction:column;text-align:center}}
+.otq{font-size:clamp(21px,2.7vw,26px);margin-bottom:14px}
+.otq small{margin:0 0 4px}
+.opts{display:grid;gap:12px}
+@media (min-width:760px){.opts{grid-template-columns:repeat(3,1fr)}}
+.opt{background:#fff;border:4px solid #c9d6ea;border-radius:20px;padding:14px;font-weight:900;font-size:clamp(19px,2.3vw,23px);line-height:1.25;box-shadow:0 6px 0 #c9d6ea;min-height:78px}
+.opt:active{transform:translateY(4px);box-shadow:0 2px 0 #c9d6ea}
+.opt:disabled{opacity:.35}
+.opt.spravne,.opt.spravne:disabled{background:var(--green);border-color:var(--green);color:#fff;box-shadow:0 6px 0 #1d8a4f;opacity:1}
+.vol.spravne:disabled{opacity:1}
+.tvrz{font-weight:900;font-size:clamp(26px,3.8vw,40px);line-height:1.3;text-align:center;margin:22px 0 26px;color:#3a2a55}
+.vol.tfP{border-color:var(--green);color:#17803f;box-shadow:0 7px 0 var(--green)}
+.vol.tfV{border-color:var(--red);color:#b8323a;box-shadow:0 7px 0 var(--red)}
+.vol.tfP.spravne,.vol.tfV.spravne{background:var(--green);border-color:var(--green);color:#fff;box-shadow:0 7px 0 #1d8a4f}
+.reforma{display:flex;align-items:center;gap:16px;justify-content:center;background:#f3f8ff;border-radius:22px;padding:18px;margin:16px 0 20px;font-weight:900;font-size:clamp(23px,3.2vw,32px);line-height:1.2}
+.rik{font-size:clamp(46px,7vw,64px);line-height:1}
+.porty{display:flex;gap:18px;justify-content:center;flex-wrap:wrap}
+.port{width:min(250px,44%);background:#fff;border:4px solid #c9d6ea;border-radius:24px;padding:12px 10px;box-shadow:0 6px 0 #c9d6ea;display:flex;flex-direction:column;align-items:center;gap:2px}
+.port svg{width:min(130px,100%);height:auto}
+.port b{font-size:clamp(19px,2.4vw,23px);font-weight:900}.port small{color:var(--muted);font-weight:700;font-size:15px}
+.port:active{transform:translateY(4px);box-shadow:0 2px 0 #c9d6ea}
+.port:disabled{opacity:.35}
+.port.spravne,.port.spravne:disabled{border-color:var(--green);background:#e3f8ec;box-shadow:0 6px 0 var(--green);opacity:1}
+.osa{display:grid;gap:8px;margin:14px 0 16px}
+.slot{display:flex;align-items:center;gap:14px;background:#f6f8fc;border:3px dashed #c9d6ea;border-radius:16px;padding:8px 14px;min-height:54px}
+.slot .sr{flex:none;min-width:62px;font-weight:900;font-size:22px;color:var(--orange)}
+.slot .st{font-weight:800;font-size:clamp(18px,2.2vw,22px)}
+.slot.cur{border-color:var(--orange);background:#fff5e8;animation:tep2 .9s ease-in-out infinite alternate}
+.slot.ok{border-style:solid;border-color:var(--green);background:#e3f8ec}
+.slot.ok .sr{color:var(--green)}
+@keyframes tep2{from{box-shadow:0 0 0 0 rgba(255,138,61,0)}to{box-shadow:0 0 0 6px rgba(255,138,61,.28)}}
+.chip.udal{font-size:clamp(17px,2.2vw,21px)}
+.chip.pouzito{display:none}
+.hriste{position:relative;height:clamp(300px,42vh,430px);border-radius:22px;overflow:hidden;background:linear-gradient(#fdf6e3,#f1dfb6);border:3px solid #e8cf98;touch-action:none}
+.pad{position:absolute;left:0;top:0;display:flex;flex-direction:column;align-items:center;gap:1px;background:#fff;border:3px solid #e1c98f;border-radius:18px;padding:6px 10px 5px;box-shadow:0 4px 0 rgba(0,0,0,.08);will-change:transform}
+.pe{font-size:40px;line-height:1.1}
+.pl{font-weight:800;font-size:14px;white-space:nowrap}
+.tabulka{display:block;width:48px;height:36px;margin:5px 0 3px;background:#3c4650;border:4px solid #9a6a3a;border-radius:6px;position:relative}
+.tabulka::after{content:"";position:absolute;left:6px;right:12px;top:10px;height:2px;background:#e8eef5;box-shadow:0 7px 0 #e8eef5}
+.pad.chycen{animation:chycen .4s forwards;background:#e3f8ec;border-color:var(--green)}
+.pad.spatne{animation:spatne .45s forwards;background:#ffe1e1;border-color:var(--red)}
+.pad.pryc{transition:opacity .3s;opacity:0}
+@keyframes chycen{to{scale:1.5;opacity:0}}
+@keyframes spatne{30%{rotate:-10deg}60%{rotate:10deg}100%{opacity:0}}
+.palac{position:absolute;right:3%;bottom:calc(var(--lane)*.27 + env(safe-area-inset-bottom));width:clamp(170px,27vw,310px);height:auto}
+</style>
+</head>
+<body>
+<div class="mrak m1"></div><div class="mrak m2"></div><div class="mrak m3"></div>
+<div id="app">
+  <header class="top">
+    <button id="back" class="iconbtn" hidden aria-label="Zpět domů">← Domů</button>
+    <div class="ttl"><h1 id="h1">Marie Terezie</h1><p id="sub"></p></div>
+    <div class="topR">
+      <span class="pill" title="Hvězdičky">⭐ <b id="hvezdy">0</b></span>
+      <button id="tahakB" class="iconbtn" aria-label="Tahák">📝</button>
+      <button id="mute" class="iconbtn" aria-label="Zvuk">🔊</button>
+    </div>
+  </header>
+  <main id="home"></main>
+  <main id="ex" hidden>
+    <div class="exHead"><div class="dots" id="dots"></div><span class="pocet" id="pocet"></span></div>
+    <section class="card" id="card"></section>
+  </main>
+</div>
+
+<div id="lane" aria-hidden="true">
+  <svg class="palac" viewBox="0 -14 300 114" aria-hidden="true"><rect x="10" y="40" width="280" height="60" fill="#f4cd57"/><rect x="114" y="26" width="72" height="74" fill="#f8db7c"/><path d="M4 42 L296 42 L284 30 L16 30 Z" fill="#6f9e63"/><path d="M108 28 L192 28 L180 14 L120 14 Z" fill="#6f9e63"/><path d="M140 14 L150 4 L160 14 Z" fill="#6f9e63"/><rect x="22" y="50" width="8" height="11" rx="2" fill="#fff"/><rect x="38" y="50" width="8" height="11" rx="2" fill="#fff"/><rect x="54" y="50" width="8" height="11" rx="2" fill="#fff"/><rect x="70" y="50" width="8" height="11" rx="2" fill="#fff"/><rect x="86" y="50" width="8" height="11" rx="2" fill="#fff"/><rect x="102" y="50" width="8" height="11" rx="2" fill="#fff"/><rect x="196" y="50" width="8" height="11" rx="2" fill="#fff"/><rect x="212" y="50" width="8" height="11" rx="2" fill="#fff"/><rect x="228" y="50" width="8" height="11" rx="2" fill="#fff"/><rect x="244" y="50" width="8" height="11" rx="2" fill="#fff"/><rect x="260" y="50" width="8" height="11" rx="2" fill="#fff"/><rect x="276" y="50" width="8" height="11" rx="2" fill="#fff"/><rect x="22" y="72" width="8" height="11" rx="2" fill="#fff"/><rect x="38" y="72" width="8" height="11" rx="2" fill="#fff"/><rect x="54" y="72" width="8" height="11" rx="2" fill="#fff"/><rect x="70" y="72" width="8" height="11" rx="2" fill="#fff"/><rect x="86" y="72" width="8" height="11" rx="2" fill="#fff"/><rect x="102" y="72" width="8" height="11" rx="2" fill="#fff"/><rect x="196" y="72" width="8" height="11" rx="2" fill="#fff"/><rect x="212" y="72" width="8" height="11" rx="2" fill="#fff"/><rect x="228" y="72" width="8" height="11" rx="2" fill="#fff"/><rect x="244" y="72" width="8" height="11" rx="2" fill="#fff"/><rect x="260" y="72" width="8" height="11" rx="2" fill="#fff"/><rect x="276" y="72" width="8" height="11" rx="2" fill="#fff"/><rect x="124" y="36" width="9" height="12" rx="3" fill="#fff"/><rect x="141" y="36" width="9" height="12" rx="3" fill="#fff"/><rect x="158" y="36" width="9" height="12" rx="3" fill="#fff"/><rect x="175" y="36" width="9" height="12" rx="3" fill="#fff"/><rect x="124" y="56" width="9" height="12" rx="3" fill="#fff"/><rect x="175" y="56" width="9" height="12" rx="3" fill="#fff"/><path d="M140 100 V80 Q150 70 160 80 V100 Z" fill="#8a5a2b"/><path d="M150 4 V-12" stroke="#555" stroke-width="1.6"/><path d="M150 -12 h14 l-4 4 l4 4 h-14Z" fill="#e23b36"/></svg>
+  <svg class="louka" viewBox="0 0 1000 100" preserveAspectRatio="none"><path d="M0 28 Q120 2 250 22 T500 18 T750 26 T1000 12 V100 H0Z" fill="#9ad874"/><path d="M0 56 Q150 36 300 52 T600 46 T1000 50 V100 H0Z" fill="#6cbf4a"/></svg>
+</div>
+<canvas id="fw" hidden></canvas>
+<div id="fx"></div>
+<div id="finale" class="ovl" hidden></div>
+<div id="tahak" class="ovl" hidden>
+  <div class="tcard">
+    <button class="zavri" id="tahakX" aria-label="Zavřít">✕</button>
+    <h2>📝 Tahák – Marie Terezie</h2>
+    <h3>Kdo byla</h3>
+    <ul>
+      <li>habsburská panovnice a česká královna, <b>vládla 1740–1780</b> (40 let), sídlila ve <b>Vídni</b></li>
+      <li>narodila se <b>1717</b>, otec císař <b>Karel VI.</b> – <b>pragmatická sankce</b> (vládnout může i dcera)</li>
+      <li>manžel František Štěpán Lotrinský, <b>16 dětí</b>, syn <b>Josef II.</b></li>
+      <li>pruský král <b>Fridrich II.</b> jí vzal většinu <b>Slezska</b></li>
+      <li><b>1743</b> korunována v Praze na českou královnu</li>
+    </ul>
+    <h3>Osvícenství</h3>
+    <ul>
+      <li><b>osvícenství</b> = osvícení rozumu – nejdůležitější je rozum a vzdělání</li>
+      <li><b>reforma</b> = změna k lepšímu</li>
+    </ul>
+    <h3>Reformy Marie Terezie</h3>
+    <table class="tt">
+      <tr><td>🏫 <b>povinná školní docházka</b></td><td>1774 · děti 6–12 let · čtení, psaní, počítání</td></tr>
+      <tr><td>🌾 <b>omezila robotu</b></td><td>poddaní robotovali méně dní</td></tr>
+      <tr><td>💰 <b>daně platí i šlechta</b></td><td>peníze hlavně na vojsko</td></tr>
+      <tr><td>🪖 <b>stálé vojsko</b></td><td>armáda připravená i v míru</td></tr>
+      <tr><td>🏠 <b>číslování domů</b></td><td>soupis lidí (i pro vojsko)</td></tr>
+      <tr><td>⚖️ <b>zákaz mučení</b></td><td>1776</td></tr>
+    </table>
+    <h3>Josef II. – syn, vládl 1780–1790</h3>
+    <ul>
+      <li><b>1781 zrušil nevolnictví</b> – lidé se mohli stěhovat, ženit a studovat bez svolení pána (robota zůstala)</li>
+      <li><b>1781 toleranční patent</b> – lidé mohli vyznávat i jiné než katolické náboženství</li>
+    </ul>
+    <h3>Zapamatuj si roky</h3>
+    <ul><li><b>1717</b> narození · <b>1740</b> nástup na trůn · <b>1774</b> školní docházka · <b>1780</b> smrt · <b>1781</b> zrušení nevolnictví</li></ul>
+  </div>
+</div>
+
+<script src="zvirata.js"></script>
+<script>
+'use strict';
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const TEST=/[?&]test\b/.test(location.search);
+const wait=ms=>new Promise(r=>setTimeout(r,ms));
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const cap=t=>t.charAt(0).toUpperCase()+t.slice(1);
+const holy=w=>w.replace(/[.,!?;:„“]/g,'').toLowerCase();
+
+/* ---------- zvuky ---------- */
+const Snd={ctx:null,muted:false,
+  init(){ if(!this.ctx){ try{ this.ctx=new (window.AudioContext||window.webkitAudioContext)(); }catch(e){} } if(this.ctx&&this.ctx.state==='suspended') this.ctx.resume().catch(()=>{}); },
+  tone(f,dur,o={}){ if(!this.ctx||this.muted) return; const c=this.ctx,t=c.currentTime+(o.at||0),os=c.createOscillator(),g=c.createGain(); os.type=o.type||'sine'; os.frequency.setValueAtTime(f,t); if(o.slide) os.frequency.exponentialRampToValueAtTime(o.slide,t+dur); g.gain.setValueAtTime(0.0001,t); g.gain.linearRampToValueAtTime(o.vol||0.12,t+0.012); g.gain.exponentialRampToValueAtTime(0.0001,t+dur); os.connect(g).connect(c.destination); os.start(t); os.stop(t+dur+0.05); },
+  noise(dur,o={}){ if(!this.ctx||this.muted) return; const c=this.ctx,n=Math.floor(c.sampleRate*dur),b=c.createBuffer(1,n,c.sampleRate),d=b.getChannelData(0); for(let i=0;i<n;i++) d[i]=(Math.random()*2-1)*Math.pow(1-i/n,1.5); const s=c.createBufferSource(); s.buffer=b; const f=c.createBiquadFilter(); f.type=o.type||'highpass'; f.frequency.value=o.f||1800; const g=c.createGain(); g.gain.value=o.vol||.15; s.connect(f).connect(g).connect(c.destination); s.start(c.currentTime+(o.at||0)); },
+  tick(){ this.tone(880,.06,{type:'triangle',vol:.08}); },
+  ok(){ this.tone(660,.09,{type:'triangle',vol:.1}); this.tone(990,.16,{type:'triangle',vol:.08,at:.07}); },
+  ding(){ [[784,0],[988,.08],[1319,.16]].forEach(([f,d])=>this.tone(f,.24,{type:'triangle',vol:.09,at:d})); },
+  buzz(){ this.tone(170,.22,{type:'sawtooth',vol:.05,slide:110}); },
+  boing(){ this.tone(300,.25,{vol:.1,slide:520}); },
+  skrt(){ this.noise(.16,{f:2400,vol:.2}); },
+  fanfare(){ [[523,0],[659,.12],[784,.24],[1047,.36],[784,.52],[1047,.64]].forEach(([f,d])=>this.tone(f,.3,{type:'triangle',vol:.09,at:d})); },
+  pop(){ this.tone(140,.25,{vol:.07,slide:60}); this.noise(.22,{type:'lowpass',f:1300,vol:.09}); },
+  hlas(z){ const t=this; const H={
+    marie(){ [[784,0],[988,.1],[1175,.2],[1568,.32]].forEach(([f,d])=>t.tone(f,.24,{type:'triangle',vol:.08,at:d})); },
+    pes(){ t.tone(560,.1,{type:'square',vol:.05,slide:330}); t.tone(610,.12,{type:'square',vol:.05,slide:340,at:.18}); },
+    kun(){ for(let i=0;i<7;i++) t.tone(1250-i*90,.07,{type:'triangle',vol:.07,at:i*.055}); t.tone(500,.18,{type:'sawtooth',vol:.03,at:.4,slide:380}); },
+    delfin(){ t.tone(1700,.22,{vol:.08,slide:2700}); t.tone(2600,.2,{vol:.07,slide:1500,at:.22}); for(let i=0;i<4;i++) t.tone(3000,.02,{type:'square',vol:.03,at:.46+i*.05}); },
+    leopard(){ t.tone(120,.32,{type:'sawtooth',vol:.06,slide:95}); t.tone(640,.3,{type:'triangle',vol:.08,slide:430,at:.34}); },
+    velryba(){ t.tone(240,.75,{vol:.13,slide:150}); t.tone(330,.55,{vol:.08,slide:210,at:.32}); }
+  }; if(H[z]) H[z](); }
+};
+document.addEventListener('pointerdown',()=>Snd.init(),{passive:true});
+
+/* ---------- zvířátka ---------- */
+const PORADI=['marie','pes','kun','delfin','leopard','velryba'];
+const JMENA={marie:'císařovna Marie Terezie',pes:'pejsek Alík',kun:'koník Blesk',delfin:'delfín Šplouch',leopard:'leopardice Skvrnka',velryba:'velryba Bublina'};
+const ZENA={marie:1,leopard:1,velryba:1};
+const VODA={delfin:1,velryba:1};
+const HLASKY={
+  marie:['Výborně, má milá Lado!','Jsem na tebe pyšná!','Císařsky dobře!','Takovou chytrou poddanou chci!'],
+  pes:['Haf! Paráda, Lado!','Haf haf, to je ono!','Vrtím ocasem – super!','Haf! Jsi jednička!'],
+  kun:['Íhahá! Bezva, Lado!','Přicválal jsem gratulovat!','Hyjé, jedeme dál!','Íhahá, to je ono!'],
+  delfin:['Ííí! Super práce!','Skáču radostí!','Šplouch! Výborně!','Jsi hvězda, Lado!'],
+  leopard:['Mňau! Rychlá jak já!','Skvělá práce, Lado!','Vrrr, gratuluju!','Mňau, to je ono!'],
+  velryba:['Bubli bubli, výborně!','Velrybí gratulace!','Šplouch! Paráda!','To je hustý, Lado!']
+};
+const BEZCHYBY=['Bez chyby! 🌟','Ani jedna chyba! 🌟','Čistá práce! 🌟'];
+const IDLE={marie:'Ahoj, já jsem Marie Terezie!',pes:'Haf! Jdeme do 18. století?',kun:'Íhahá! Povezu císařský kočár!',delfin:'Ííí! Kolik měla dětí?',leopard:'Mňau! Znáš roky 1740–1780?',velryba:'Bubli bubli, ahoj Lado!'};
+const FINAL={marie:'Bravo, Lado!',pes:'Haf! Super!',kun:'Íhahá!',delfin:'Ííí!',leopard:'Mňau! Hustý!',velryba:'Gratuluju!'};
+function zvireSVG(z){ return `<svg viewBox="0 0 140 110" aria-hidden="true">${ZV[z]}</svg>`; }
+function zvireHTML(z,cls){ return `<div class="zvire ${z} ${cls||''}">${zvireSVG(z)}${VODA[z]?'<div class="vlna"></div>':''}<div class="bub"></div></div>`; }
+const lane=$('#lane');
+function bubli(el,text,vys){ const b=el.querySelector('.bub'); if(!b) return; b.textContent=text; b.classList.toggle('vys',!!vys); b.style.marginLeft='0px';
+  const er=el.getBoundingClientRect(), bw=b.offsetWidth, left=er.left+er.width*.55-bw/2; let dx=0;
+  if(left<8) dx=8-left; else if(left+bw>innerWidth-8) dx=innerWidth-8-(left+bw); b.style.marginLeft=dx+'px'; b.classList.add('on'); }
+function anim(el,a,b,dur,easing){ return new Promise(res=>{ const tf=x=>`translateX(${x}px)`; if(!el.animate){ el.style.transform=tf(b); setTimeout(res,dur); return; }
+  const an=el.animate([{transform:tf(a)},{transform:tf(b)}],{duration:dur,easing,fill:'forwards'}); an.onfinish=res; an.oncancel=res; }); }
+let beziOdmen=0, odmI=0;
+async function probehni(z,text){
+  if(beziOdmen>=2) return; beziOdmen++;
+  lane.insertAdjacentHTML('beforeend',zvireHTML(z,'run bezec'));
+  const el=lane.lastElementChild, W=lane.clientWidth, w=el.offsetWidth;
+  const cx=Math.round((W-w)/2+(Math.random()-.5)*W*.3);
+  try{
+    await anim(el,-w-30,cx,1100,'cubic-bezier(.2,.75,.35,1)'); if(!el.isConnected) return;
+    el.classList.replace('run','mav'); bubli(el,text); Snd.hlas(z);
+    await wait(1750); if(!el.isConnected) return;
+    el.querySelector('.bub').classList.remove('on'); el.classList.replace('mav','run');
+    await anim(el,cx,W+30,950,'cubic-bezier(.55,0,.9,.55)');
+  } finally { el.remove(); beziOdmen--; }
+}
+function zrusBezce(){ $$('#lane .bezec').forEach(e=>{ if(e.getAnimations) e.getAnimations().forEach(a=>a.cancel()); e.remove(); }); }
+function odmena(){ const z=PORADI[odmI++%PORADI.length]; const t=(st&&st.ck===0&&Math.random()<.35)?pick(BEZCHYBY):pick(HLASKY[z]); probehni(z,t); }
+function xPozice(i,w){ const W=lane.clientWidth; return Math.round(Math.max(4,Math.min(W-w-4,W*((i+.5)/PORADI.length)-w/2))); }
+function idleZvirata(on){
+  $$('#lane .idle').forEach(e=>e.remove()); if(!on) return;
+  PORADI.forEach((z,i)=>{
+    lane.insertAdjacentHTML('beforeend',zvireHTML(z,'stoji idle'));
+    const el=lane.lastElementChild; el.style.transform=`translateX(${xPozice(i,el.offsetWidth)}px)`;
+    el.querySelector('svg').style.animationDelay=(-i*.37)+'s';
+    el.addEventListener('click',()=>{ if(el.classList.contains('mav')) return; el.classList.add('mav'); bubli(el,IDLE[z],i%2); Snd.init(); Snd.hlas(z); jiskry(el,8);
+      setTimeout(()=>{ el.classList.remove('mav'); const b=el.querySelector('.bub'); if(b) b.classList.remove('on'); },1900); });
+  });
+}
+function kytky(){ const f=['🌼','🌷','🌸','🌼','🌻','🌼','🌷','🌸','🌼']; f.forEach((k,i)=>{ const s=document.createElement('span'); s.className='kytka'; s.textContent=k; s.style.left=(4+i*11+Math.random()*5)+'%'; s.style.bottom=`calc(var(--lane)*${(.02+Math.random()*.12).toFixed(3)} + env(safe-area-inset-bottom))`; lane.appendChild(s); }); }
+
+/* ---------- efekty ---------- */
+function jiskry(el,n=10){ const r=el.getBoundingClientRect(), x=r.left+r.width/2, y=r.top+r.height/2, fx=$('#fx'); const B=['#ffc93c','#2fb36a','#2f7ff0','#ff5d8f','#8a5cf0','#ff8a3d'];
+  for(let i=0;i<n;i++){ const s=document.createElement('i'); s.className='jiskra'; s.style.background=B[i%B.length]; s.style.left=(x-5)+'px'; s.style.top=(y-5)+'px'; fx.appendChild(s);
+    const a=Math.random()*Math.PI*2, d=40+Math.random()*55;
+    if(s.animate) s.animate([{transform:'translate(0,0) scale(1)',opacity:1},{transform:`translate(${Math.cos(a)*d}px,${Math.sin(a)*d}px) scale(.3)`,opacity:0}],{duration:600+Math.random()*250,easing:'cubic-bezier(.2,.7,.4,1)',fill:'forwards'});
+    setTimeout(()=>s.remove(),900); } }
+function shake(el){ el.classList.remove('shake'); void el.offsetWidth; el.classList.add('shake'); }
+const FW={cv:null,cx:null,raf:0,end:0,rk:[],pt:[],W:0,H:0,
+  start(ms){ this.cv=$('#fw'); this.cx=this.cv.getContext('2d'); this.cv.hidden=false; this.fit(); this.end=performance.now()+ms; if(!this.raf) this.raf=requestAnimationFrame(t=>this.loop(t)); },
+  fit(){ if(!this.cv) return; const d=Math.min(2,window.devicePixelRatio||1); this.W=innerWidth; this.H=innerHeight; this.cv.width=this.W*d; this.cv.height=this.H*d; this.cx.setTransform(d,0,0,d,0,0); },
+  stop(){ this.end=0; this.rk=[]; this.pt=[]; },
+  loop(t){ const c=this.cx,W=this.W,H=this.H;
+    if(t<this.end&&Math.random()<.065) this.rk.push({x:W*(.12+Math.random()*.76),y:H,vx:(Math.random()-.5)*1.6,vy:-(H*.012+Math.random()*H*.006),h:Math.floor(Math.random()*360)});
+    c.clearRect(0,0,W,H);
+    for(const r of this.rk){ r.x+=r.vx; r.y+=r.vy; r.vy+=H*.00018; c.fillStyle=`hsl(${r.h},100%,60%)`; c.beginPath(); c.arc(r.x,r.y,3.2,0,7); c.fill(); if(r.vy>=-1){ r.dead=1; this.boom(r); } }
+    this.rk=this.rk.filter(r=>!r.dead);
+    c.lineWidth=3.6; c.lineCap='round';
+    for(const p of this.pt){ const px=p.x,py=p.y; p.x+=p.vx; p.y+=p.vy; p.vx*=.985; p.vy=p.vy*.985+.06; p.a-=p.d; c.strokeStyle=`hsla(${p.h},100%,${p.l}%,${Math.max(0,p.a)})`; c.beginPath(); c.moveTo(px,py); c.lineTo(p.x,p.y); c.stroke(); }
+    this.pt=this.pt.filter(p=>p.a>0);
+    if(t<this.end||this.rk.length||this.pt.length) this.raf=requestAnimationFrame(t2=>this.loop(t2)); else { this.raf=0; c.clearRect(0,0,W,H); this.cv.hidden=true; } },
+  boom(r){ const n=48+Math.floor(Math.random()*26), sp=2.2+Math.random()*2.6, h2=(r.h+40+Math.random()*90)%360;
+    for(let i=0;i<n;i++){ const a=Math.PI*2*i/n, s=sp*(.55+Math.random()*.6); this.pt.push({x:r.x,y:r.y,vx:Math.cos(a)*s,vy:Math.sin(a)*s,a:1,d:.011+Math.random()*.01,h:i%3?r.h:h2,l:48+Math.random()*16}); }
+    Snd.pop(); }
+};
+
+/* ---------- obsah: Marie Terezie (vlastivěda 5. třída – osvícenství, reformy) ---------- */
+const PRIBEH=[
+  {obr:'mt',text:'Ahoj, já jsem <b>Marie Terezie</b>! Narodila jsem se roku <b>1717</b> ve Vídni. Patřila jsem do slavného rodu <b>Habsburků</b>, kteří vládli i v českých zemích.',
+    q:'Z jakého rodu byla Marie Terezie?',ok:'z rodu Habsburků',ne:['z rodu Přemyslovců','z rodu Lucemburků'],proc:'Marie Terezie byla Habsburkovna – Habsburkové vládli z Vídně.'},
+  {obr:'📜',text:'Můj tatínek, císař <b>Karel VI.</b>, neměl syna. Proto sepsal <b>pragmatickou sankci</b> – listinu, podle které mohla po něm vládnout i dcera.',
+    q:'Proč mohla vládnout žena?',ok:'otec to zajistil pragmatickou sankcí',ne:['vyhrála volby','vyhrála závod v běhu'],proc:'Pragmatická sankce zajistila, že po Karlu VI. mohla nastoupit jeho dcera.'},
+  {obr:'⚔️',text:'Na trůn jsem nastoupila roku <b>1740</b>, bylo mi 23 let. Hned mě napadl pruský král <b>Fridrich II.</b> a vzal mi většinu <b>Slezska</b>. Ostatní země jsem ubránila.',
+    q:'Kdo jí vzal většinu Slezska?',ok:'pruský král Fridrich II.',ne:['francouzský král','turecký sultán'],proc:'Ve válkách o rakouské dědictví získal skoro celé Slezsko pruský král Fridrich II.'},
+  {obr:'👑',text:'Roku <b>1743</b> mě v Praze korunovali na <b>českou královnu</b>. Vládla jsem celých <b>40 let</b> – od roku 1740 do roku 1780. Sídlila jsem ve <b>Vídni</b>.',
+    q:'Kolik let Marie Terezie vládla?',ok:'40 let',ne:['10 let','70 let'],proc:'Vládla od roku 1740 do roku 1780 – to je 40 let.'},
+  {obr:'👨‍👩‍👧‍👦',text:'Můj manžel <b>František Štěpán Lotrinský</b> byl císař. Měli jsme <b>16 dětí</b>! Syn <b>Josef II.</b> po mně vládl a dcera Marie Antoinetta se stala francouzskou královnou.',
+    q:'Kolik dětí měla Marie Terezie?',ok:'16',ne:['3','30'],proc:'Měla 16 dětí – ne všechny se ale dožily dospělosti.'},
+  {obr:'💡',text:'V 18. století lidé začali víc věřit <b>rozumu</b> a <b>vzdělání</b>. Této době se říká <b>osvícenství</b>. Lidé chtěli <b>reformy</b> – změny k lepšímu.',
+    q:'Co je reforma?',ok:'změna k lepšímu',ne:['válka','korunovace'],proc:'Reforma = změna k lepšímu. Osvícenství = osvícení rozumu.'},
+  {obr:'🏫',text:'A tak jsem zavedla <b>reformy</b>: roku <b>1774</b> povinnou <b>školní docházku</b>, <b>omezila robotu</b> na méně dní, <b>daně</b> musela platit i šlechta, vybudovala jsem <b>stálé vojsko</b> a domy dostaly <b>čísla</b>.',
+    q:'Co zavedla Marie Terezie roku 1774?',ok:'povinnou školní docházku',ne:['zrušení nevolnictví','toleranční patent'],proc:'Roku 1774 vyšel Všeobecný školní řád – děti od 6 do 12 let měly chodit do školy.'},
+  {obr:'j2',text:'Zemřela jsem roku <b>1780</b>. Pak vládl můj syn <b>Josef II.</b> Pokračoval v reformách: <b>zrušil nevolnictví</b> a vydal <b>toleranční patent</b> – lidé mohli vyznávat i jiné než katolické náboženství.',
+    q:'Kdo zrušil nevolnictví?',ok:'Josef II.',ne:['Marie Terezie','Karel VI.'],proc:'Nevolnictví zrušil roku 1781 syn Marie Terezie, Josef II.'},
+];
+const TF=[
+  ['Marie Terezie vládla 40 let.',1,'Ano – od roku 1740 do roku 1780.'],
+  ['Měla 16 dětí.',1,'Ano, 16! Nejznámější je syn Josef II. a dcera Marie Antoinetta.'],
+  ['Zavedla povinnou školní docházku.',1,'Ano, roku 1774. Děti od 6 do 12 let se měly učit číst, psát a počítat.'],
+  ['Zakázala krátké sukně.',0,'Výmysl! Krátké sukně tenkrát nikdo nenosil, tak nebylo co zakazovat. 😄'],
+  ['Nechala očíslovat domy.',1,'Ano! Úředníci tak věděli, kolik lidí kde bydlí – a kolik mužů může jít k vojsku.'],
+  ['Zrušila robotu úplně.',0,'Výmysl. Robotu jen omezila na méně dní. Úplně zrušená byla až mnohem později.'],
+  ['Daně musela platit i šlechta.',1,'Ano – dřív platili hlavně poddaní, za Marie Terezie i vrchnost.'],
+  ['Povolila demokratické volby.',0,'Výmysl. Tak „osvícená“ zase nebyla – vládla sama jako panovnice.'],
+  ['Byla korunována českou královnou v Praze.',1,'Ano, roku 1743.'],
+  ['Úředním jazykem se stala čeština.',0,'Výmysl. Habsburkové vládli z Vídně, úředním jazykem byla němčina.'],
+  ['Pruský král Fridrich II. byl její nejlepší kamarád.',0,'Výmysl! Byl to její nepřítel – vzal jí většinu Slezska.'],
+  ['Vybudovala stálé vojsko.',1,'Ano – armádu, která byla připravená pořád, nejen když byla válka.'],
+  ['Bydlela na Pražském hradě.',0,'Výmysl. Sídlila ve Vídni – v Hofburgu a na zámku Schönbrunn.'],
+  ['Nechala své děti očkovat proti neštovicím.',1,'Ano! Neštovice byly nebezpečná nemoc a ona se nebála nové vědy.'],
+];
+const KDO=[
+  ['🏫','Povinná školní docházka (1774)','mt','Marie Terezie – Všeobecný školní řád z roku 1774.'],
+  ['🌾','Omezení roboty na méně dní','mt','Marie Terezie – poddaní museli na panském robotovat méně dní v týdnu.'],
+  ['💰','Daně musí platit i šlechta','mt','Marie Terezie – peníze potřebovala hlavně na vojsko.'],
+  ['🪖','Stálé vojsko','mt','Marie Terezie – armáda připravená i v době míru.'],
+  ['🏠','Číslování domů','mt','Marie Terezie – aby se vědělo, kolik kde žije lidí.'],
+  ['⚖️','Zákaz mučení při výslechu','mt','Marie Terezie – mučení zakázala roku 1776.'],
+  ['🕊️','Zrušení nevolnictví (1781)','j2','Josef II. – lidé se mohli stěhovat, ženit nebo studovat bez svolení pána. Robotovat ale museli dál.'],
+  ['⛪','Toleranční patent (1781)','j2','Josef II. – kromě katolíků mohli svou víru vyznávat i evangelíci a pravoslavní.'],
+  ['⚰️','„Úsporná rakev“ se sklápěcím dnem','j2','Josef II. – chtěl šetřit dřevo. Lidé se ale tak zlobili, že nařízení brzy zrušil. 😄'],
+];
+const OSA1={nadpis:'Seřaď život Marie Terezie od začátku do konce. Ťukej na události popořadě.',udal:[
+  ['narodila se ve Vídni','1717'],['nastoupila na trůn','1740'],['korunovace v Praze na českou královnu','1743'],['povinná školní docházka','1774'],['zemřela a vládne Josef II.','1780'],['Josef II. zrušil nevolnictví','1781']]};
+const OSA2={nadpis:'Přiřaď k rokům, co se stalo. Ťukni na událost pro rok, který bliká.',roky:1,udal:[
+  ['Marie Terezie se narodila','1717'],['nastoupila na trůn','1740'],['povinná školní docházka','1774'],['Marie Terezie zemřela','1780']]};
+const STARE=[['🪶','husí brk','psalo se husím brkem namáčeným v inkoustu'],['📖','slabikář','z něj se děti učily číst'],['tab','břidlicová tabulka','psalo se na ni – papír byl drahý'],
+  ['🕯️','svíčka','elektřina ještě nebyla'],['🥖','chleba na svačinu','svačina byla z domova'],['🔔','školní zvonek','svolával děti do školy']];
+const NOVE=[['📱','mobil'],['💻','notebook'],['🎧','sluchátka'],['🖊️','propiska'],['🎮','herní konzole'],['🧃','džus v krabičce'],['⌚','chytré hodinky'],['🛴','koloběžka']];
+const SKOLA_Q=[
+  {q:'Od kolika do kolika let měly děti chodit do školy?',ok:'od 6 do 12 let',ne:['od 3 do 6 let','od 15 do 19 let'],proc:'Podle školního řádu z roku 1774 měly do školy chodit děti od 6 do 12 let. Na vesnicích ale děti často musely pomáhat doma a ve škole chyběly.'},
+  {q:'Co se děti učily v obyčejné (triviální) škole?',ok:'číst, psát a počítat',ne:['programovat a anglicky','jezdit na koni a šermovat'],proc:'Triviální škola učila tři základní věci: čtení, psaní a počítání – a k tomu náboženství.'},
+  {q:'Proč chtěla Marie Terezie, aby děti chodily do školy?',ok:'vzdělaní lidé byli pro stát užitečnější',ne:['aby rodiče měli doma klid','aby se děti naučily francouzsky'],proc:'Říše zaostávala. Vzdělaní lidé lépe hospodařili a byli z nich lepší řemeslníci, vojáci i úředníci.'},
+];
+const TESTQ=[
+  {q:'Kdy vládla Marie Terezie?',ok:'1740–1780',ne:['1620–1648','1848–1916'],proc:'Vládla 40 let, od 1740 do 1780.'},
+  {q:'Z jakého rodu byla?',ok:'z rodu Habsburků',ne:['z rodu Přemyslovců','z rodu Lucemburků'],proc:'Byla Habsburkovna.'},
+  {q:'Kolik měla dětí?',ok:'16',ne:['4','25'],proc:'Měla 16 dětí.'},
+  {q:'Jak se jmenoval její syn, který po ní vládl?',ok:'Josef II.',ne:['Karel IV.','František Josef I.'],proc:'Po Marii Terezii vládl syn Josef II.'},
+  {q:'Která listina jí umožnila vládnout?',ok:'pragmatická sankce',ne:['toleranční patent','Zlatá bula sicilská'],proc:'Pragmatickou sankci sepsal její otec Karel VI.'},
+  {q:'Kdo jí vzal většinu Slezska?',ok:'pruský král Fridrich II.',ne:['Napoleon','turecký sultán'],proc:'Fridrich II. Pruský.'},
+  {q:'Jak se říká době, kdy byl nejdůležitější rozum a vzdělání?',ok:'osvícenství',ne:['baroko','gotika'],proc:'Osvícenství = osvícení rozumu.'},
+  {q:'Kdy zavedla povinnou školní docházku?',ok:'1774',ne:['1620','1918'],proc:'Roku 1774 – Všeobecný školní řád.'},
+  {q:'Od kolika do kolika let měly děti chodit do školy?',ok:'od 6 do 12 let',ne:['od 3 do 6 let','od 15 do 19 let'],proc:'Od 6 do 12 let.'},
+  {q:'Co udělala Marie Terezie s robotou?',ok:'omezila ji na méně dní',ne:['úplně ji zrušila','zdvojnásobila ji'],proc:'Robotu omezila – zrušená byla až později.'},
+  {q:'Kdo musel nově platit daně?',ok:'i šlechta (vrchnost)',ne:['jen děti','nikdo'],proc:'Daně musela platit i vrchnost.'},
+  {q:'Proč dostaly domy čísla?',ok:'aby se vědělo, kolik kde žije lidí',ne:['aby byly domy hezčí','aby se v nich dalo hrát loterii'],proc:'Úředníci tak spočítali obyvatele – i muže pro vojsko.'},
+  {q:'Co vybudovala pro obranu říše?',ok:'stálé vojsko',ne:['Velkou čínskou zeď','obří hrad z písku'],proc:'Stálé vojsko – armádu připravenou i v míru.'},
+  {q:'Co zrušil Josef II. roku 1781?',ok:'nevolnictví',ne:['povinnou školní docházku','všechny daně'],proc:'Zrušil nevolnictví – lidé se mohli stěhovat a studovat bez svolení pána.'},
+  {q:'Co povolil toleranční patent?',ok:'vyznávat i jiné než katolické náboženství',ne:['jezdit autem','volit prezidenta'],proc:'Toleranční patent Josefa II. povolil i jiná náboženství.'},
+  {q:'Ve kterém městě Marie Terezie sídlila?',ok:'ve Vídni',ne:['v Praze','v Berlíně'],proc:'Sídlila ve Vídni.'},
+  {q:'Který jazyk se za Habsburků stal úředním jazykem i v Čechách?',ok:'němčina',ne:['čeština','angličtina'],proc:'Úředním jazykem byla němčina.'},
+  {q:'Kde byla korunována českou královnou?',ok:'v Praze',ne:['v Paříži','v Brně'],proc:'V Praze, roku 1743.'},
+];
+const EX=[
+  {id:'m1',title:'Příběh Marie Terezie',desc:'Kdo byla, odkud byla a co zažila – 8 krátkých kapitol, po každé otázka',zvire:'marie',barva:'#e2557f',
+    kroky:()=>PRIBEH.map(p=>({typ:'quiz',...p,cast:'Příběh Marie Terezie'}))},
+  {id:'m2',title:'Pravda, nebo výmysl?',desc:'Rozsuď 12 tvrzení – co je pravda a co si někdo vymyslel?',zvire:'pes',barva:'#2f7ff0',
+    kroky:()=>shuffle(TF).slice(0,12).map(t=>({typ:'tf',v:t[0],ok:t[1],proc:t[2],cast:'Pravda, nebo výmysl?'}))},
+  {id:'m3',title:'Kdo to zavedl?',desc:'Marie Terezie, nebo její syn Josef II.? Roztřiď jejich reformy',zvire:'kun',barva:'#2fb36a',
+    kroky:()=>shuffle(KDO).map(k=>({typ:'kdo',ik:k[0],v:k[1],ok:k[2],proc:k[3],cast:'Marie Terezie, nebo Josef II.?'}))},
+  {id:'m4',title:'Časová osa',desc:'Seřaď život Marie Terezie a zapamatuj si roky 1717, 1740, 1774, 1780',zvire:'leopard',barva:'#ff8a3d',
+    kroky:()=>[{typ:'osa',...OSA1,cast:'Časová osa · seřaď události'},{typ:'osa',...OSA2,cast:'Časová osa · důležité roky'}]},
+  {id:'m5',title:'Do školy! (1774)',desc:'Co bylo ve škole v 18. století? Chytej správné věci a zjisti, jak se tehdy učilo',zvire:'delfin',barva:'#8a5cf0',
+    kroky:()=>[{typ:'chytej',cast:'Co bylo ve škole v roce 1774?'},...SKOLA_Q.map(q=>({typ:'quiz',...q,cast:'Škola za Marie Terezie'}))]},
+  {id:'m6',title:'Velký test',desc:'12 otázek ze všeho – jako opravdová písemka. Dáš všechno bez chyby?',zvire:'velryba',barva:'#d19a00',
+    kroky:()=>shuffle(TESTQ).slice(0,12).map(q=>({typ:'quiz',...q,cast:'Velký test',test:1}))},
+];
+
+/* ---------- stav ---------- */
+const KEY='mt-v1';
+let store={hv:{},muted:false};
+function load(){ try{ const s=JSON.parse(localStorage.getItem(KEY)||'null'); if(s&&typeof s==='object') store=Object.assign(store,s); }catch(e){} if(!store.hv||typeof store.hv!=='object') store.hv={}; Snd.muted=!!store.muted; }
+function save(){ try{ localStorage.setItem(KEY,JSON.stringify(store)); }catch(e){} }
+let st=null, cleanupFn=null;
+function cleanup(){ if(cleanupFn){ const f=cleanupFn; cleanupFn=null; f(); } }
+function updateHvezdy(){ $('#hvezdy').textContent=Object.values(store.hv).reduce((a,b)=>a+(+b||0),0); }
+function updateMute(){ $('#mute').textContent=store.muted?'🔇':'🔊'; }
+function show(id){ cleanup(); $('#home').hidden=id!=='home'; $('#ex').hidden=id!=='ex'; $('#back').hidden=id==='home'; window.scrollTo(0,0); idleZvirata(id==='home'); }
+const FOOT='<div class="fb" id="fb"></div><div class="nav" id="nav"></div>';
+function fb(t,cls){ const f=$('#fb'); if(!f) return; f.innerHTML=t||''; f.className='fb '+(cls||''); }
+
+function renderHome(){
+  st=null; $('#h1').textContent='Marie Terezie'; $('#sub').textContent='Vlastivěda pro 5. třídu · císařovna, osvícenství a reformy 👑';
+  const vse=EX.every(e=>store.hv[e.id]);
+  $('#home').innerHTML=`<div class="karty">${EX.map((e,i)=>{ const h=store.hv[e.id]||0;
+    return `<button class="exCard${h?' hotove':''}" data-i="${i}" style="--c:${e.barva}"><span class="num">${i+1}</span><span class="tx"><b>${e.title}</b><small>${e.desc}</small><span class="hv">${'★'.repeat(h)}<span class="off">${'★'.repeat(3-h)}</span></span></span><span class="mini">${zvireSVG(e.zvire)}</span></button>`; }).join('')}</div>
+    ${vse?'<div class="banner">👑 Všechno hotovo – Marie Terezie by z tebe měla radost!</div>':''}<p class="tip">Ťukni dole na zvířátka 👇</p>`;
+  updateHvezdy(); show('home');
+}
+function startEx(i){ zavriFinale(); const ex=EX[i]; st={idx:i,ex,kroky:ex.kroky(),i:0,chyby:0,ck:0,done:false,perf:[]}; $('#h1').textContent=ex.title; show('ex'); renderKrok(); }
+function renderKrok(){ cleanup(); const k=st.kroky[st.i]; st.done=false; st.ck=0; $('#sub').textContent=k.cast; renderDots();
+  const c=$('#card'); c.className='card typ-'+k.typ; c.innerHTML=''; R[k.typ](k,c); void c.offsetWidth; c.classList.add('vjezd'); window.scrollTo(0,0); }
+function renderDots(){ $('#dots').innerHTML=st.kroky.map((k,i)=>`<i class="${i<st.i||(i===st.i&&st.done)?(st.perf[i]?'ok':'done'):i===st.i?'cur':''}"></i>`).join(''); $('#pocet').textContent=`${st.i+1} / ${st.kroky.length}`; }
+function chyba(msg){ st.chyby++; st.ck++; Snd.buzz(); fb(msg,'bad'); }
+function hotovo(msg,opt={}){ if(!st||st.done) return; st.done=true; st.perf[st.i]=st.ck===0; if(!opt.tichy) Snd.ding(); if(msg) fb(msg,opt.cls||'good'); if(!opt.bezOdmeny) odmena(); renderDots();
+  const last=st.i===st.kroky.length-1; $('#nav').innerHTML=`<button class="dalsi" id="dalsiB">${last?'Dokončit 🎉':'Další →'}</button>`; $('#dalsiB').addEventListener('click',dalsi); }
+function dalsi(){ if(!st||!st.done) return; if(st.i>=st.kroky.length-1) finale(); else { st.i++; renderKrok(); } }
+function slovaHTML(v){ return v.split(' ').map((w,i)=>`<span class="slovo" data-i="${i}">${esc(w)}</span>`).join(' '); }
+
+/* ---------- jednotlivé typy úkolů ---------- */
+const R={};
+function obrHTML(o){ if(o==='mt') return `<div class="obrMT"><svg viewBox="36 -4 68 112" aria-hidden="true">${ZV.marie}</svg></div>`; if(o==='j2') return BUSTA.j2; return `<div class="obrE">${o}</div>`; }
+function oznacSpravne(c,sel,isOk){ c.querySelectorAll(sel).forEach(x=>{ x.disabled=true; if(isOk(x)) x.classList.add('spravne'); }); }
+R.quiz=(k,c)=>{
+  const opts=shuffle([k.ok,...k.ne]);
+  const info=k.text?`<div class="pribeh"><div class="obr">${obrHTML(k.obr)}</div><p>${k.text}</p></div>`:'';
+  const pre=k.text?`Kapitola ${st.i+1} z ${st.kroky.length} · `:k.test?`Otázka ${st.i+1} z ${st.kroky.length} · `:'';
+  c.innerHTML=`${info}<div class="ukol otq"><small>${pre}${k.text?'přečti si to a odpověz':'vyber správnou odpověď'}</small>❓ ${esc(k.q)}</div>
+    <div class="opts">${opts.map(o=>`<button class="opt">${esc(o)}</button>`).join('')}</div>${FOOT}`;
+  c.querySelectorAll('.opt').forEach(b=>b.addEventListener('click',()=>{ if(st.done||b.disabled) return;
+    if(b.textContent===k.ok){ oznacSpravne(c,'.opt',x=>x===b); jiskry(b,10); hotovo('✓ '+k.proc); }
+    else { b.disabled=true; shake(b); chyba(k.test?'To ne – zkus jinou odpověď.':k.text?'Ještě ne. Přečti si to ještě jednou nahoře. 👆':'Ještě ne. Zkus jinou odpověď.'); } }));
+};
+R.tf=(k,c)=>{
+  c.innerHTML=`<div class="ukol">Je to pravda, nebo výmysl?<small>Tvrzení ${st.i+1} z ${st.kroky.length}</small></div><div class="tvrz">„${esc(k.v)}“</div>
+    <div class="volby2"><button class="vol tfP" data-a="1">👑 Pravda</button><button class="vol tfV" data-a="0">🤡 Výmysl</button></div>${FOOT}`;
+  c.querySelectorAll('.vol').forEach(b=>b.addEventListener('click',()=>{ if(st.done) return; const spr=(+b.dataset.a)===k.ok;
+    oznacSpravne(c,'.vol',x=>(+x.dataset.a)===k.ok);
+    if(spr){ jiskry(b,10); hotovo('✓ '+k.proc); }
+    else { shake(b); chyba(''); hotovo('Kdepak! '+(k.ok?'Je to pravda. ':'')+k.proc,{cls:'bad',bezOdmeny:true,tichy:true}); } }));
+};
+R.kdo=(k,c)=>{
+  c.innerHTML=`<div class="ukol">Kdo zavedl tuhle reformu?<small>Reforma ${st.i+1} z ${st.kroky.length}</small></div>
+    <div class="reforma"><span class="rik">${k.ik}</span><span>${esc(k.v)}</span></div>
+    <div class="porty"><button class="port" data-a="mt">${BUSTA.mt}<b>Marie Terezie</b><small>vládla 1740–1780</small></button><button class="port" data-a="j2">${BUSTA.j2}<b>Josef II.</b><small>syn, vládl 1780–1790</small></button></div>${FOOT}`;
+  c.querySelectorAll('.port').forEach(b=>b.addEventListener('click',()=>{ if(st.done) return; const spr=b.dataset.a===k.ok;
+    oznacSpravne(c,'.port',x=>x.dataset.a===k.ok);
+    if(spr){ jiskry(b,12); hotovo('✓ '+k.proc); }
+    else { shake(b); chyba(''); hotovo('Kdepak! Zavedl'+(k.ok==='mt'?'a to ':' to ')+k.proc,{cls:'bad',bezOdmeny:true,tichy:true}); } }));
+};
+R.osa=(k,c)=>{
+  const n=k.udal.length, chips=shuffle(k.udal.map((u,i)=>({t:u[0],i}))); let cur=0;
+  c.innerHTML=`<div class="ukol">${k.nadpis}</div>
+    <div class="osa">${k.udal.map((u,i)=>`<div class="slot${i===0?' cur':''}"><span class="sr">${k.roky?u[1]:(i+1)+'.'}</span><span class="st"></span></div>`).join('')}</div>
+    <div class="chips">${chips.map(ch=>`<button class="chip udal" data-i="${ch.i}">${esc(ch.t)}</button>`).join('')}</div>${FOOT}`;
+  const sloty=[...c.querySelectorAll('.slot')];
+  c.querySelectorAll('.udal').forEach(b=>b.addEventListener('click',()=>{ if(st.done||b.disabled) return; const i=+b.dataset.i;
+    if(i===cur){ b.disabled=true; b.classList.add('pouzito'); const s=sloty[cur], u=k.udal[i];
+      s.querySelector('.st').textContent=u[0]+(k.roky?'':` (${u[1]})`); s.classList.remove('cur'); s.classList.add('ok'); Snd.ok(); jiskry(s,8); cur++;
+      if(cur>=n) hotovo(k.roky?'✓ Tyhle čtyři roky si zapamatuj: 1717, 1740, 1774, 1780!':'✓ Celý život Marie Terezie je ve správném pořadí!');
+      else { sloty[cur].classList.add('cur'); fb(`✓ ${u[1]} – ${u[0]}`,'good'); } }
+    else { shake(b); chyba(k.roky?`Ne. Co se stalo roku ${k.udal[cur][1]}?`:`To ještě ne. Co se stalo jako ${cur+1}.?`); } }));
+};
+const CIL_CHYT=10;
+R.chytej=(k,c)=>{
+  c.innerHTML=`<div class="ukol">🎒 Ťukej jen na věci, které byly ve škole v roce <b>1774</b>!<small>Moderní věci nech spadnout – ty tenkrát ještě nebyly.</small></div>
+    <div class="pocit" id="chN">0 / ${CIL_CHYT}</div><div class="hriste" id="hr"></div>${FOOT}`;
+  const hr=$('#hr'); let n=0, konec=false, raf=0, last=0, odSpawnu=99, items=[];
+  cleanupFn=()=>{ konec=true; cancelAnimationFrame(raf); };
+  const spawn=()=>{ const stary=Math.random()<.55, d=stary?pick(STARE):pick(NOVE);
+    const el=document.createElement('button'); el.className='pad';
+    el.innerHTML=(d[0]==='tab'?'<i class="tabulka"></i>':`<span class="pe">${d[0]}</span>`)+`<span class="pl">${d[1]}</span>`;
+    hr.appendChild(el); const it={el,stary,d,x:Math.random()*Math.max(10,hr.clientWidth-el.offsetWidth),y:-el.offsetHeight-4,v:hr.clientHeight/(5.6-Math.min(2,n*.2))};
+    el.style.transform=`translate(${it.x}px,${it.y}px)`; items.push(it);
+    el.addEventListener('pointerdown',e=>{ e.preventDefault(); if(konec||it.hit) return; it.hit=true;
+      if(it.stary){ n++; el.classList.add('chycen'); Snd.ok(); jiskry(el,8); $('#chN').textContent=`${n} / ${CIL_CHYT}`; fb(`✓ ${d[1]} – ${d[2]}`,'good');
+        if(n>=CIL_CHYT){ konec=true; cancelAnimationFrame(raf); items.forEach(o=>{ if(!o.hit) o.el.classList.add('pryc'); });
+          setTimeout(()=>hotovo('✓ Hotovo! V roce 1774 se psalo husím brkem nebo na tabulku, četlo ze slabikáře a svítilo svíčkou.'),350); } }
+      else { el.classList.add('spatne'); shake(hr); chyba(`${d[0]} ${d[1]} – to v roce 1774 ještě neexistovalo!`); }
+      setTimeout(()=>el.remove(),450); }); };
+  const loop=t=>{ if(konec) return; const dt=Math.min(.05,last?(t-last)/1000:0); last=t; odSpawnu+=dt;
+    if(odSpawnu>Math.max(.75,1.15-n*.03)){ odSpawnu=0; spawn(); }
+    const H=hr.clientHeight;
+    items=items.filter(it=>{ if(it.hit) return false; it.y+=it.v*dt; it.el.style.transform=`translate(${it.x}px,${it.y}px)`; if(it.y>H+10){ it.el.remove(); return false; } return true; });
+    raf=requestAnimationFrame(loop); };
+  raf=requestAnimationFrame(loop);
+};
+
+/* ---------- finále ---------- */
+let parade=[];
+function finale(){
+  cleanup(); const ex=st.ex, ch=st.chyby, h=ch<=1?3:ch<=4?2:1, idx=st.idx;
+  store.hv[ex.id]=Math.max(store.hv[ex.id]||0,h); save(); updateHvezdy();
+  const dalsiEx=EX[idx+1];
+  $('#finale').innerHTML=`<div class="fcard"><div class="fmedal">${zvireSVG(ex.zvire)}</div><h2>Hotovo, Lado! 🎉</h2><p class="fsub">${ex.title}</p>
+    <div class="fhv">${[0,1,2].map(i=>`<span class="${i<h?'on':''}" style="animation-delay:${.35+i*.35}s">★</span>`).join('')}</div>
+    <p class="fch">${ch===0?'Bez jediné chyby! 🤩':ch===1?'Jen jedna chybička! 👏':'Chyb: '+ch+' – příště to bude ještě lepší!'}</p>
+    <div class="fbtns">${dalsiEx?`<button class="dalsi" data-f="next">Další cvičení →</button>`:''}<button class="sek" data-f="again">Znovu 🔁</button><button class="sek" data-f="home">Domů 🏠</button></div></div>`;
+  $('#finale').hidden=false; Snd.fanfare(); FW.start(6500); prehlidka();
+}
+function prehlidka(){ zrusBezce(); parade.forEach(e=>e.remove()); parade=[];
+  PORADI.forEach((z,i)=>{ lane.insertAdjacentHTML('beforeend',zvireHTML(z,'run')); const el=lane.lastElementChild; parade.push(el); const w=el.offsetWidth, x=xPozice(i,w);
+    el.style.transform=`translateX(${-w-30}px)`;
+    setTimeout(async()=>{ if(!el.isConnected) return; await anim(el,-w-30,x,1300+i*150,'cubic-bezier(.2,.75,.35,1)'); if(!el.isConnected) return;
+      el.classList.replace('run','mav'); setTimeout(()=>{ if(el.isConnected){ bubli(el,FINAL[z],i%2); Snd.hlas(z); } },i*420); },i*230); }); }
+function zavriFinale(){ if($('#finale').hidden) return; $('#finale').hidden=true; FW.stop(); const W=lane.clientWidth;
+  parade.forEach(el=>{ const b=el.querySelector('.bub'); if(b) b.classList.remove('on'); el.classList.remove('mav'); el.classList.add('run');
+    const x=el.getBoundingClientRect().left; anim(el,x,W+40,800,'cubic-bezier(.55,0,.9,.55)').then(()=>el.remove()); }); parade=[]; }
+$('#finale').addEventListener('click',e=>{ const b=e.target.closest('[data-f]'); if(!b) return; const f=b.dataset.f, idx=st?st.idx:0;
+  zavriFinale(); if(f==='next') startEx(idx+1); else if(f==='again') startEx(idx); else renderHome(); });
+
+/* ---------- ovládání ---------- */
+$('#home').addEventListener('click',e=>{ const b=e.target.closest('.exCard'); if(b) startEx(+b.dataset.i); });
+$('#back').addEventListener('click',()=>{ zavriFinale(); renderHome(); });
+$('#mute').addEventListener('click',()=>{ store.muted=!store.muted; Snd.muted=store.muted; save(); updateMute(); if(!store.muted){ Snd.init(); Snd.ok(); } });
+$('#tahakB').addEventListener('click',()=>{ $('#tahak').hidden=false; });
+$('#tahakX').addEventListener('click',()=>{ $('#tahak').hidden=true; });
+$('#tahak').addEventListener('click',e=>{ if(e.target.id==='tahak') $('#tahak').hidden=true; });
+let rT=0; addEventListener('resize',()=>{ clearTimeout(rT); rT=setTimeout(()=>{ if(!$('#home').hidden) idleZvirata(true); if(FW.raf) FW.fit(); },150); });
+
+load(); updateMute(); kytky(); renderHome();
+if(TEST) window.__mt={st:()=>st,startEx,dalsi,finale,R,EX};
+</script>
+</body>
+</html>

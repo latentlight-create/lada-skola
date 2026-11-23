@@ -385,17 +385,18 @@ function anim(el,a,b,dur,easing){ return new Promise(res=>{ const tf=x=>`transla
 let beziOdmen=0, odmI=0;
 async function probehni(z,text){
   if(beziOdmen>=2) return; beziOdmen++;
-  lane.insertAdjacentHTML('beforeend',zvireHTML(z,'run'));
+  lane.insertAdjacentHTML('beforeend',zvireHTML(z,'run bezec'));
   const el=lane.lastElementChild, W=lane.clientWidth, w=el.offsetWidth;
   const cx=Math.round((W-w)/2+(Math.random()-.5)*W*.3);
   try{
-    await anim(el,-w-30,cx,1100,'cubic-bezier(.2,.75,.35,1)');
+    await anim(el,-w-30,cx,1100,'cubic-bezier(.2,.75,.35,1)'); if(!el.isConnected) return;
     el.classList.replace('run','mav'); bubli(el,text); Snd.hlas(z);
-    await wait(1750);
+    await wait(1750); if(!el.isConnected) return;
     el.querySelector('.bub').classList.remove('on'); el.classList.replace('mav','run');
     await anim(el,cx,W+30,950,'cubic-bezier(.55,0,.9,.55)');
   } finally { el.remove(); beziOdmen--; }
 }
+function zrusBezce(){ $$('#lane .bezec').forEach(e=>{ if(e.getAnimations) e.getAnimations().forEach(a=>a.cancel()); e.remove(); }); }
 function odmena(){ const z=PORADI[odmI++%PORADI.length]; const t=(st&&st.ck===0&&Math.random()<.35)?pick(BEZCHYBY):pick(HLASKY[z]); probehni(z,t); }
 function xPozice(i,w){ const W=lane.clientWidth; return Math.round(Math.max(4,Math.min(W-w-4,W*(.1+.2*i)-w/2))); }
 function idleZvirata(on){
@@ -692,7 +693,7 @@ function finale(){
     <div class="fbtns">${dalsiEx?`<button class="dalsi" data-f="next">Další cvičení →</button>`:''}<button class="sek" data-f="again">Znovu 🔁</button><button class="sek" data-f="home">Domů 🏠</button></div></div>`;
   $('#finale').hidden=false; Snd.fanfare(); FW.start(6500); prehlidka();
 }
-function prehlidka(){ parade.forEach(e=>e.remove()); parade=[];
+function prehlidka(){ zrusBezce(); parade.forEach(e=>e.remove()); parade=[];
   PORADI.forEach((z,i)=>{ lane.insertAdjacentHTML('beforeend',zvireHTML(z,'run')); const el=lane.lastElementChild; parade.push(el); const w=el.offsetWidth, x=xPozice(i,w);
     el.style.transform=`translateX(${-w-30}px)`;
     setTimeout(async()=>{ if(!el.isConnected) return; await anim(el,-w-30,x,1300+i*150,'cubic-bezier(.2,.75,.35,1)'); if(!el.isConnected) return;
