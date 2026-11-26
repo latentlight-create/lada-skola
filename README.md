@@ -16,6 +16,16 @@ Po každém kroku proběhne zvířátko (pes, kůň, delfín, leopard, velryba),
 
 - `cesky-test/index.html` – celá appka (bez sestavování), `cesky-test/zvirata.js` – kresby zvířátek, `?test` zpřístupní `window.__cj`
 
+## Písemka i/y (`pisemka-iy/`)
+
+Příprava na písemku podle cvičení 22 z učebnice (doplň i, í, y, ý). Ve 20 mezerách cvičení jsou čtyři pravidla a každé má vlastní oddíl
+s pravidlem, sérií rychlých otázek a větami: Zvířecí a jarní (přídavná jména jako jarní × mladý), Páni, psi a hrady (pán × hrad, 1. × 4. pád),
+Kdo to udělal? (přítomný čas -í, shoda přísudku s podmětem), Vyjmenovaná, nebo ne? (sýr, vy- × Milada, Libor, minulý; chytačka).
+Pak Najdi chybu (oprava červenou propiskou), Rychlovka (60 s, rekord), Zkušební písemka (podobné věty, pokaždé trochu jiné) a nakonec
+Písemka: cvičení 22 přesně podle učebnice – bez nápověd, s opravou a známkou. Odměna je červená fajfka nebo jednička, na konci žákovská knížka.
+Vzhled: čtverečkovaný papír, písma Bitter a Caveat, ikony Lucide. Tahák se všemi pravidly a vyjmenovanými slovy.
+`?test&demo=pravidlo|serie|jarni|veta|odmena|zive|shoda|chytej|oprav|rychlovka|pisemka|opraveno|knizka|tahak` otevře danou obrazovku, `?test` zpřístupní `window.__iy`.
+
 ## Marie Terezie (`marie-terezie/`)
 
 Vlastivěda pro 5. třídu postavená na Ladině školním sešitu (učebnice s. 14–17, PS s. 10–11). Sešit je osnova, ne kopie:
@@ -29,13 +39,3 @@ Vzhled pro starší školačku: papír a zlato, písmo Playfair Display, ikony L
 na konci císařská listina. Obrazárna se skutečnými obrazy a fotkami z Wikimedia Commons (načítají se přímo odtud, autor a licence u každého).
 `?test&demo=pecet|listina|galerie|lightbox|kdo|stanice` otevře danou obrazovku pro snímky.
 Používá stejný engine jako `cesky-test/`; zvířátka doplnila císařovna (`ZV.marie`) a portréty `BUSTA` v `zvirata.js`. `?test` zpřístupní `window.__mt`.
-
-## Písemka i/y (`pisemka-iy/`)
-
-Příprava na písemku podle cvičení 22 z učebnice (doplň i, í, y, ý). Ve 20 mezerách cvičení jsou čtyři pravidla a každé má vlastní oddíl
-s pravidlem, sérií rychlých otázek a větami: Zvířecí a jarní (přídavná jména jako jarní × mladý), Páni, psi a hrady (pán × hrad, 1. × 4. pád),
-Kdo to udělal? (přítomný čas -í, shoda přísudku s podmětem), Vyjmenovaná, nebo ne? (sýr, vy- × Milada, Libor, minulý; chytačka).
-Pak Najdi chybu (oprava červenou propiskou), Rychlovka (60 s, rekord), Zkušební písemka (podobné věty, pokaždé trochu jiné) a nakonec
-Písemka: cvičení 22 přesně podle učebnice – bez nápověd, s opravou a známkou. Odměna je červená fajfka nebo jednička, na konci žákovská knížka.
-Vzhled: čtverečkovaný papír, písma Bitter a Caveat, ikony Lucide. Tahák se všemi pravidly a vyjmenovanými slovy.
-`?test&demo=pravidlo|serie|jarni|veta|odmena|zive|shoda|chytej|oprav|rychlovka|pisemka|opraveno|knizka|tahak` otevře danou obrazovku, `?test` zpřístupní `window.__iy`.
