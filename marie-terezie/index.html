@@ -7,12 +7,12 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Marie Terezie">
-<meta name="theme-color" content="#bfe6ff">
+<meta name="theme-color" content="#f5eedd">
 <link rel="apple-touch-icon" href="icon.png">
 <link rel="icon" href="icon.png">
 <title>Marie Terezie</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,800;1,600&family=Great+Vibes&display=swap">
 <style>
 :root{
   --ink:#1d2a44; --muted:#5b6b85; --card:#fff;
@@ -334,17 +334,117 @@ h1{font-weight:900;font-size:clamp(26px,4.2vw,42px);line-height:1.05;margin:0;le
 .tt.ses td{font-size:17px}
 .pozn{color:var(--muted);font-weight:700;font-size:15px;margin:6px 0 0}
 .palac{position:absolute;right:3%;bottom:calc(var(--lane)*.27 + env(safe-area-inset-bottom));width:clamp(170px,27vw,310px);height:auto}
+
+/* ===== vzhled pro starší školačku: papír, zlato, Schönbrunn ===== */
+:root{--ink:#24263a;--muted:#6b6577;--gold:#b8892b;--gold2:#e5c877;--paper:#fbf7ee;--line:#e7dcc4;--teal:#1f6f78;--burg:#8e2c48;--lane:0px;--serif:"Playfair Display",Georgia,"Times New Roman",serif}
+body{background:radial-gradient(1100px 520px at 50% -8%,#fffdf8 0%,rgba(255,253,248,0) 65%),linear-gradient(180deg,#f6efdf 0%,#efe4cc 100%) fixed;color:var(--ink)}
+#app{padding-bottom:calc(env(safe-area-inset-bottom) + 40px)}
+h1{font-family:var(--serif);font-weight:800;letter-spacing:0}
+#sub{color:var(--muted)}
+.pill,.iconbtn{background:#fffdf8;border:1px solid var(--line);box-shadow:0 2px 6px rgba(80,60,20,.08)}
+.iconbtn{display:inline-flex;align-items:center;justify-content:center;gap:6px}
+.txtbtn span{font-size:16px;font-weight:800}
+@media (max-width:560px){.txtbtn span{display:none}}
+@media (max-width:600px){.top{flex-wrap:wrap}.ttl{order:3;flex-basis:100%}.topR{margin-left:auto}.iconbtn{min-width:44px;height:44px;padding:0 10px}h1{font-size:28px}}
+.hvz{color:var(--gold)}
+.lic{width:1.15em;height:1.15em;stroke-width:1.8;vertical-align:-.2em;font-style:normal}
+.exCard{background:#fffdf8;border:1px solid var(--line);border-left:7px solid var(--c);border-radius:18px;box-shadow:0 6px 18px rgba(80,60,20,.08);min-height:132px}
+.exCard:active{transform:translateY(2px);box-shadow:0 2px 8px rgba(80,60,20,.08)}
+.exCard .num{width:34px;height:34px;font-size:17px;background:transparent;color:var(--c);border:2px solid var(--c)}
+.exCard b{font-family:var(--serif);font-weight:700;font-size:clamp(20px,2.5vw,24px)}
+.exCard .mini{width:78px;height:78px;flex:none;border-radius:50%;display:grid;place-items:center;overflow:hidden}
+.exCard .mini.med{background:color-mix(in srgb,var(--c) 14%,#fff);color:var(--c);box-shadow:inset 0 0 0 2px color-mix(in srgb,var(--c) 35%,#fff)}
+.exCard .mini.med .lic{width:38px;height:38px;stroke-width:1.6}
+.exCard .mini.mfoto{box-shadow:0 0 0 3px #fff,0 0 0 5px var(--gold2)}
+.exCard .mini.mfoto img{width:100%;height:100%;object-fit:cover;object-position:50% 18%}
+.exCard .hv{color:var(--gold);text-shadow:none}
+.exCard.hotove::after{background:var(--teal);box-shadow:none}
+.exCard .nove{background:var(--burg);box-shadow:none}
+.banner{background:linear-gradient(90deg,#f3dd9a,#e5c877);box-shadow:none;color:#4a3a10;font-family:var(--serif)}
+.tipB{display:flex;align-items:center;justify-content:center;gap:8px;margin:18px auto 0;padding:12px 18px;border-radius:14px;background:#fffdf8;border:1px solid var(--line);color:var(--ink);font-weight:800;font-size:17px}
+.tipB .lic{color:var(--gold)}
+.card{position:relative;background:#fffdf8;border:1px solid var(--line);border-radius:22px;box-shadow:0 10px 30px rgba(80,60,20,.08)}
+.dots i.cur{background:var(--gold2)}.dots i.ok{background:var(--teal)}.dots i.done{background:#a9cfd2}
+.ukol{color:var(--ink)}
+.pribeh{background:#fffaf0;border:1px solid var(--line);border-left:5px solid var(--gold2);border-radius:16px}
+.pribeh p b{color:var(--burg)}
+.obr{width:clamp(110px,18vw,170px)}
+.obrE{width:84px;height:84px;margin:auto;border-radius:50%;display:grid;place-items:center;background:#f5ecd6;color:var(--gold);font-size:42px}
+.obrE .lic{width:44px;height:44px;stroke-width:1.5}
+.foto{position:relative;display:block;width:100%;padding:0;border-radius:12px;overflow:hidden;background:#eee3c8;box-shadow:0 0 0 3px #fff,0 0 0 5px var(--gold2),0 6px 14px rgba(0,0,0,.15)}
+.foto img{display:block;width:100%;max-height:220px;object-fit:cover;object-position:50% 20%}
+.foto .lupa{position:absolute;right:6px;bottom:6px;width:30px;height:30px;border-radius:50%;background:rgba(255,253,248,.92);display:grid;place-items:center;color:var(--ink);font-size:15px}
+.foto .lupa .lic{width:18px;height:18px}
+.opt{border:2px solid var(--line);box-shadow:0 3px 0 var(--line);border-radius:16px;background:#fff}
+.opt:active{box-shadow:0 1px 0 var(--line)}
+.opt.spravne,.opt.spravne:disabled{background:var(--teal);border-color:var(--teal);box-shadow:0 3px 0 #164f56}
+.dalsi{background:var(--teal);box-shadow:0 5px 0 #164f56;border-radius:16px}
+.dalsi:active{box-shadow:0 1px 0 #164f56}
+.sek{border:1px solid var(--line);box-shadow:0 3px 0 var(--line);border-radius:14px;background:#fff}
+.vol{border-width:3px;box-shadow:0 4px 0 currentColor;border-radius:16px}
+.vol.spravne,.vol.tfP.spravne,.vol.tfV.spravne{background:var(--teal);border-color:var(--teal);box-shadow:0 4px 0 #164f56}
+.chip{border:2px solid var(--line);box-shadow:0 3px 0 var(--line)}
+.chip.found{background:var(--teal);border-color:var(--teal);box-shadow:0 3px 0 #164f56}
+.fb{display:flex;align-items:center;gap:12px}
+.fb.good{background:#e8f3f1;color:#174f4f}
+.fb .fbt{flex:1}
+.chvala{color:var(--burg);font-family:var(--serif)}
+.pecet{flex:none;width:58px;height:58px;display:block;transform:rotate(-12deg);animation:razitko .5s cubic-bezier(.2,1.5,.4,1);filter:drop-shadow(0 3px 3px rgba(0,0,0,.22))}
+.pecet svg{width:100%;height:100%;overflow:visible}
+.pecet .pv{fill:#9e1b32}.pecet .pk1{fill:none;stroke:#c7465d;stroke-width:2}.pecet .pk2{fill:#8a1529}
+.pecet .pm{font:italic 600 24px var(--serif);fill:#f4c9cf}
+.pecet.zlata .pv{fill:#c99a2e}.pecet.zlata .pk1{stroke:#f0d68a}.pecet.zlata .pk2{fill:#b5871f}.pecet.zlata .pm{fill:#fff3cf}
+@keyframes razitko{0%{transform:scale(2.4) rotate(-35deg);opacity:0}60%{opacity:1}100%{transform:scale(1) rotate(-12deg)}}
+.reforma{background:#f7f0e0;border-radius:16px}
+.rik{color:var(--gold)} .rik .lic{width:52px;height:52px;stroke-width:1.5}
+.port{border:2px solid var(--line);box-shadow:0 3px 0 var(--line);border-radius:18px;background:#fff}
+.portImg{width:min(120px,100%);aspect-ratio:1;object-fit:cover;object-position:50% 15%;border-radius:50%;box-shadow:0 0 0 3px #fff,0 0 0 5px var(--gold2);margin:4px 0 8px}
+.port.spravne,.port.spravne:disabled{border-color:var(--teal);background:#e8f3f1;box-shadow:0 3px 0 var(--teal)}
+.pad .pe .lic{width:36px;height:36px;color:var(--teal);stroke-width:1.7}
+.hriste{background:linear-gradient(#fbf6ea,#efe2c3);border:1px solid var(--line)}
+.ka{background:#fffaf0;border:1px solid var(--line);border-left:5px solid var(--gold2)}
+.tvrz{font-family:var(--serif);font-weight:700;color:var(--ink)}
+.kq{font-family:var(--serif);font-weight:700;color:var(--ink)}
+/* listina */
+.ovl{background:rgba(30,24,12,.45)}
+.fcard.listina{background:linear-gradient(#fffdf6,#f8eed6);border:1px solid #d9c18a;box-shadow:inset 0 0 0 7px #fffdf6,inset 0 0 0 8px #e3cf9c,0 14px 34px rgba(0,0,0,.25);padding:26px 28px}
+.lHead{font-family:var(--serif);font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--burg);font-size:16px}
+.lText{font-family:var(--serif);font-style:italic;color:#5b4a3a;margin:8px 0 0;font-size:17px}
+.fcard.listina h2{font-family:var(--serif);font-size:clamp(38px,6vw,54px);margin:6px 0 0;color:var(--ink)}
+.fhv span.on{color:var(--gold);text-shadow:none}
+.podpisRadek{display:flex;align-items:center;justify-content:center;gap:18px;margin:4px 0 16px}
+.podpis{font-family:"Great Vibes",cursive;font-size:40px;color:#2a3a6a;line-height:1;border-bottom:1px solid #cdb98a;padding:0 10px 4px}
+.podpis small{display:block;font-family:var(--font);font-size:12px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-top:4px}
+.pecet.velka{width:88px;height:88px}
+/* obrazárna + zvětšení */
+.gcard{max-width:900px}
+.gcard h2{font-family:var(--serif)}
+.gsub{margin:0 0 14px;color:var(--muted);font-weight:700}
+.galGrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:16px}
+.gal{margin:0}
+.gal .foto img{aspect-ratio:4/5;max-height:none}
+.gal figcaption{margin-top:8px;font-weight:800;font-size:15px;text-align:center}
+.lb{background:rgba(12,10,8,.88);align-items:center}
+.lbFig{position:relative;margin:0;max-width:min(960px,100%);text-align:center}
+.lbFig img{max-width:100%;max-height:68vh;border-radius:8px;box-shadow:0 10px 40px rgba(0,0,0,.5);background:#222}
+.lbFig figcaption{color:#f5eedd;margin-top:12px;display:flex;flex-direction:column;gap:4px;font-weight:700}
+.lbFig figcaption b{font-family:var(--serif);font-size:24px}
+.lbFig figcaption small{color:#bfb5a0;font-weight:600}
+.lbFig .zavri{top:-14px;right:-6px;background:#fffdf8}
+.tcard{background:#fffdf8}
+.tcard h2,.tcard h3{font-family:var(--serif)}
+.tcard h3{color:var(--burg)}
 </style>
 </head>
 <body>
-<div class="mrak m1"></div><div class="mrak m2"></div><div class="mrak m3"></div>
 <div id="app">
   <header class="top">
     <button id="back" class="iconbtn" hidden aria-label="Zpět domů">← Domů</button>
     <div class="ttl"><h1 id="h1">Marie Terezie</h1><p id="sub"></p></div>
     <div class="topR">
-      <span class="pill" title="Hvězdičky">⭐ <b id="hvezdy">0</b></span>
-      <button id="tahakB" class="iconbtn" aria-label="Tahák">📝</button>
+      <span class="pill" title="Hvězdičky"><span class="hvz">★</span> <b id="hvezdy">0</b></span>
+      <button id="galB" class="iconbtn txtbtn" aria-label="Obrazárna"><i data-lucide="images" class="lic">🖼️</i><span>Obrazárna</span></button>
+      <button id="tahakB" class="iconbtn" aria-label="Tahák"><i data-lucide="book-open" class="lic">📝</i></button>
       <button id="mute" class="iconbtn" aria-label="Zvuk">🔊</button>
     </div>
   </header>
@@ -355,13 +455,13 @@ h1{font-weight:900;font-size:clamp(26px,4.2vw,42px);line-height:1.05;margin:0;le
   </main>
 </div>
 
-<div id="lane" aria-hidden="true">
-  <svg class="palac" viewBox="0 -14 300 114" aria-hidden="true"><rect x="10" y="40" width="280" height="60" fill="#f4cd57"/><rect x="114" y="26" width="72" height="74" fill="#f8db7c"/><path d="M4 42 L296 42 L284 30 L16 30 Z" fill="#6f9e63"/><path d="M108 28 L192 28 L180 14 L120 14 Z" fill="#6f9e63"/><path d="M140 14 L150 4 L160 14 Z" fill="#6f9e63"/><rect x="22" y="50" width="8" height="11" rx="2" fill="#fff"/><rect x="38" y="50" width="8" height="11" rx="2" fill="#fff"/><rect x="54" y="50" width="8" height="11" rx="2" fill="#fff"/><rect x="70" y="50" width="8" height="11" rx="2" fill="#fff"/><rect x="86" y="50" width="8" height="11" rx="2" fill="#fff"/><rect x="102" y="50" width="8" height="11" rx="2" fill="#fff"/><rect x="196" y="50" width="8" height="11" rx="2" fill="#fff"/><rect x="212" y="50" width="8" height="11" rx="2" fill="#fff"/><rect x="228" y="50" width="8" height="11" rx="2" fill="#fff"/><rect x="244" y="50" width="8" height="11" rx="2" fill="#fff"/><rect x="260" y="50" width="8" height="11" rx="2" fill="#fff"/><rect x="276" y="50" width="8" height="11" rx="2" fill="#fff"/><rect x="22" y="72" width="8" height="11" rx="2" fill="#fff"/><rect x="38" y="72" width="8" height="11" rx="2" fill="#fff"/><rect x="54" y="72" width="8" height="11" rx="2" fill="#fff"/><rect x="70" y="72" width="8" height="11" rx="2" fill="#fff"/><rect x="86" y="72" width="8" height="11" rx="2" fill="#fff"/><rect x="102" y="72" width="8" height="11" rx="2" fill="#fff"/><rect x="196" y="72" width="8" height="11" rx="2" fill="#fff"/><rect x="212" y="72" width="8" height="11" rx="2" fill="#fff"/><rect x="228" y="72" width="8" height="11" rx="2" fill="#fff"/><rect x="244" y="72" width="8" height="11" rx="2" fill="#fff"/><rect x="260" y="72" width="8" height="11" rx="2" fill="#fff"/><rect x="276" y="72" width="8" height="11" rx="2" fill="#fff"/><rect x="124" y="36" width="9" height="12" rx="3" fill="#fff"/><rect x="141" y="36" width="9" height="12" rx="3" fill="#fff"/><rect x="158" y="36" width="9" height="12" rx="3" fill="#fff"/><rect x="175" y="36" width="9" height="12" rx="3" fill="#fff"/><rect x="124" y="56" width="9" height="12" rx="3" fill="#fff"/><rect x="175" y="56" width="9" height="12" rx="3" fill="#fff"/><path d="M140 100 V80 Q150 70 160 80 V100 Z" fill="#8a5a2b"/><path d="M150 4 V-12" stroke="#555" stroke-width="1.6"/><path d="M150 -12 h14 l-4 4 l4 4 h-14Z" fill="#e23b36"/></svg>
-  <svg class="louka" viewBox="0 0 1000 100" preserveAspectRatio="none"><path d="M0 28 Q120 2 250 22 T500 18 T750 26 T1000 12 V100 H0Z" fill="#9ad874"/><path d="M0 56 Q150 36 300 52 T600 46 T1000 50 V100 H0Z" fill="#6cbf4a"/></svg>
-</div>
 <canvas id="fw" hidden></canvas>
 <div id="fx"></div>
 <div id="finale" class="ovl" hidden></div>
+<div id="galerie" class="ovl" hidden><div class="tcard gcard"><button class="zavri" id="galX" aria-label="Zavřít">✕</button>
+  <h2>Obrazárna</h2><p class="gsub">Skutečné obrazy a fotky z doby Marie Terezie. Ťukni na obrázek a zvětší se.</p><div class="galGrid" id="galGrid"></div>
+  <p class="pozn">Obrázky jsou z Wikimedia Commons – u každého je autor a licence.</p></div></div>
+<div id="lightbox" class="ovl lb" hidden><figure class="lbFig"><button class="zavri" id="lbX" aria-label="Zavřít">✕</button><img id="lbImg" alt=""><figcaption id="lbCap"></figcaption></figure></div>
 <div id="tahak" class="ovl" hidden>
   <div class="tcard">
     <button class="zavri" id="tahakX" aria-label="Zavřít">✕</button>
@@ -400,11 +500,18 @@ h1{font-weight:900;font-size:clamp(26px,4.2vw,42px);line-height:1.05;margin:0;le
     <ul><li>poddaný patřil k panství – <b>bez svolení pána</b> se nesměl odstěhovat, oženit/vdát, ani jít studovat či do učení</li></ul>
     <h3>📅 Roky</h3>
     <ul><li><b>1717</b> narození · <b>1740</b> začala vládnout · <b>1774</b> školní docházka · <b>1780</b> smrt · <b>1781</b> zrušení nevolnictví</li></ul>
-    <p class="pozn">Podle Ladina školního sešitu · učebnice str. 14–17 · pracovní sešit str. 10–11</p>
+    <h3>➕ Navíc (v sešitě není)</h3>
+    <ul>
+      <li><b>pragmatická sankce</b> – otec Karel VI. zajistil, že může vládnout i dcera</li>
+      <li>1740 jí pruský král <b>Fridrich II.</b> vzal většinu <b>Slezska</b> · 1743 korunovace v <b>Praze</b></li>
+      <li>omezila <b>robotu</b> · daně platí i <b>šlechta</b> · <b>stálé vojsko</b> · 1776 zákaz mučení</li>
+      <li>zámek <b>Schönbrunn</b> · Josef II. založil 1780 pevnost <b>Terezín</b> a pojmenoval ji po mamince</li>
+    </ul>
+    <p class="pozn">Podle Ladina školního sešitu · učebnice str. 14–17 · pracovní sešit str. 10–11 · obrázky najdeš v Obrazárně</p>
   </div>
 </div>
 
-<script src="zvirata.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lucide@0.468.0/dist/umd/lucide.min.js"></script>
 <script>
 'use strict';
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
@@ -429,6 +536,7 @@ const Snd={ctx:null,muted:false,
   skrt(){ this.noise(.16,{f:2400,vol:.2}); },
   fanfare(){ [[523,0],[659,.12],[784,.24],[1047,.36],[784,.52],[1047,.64]].forEach(([f,d])=>this.tone(f,.3,{type:'triangle',vol:.09,at:d})); },
   pop(){ this.tone(140,.25,{vol:.07,slide:60}); this.noise(.22,{type:'lowpass',f:1300,vol:.09}); },
+  razitko(){ this.tone(110,.18,{vol:.14,slide:60}); this.noise(.12,{type:'lowpass',f:700,vol:.2}); },
   hlas(z){ const t=this; const H={
     marie(){ [[784,0],[988,.1],[1175,.2],[1568,.32]].forEach(([f,d])=>t.tone(f,.24,{type:'triangle',vol:.08,at:d})); },
     pes(){ t.tone(560,.1,{type:'square',vol:.05,slide:330}); t.tone(610,.12,{type:'square',vol:.05,slide:340,at:.18}); },
@@ -440,58 +548,45 @@ const Snd={ctx:null,muted:false,
 };
 document.addEventListener('pointerdown',()=>Snd.init(),{passive:true});
 
-/* ---------- zvířátka ---------- */
-const PORADI=['marie','pes','kun','delfin','leopard','velryba'];
-const JMENA={marie:'císařovna Marie Terezie',pes:'pejsek Alík',kun:'koník Blesk',delfin:'delfín Šplouch',leopard:'leopardice Skvrnka',velryba:'velryba Bublina'};
-const ZENA={marie:1,leopard:1,velryba:1};
-const VODA={delfin:1,velryba:1};
-const HLASKY={
-  marie:['Výborně, má milá Lado!','Jsem na tebe pyšná!','Císařsky dobře!','Takovou chytrou poddanou chci!'],
-  pes:['Haf! Paráda, Lado!','Haf haf, to je ono!','Vrtím ocasem – super!','Haf! Jsi jednička!'],
-  kun:['Íhahá! Bezva, Lado!','Přicválal jsem gratulovat!','Hyjé, jedeme dál!','Íhahá, to je ono!'],
-  delfin:['Ííí! Super práce!','Skáču radostí!','Šplouch! Výborně!','Jsi hvězda, Lado!'],
-  leopard:['Mňau! Rychlá jak já!','Skvělá práce, Lado!','Vrrr, gratuluju!','Mňau, to je ono!'],
-  velryba:['Bubli bubli, výborně!','Velrybí gratulace!','Šplouch! Paráda!','To je hustý, Lado!']
+/* ---------- obrázky (Wikimedia Commons) ---------- */
+const WM='https://thumb.wikimedia.org/wikipedia/commons/thumb/';
+const wm=(cesta)=>{ const f=cesta.split('/').pop(); return {th:`${WM}${cesta}/500px-${f}`, big:`${WM}${cesta}/960px-${f}`}; };
+const OBRAZY={
+  mt11:{...wm('e/eb/Andreas_Moeller_-_Erzherzogin_Maria_Theresia_-_Kunsthistorisches_Museum.jpg'),t:'Marie Terezie jako dívka',
+    p:'Takhle vypadala Marie Terezie, když jí bylo asi 11 let – stejně jako tobě. Tenkrát ještě nikdo nevěděl, že jednou bude vládnout.',k:'Andreas Møller, kolem roku 1727 · Kunsthistorisches Museum, Vídeň · volné dílo'},
+  mt:{th:'https://upload.wikimedia.org/wikipedia/commons/a/a0/Meytens_-_Empress_Maria_Theresa_-_Hofburg%2C_Maria-Theresien-Zimmer.png',big:'https://upload.wikimedia.org/wikipedia/commons/a/a0/Meytens_-_Empress_Maria_Theresa_-_Hofburg%2C_Maria-Theresien-Zimmer.png',t:'Císařovna Marie Terezie',
+    p:'Portrét od dvorního malíře Martina van Meytense. Takhle vypadala v době, kdy vládla – v bohatých šatech s krajkami.',k:'Martin van Meytens, kolem roku 1750 · Hofburg, Vídeň · volné dílo'},
+  rodina:{...wm('0/01/Jakob_Matthias_Schmutzer_nach_Meytens_Kaiserliche_Familie.jpg'),t:'Císařská rodina',
+    p:'Marie Terezie a její manžel František Štěpán s dětmi. Dohromady měli dětí šestnáct!',k:'Jakob Matthias Schmutzer podle Martina van Meytense, kolem roku 1757 · volné dílo'},
+  antoinetta:{...wm('9/91/Marie-Antoinette_en_grand_habit_de_cour_-_1778_-_Elisabeth_Louise_Vig%C3%A9e_Le_Brun.jpg'),t:'Marie Antoinetta',
+    p:'Nejmladší dcera Marie Terezie se stala francouzskou královnou. I díky takovým sňatkům měla Marie Terezie vnoučata po celé Evropě.',k:'Élisabeth Vigée Le Brun, 1778 · foto Yann Caradec, CC BY-SA 2.0'},
+  josef:{...wm('1/1b/Anton_von_Maron_006.png'),t:'Josef II.',
+    p:'Nejstarší syn Marie Terezie na portrétu z roku 1775. Po mamince vládl v letech 1780–1790.',k:'Anton von Maron, 1775 · Kunsthistorisches Museum, Vídeň · volné dílo'},
+  tolar:{...wm('b/b5/1_thaler_Maria_Theresia_1780.png'),pos:'4% 50%',t:'Tereziánský tolar',
+    p:'Stříbrná mince s portrétem Marie Terezie z roku 1780. Patřila k jednotné měně – a byla tak oblíbená, že se razí dodnes.',k:'foto Windrain, CC BY-SA 4.0'},
+  schonbrunn:{...wm('c/c4/Schloss_Sch%C3%B6nbrunn_Wien_2014_%28Zuschnitt_1%29.jpg'),t:'Zámek Schönbrunn ve Vídni',
+    p:'Oblíbené sídlo Marie Terezie. Jeho žluté barvě se dodnes říká „schönbrunnská žlutá“.',k:'foto Thomas Wolf (www.foto-tw.de), CC BY-SA 3.0 DE'},
+  terezin:{...wm('f/fc/Terez%C3%ADnsk%C3%A1_pevnost_letecky_-_panoramio.jpg'),t:'Pevnost Terezín',
+    p:'Josef II. ji nechal postavit roku 1780 u Litoměřic a pojmenoval ji po své mamince Marii Terezii.',k:'foto melechovsky, CC BY 3.0'},
 };
-const BEZCHYBY=['Bez chyby! 🌟','Ani jedna chyba! 🌟','Čistá práce! 🌟'];
-const IDLE={marie:'Ahoj, já jsem Marie Terezie!',pes:'Haf! Jdeme do 18. století?',kun:'Íhahá! Povezu císařský kočár!',delfin:'Ííí! Kolik měla dětí?',leopard:'Mňau! Znáš roky 1740–1780?',velryba:'Bubli bubli, ahoj Lado!'};
-const FINAL={marie:'Bravo, Lado!',pes:'Haf! Super!',kun:'Íhahá!',delfin:'Ííí!',leopard:'Mňau! Hustý!',velryba:'Gratuluju!'};
-function zvireSVG(z){ return `<svg viewBox="0 0 140 110" aria-hidden="true">${ZV[z]}</svg>`; }
-function zvireHTML(z,cls){ return `<div class="zvire ${z} ${cls||''}">${zvireSVG(z)}${VODA[z]?'<div class="vlna"></div>':''}<div class="bub"></div></div>`; }
-const lane=$('#lane');
-function bubli(el,text,vys){ const b=el.querySelector('.bub'); if(!b) return; b.textContent=text; b.classList.toggle('vys',!!vys); b.style.marginLeft='0px';
-  const er=el.getBoundingClientRect(), bw=b.offsetWidth, left=er.left+er.width*.55-bw/2; let dx=0;
-  if(left<8) dx=8-left; else if(left+bw>innerWidth-8) dx=innerWidth-8-(left+bw); b.style.marginLeft=dx+'px'; b.classList.add('on'); }
-function anim(el,a,b,dur,easing){ return new Promise(res=>{ const tf=x=>`translateX(${x}px)`; if(!el.animate){ el.style.transform=tf(b); setTimeout(res,dur); return; }
-  const an=el.animate([{transform:tf(a)},{transform:tf(b)}],{duration:dur,easing,fill:'forwards'}); an.onfinish=res; an.oncancel=res; }); }
-let beziOdmen=0, odmI=0;
-async function probehni(z,text){
-  if(beziOdmen>=2) return; beziOdmen++;
-  lane.insertAdjacentHTML('beforeend',zvireHTML(z,'run bezec'));
-  const el=lane.lastElementChild, W=lane.clientWidth, w=el.offsetWidth;
-  const cx=Math.round((W-w)/2+(Math.random()-.5)*W*.3);
-  try{
-    await anim(el,-w-30,cx,1100,'cubic-bezier(.2,.75,.35,1)'); if(!el.isConnected) return;
-    el.classList.replace('run','mav'); bubli(el,text); Snd.hlas(z);
-    await wait(1750); if(!el.isConnected) return;
-    el.querySelector('.bub').classList.remove('on'); el.classList.replace('mav','run');
-    await anim(el,cx,W+30,950,'cubic-bezier(.55,0,.9,.55)');
-  } finally { el.remove(); beziOdmen--; }
-}
-function zrusBezce(){ $$('#lane .bezec').forEach(e=>{ if(e.getAnimations) e.getAnimations().forEach(a=>a.cancel()); e.remove(); }); }
-function odmena(){ const z=PORADI[odmI++%PORADI.length]; const t=(st&&st.ck===0&&Math.random()<.35)?pick(BEZCHYBY):pick(HLASKY[z]); probehni(z,t); }
-function xPozice(i,w){ const W=lane.clientWidth; return Math.round(Math.max(4,Math.min(W-w-4,W*((i+.5)/PORADI.length)-w/2))); }
-function idleZvirata(on){
-  $$('#lane .idle').forEach(e=>e.remove()); if(!on) return;
-  PORADI.forEach((z,i)=>{
-    lane.insertAdjacentHTML('beforeend',zvireHTML(z,'stoji idle'));
-    const el=lane.lastElementChild; el.style.transform=`translateX(${xPozice(i,el.offsetWidth)}px)`;
-    el.querySelector('svg').style.animationDelay=(-i*.37)+'s';
-    el.addEventListener('click',()=>{ if(el.classList.contains('mav')) return; el.classList.add('mav'); bubli(el,IDLE[z],i%2); Snd.init(); Snd.hlas(z); jiskry(el,8);
-      setTimeout(()=>{ el.classList.remove('mav'); const b=el.querySelector('.bub'); if(b) b.classList.remove('on'); },1900); });
-  });
-}
-function kytky(){ const f=['🌼','🌷','🌸','🌼','🌻','🌼','🌷','🌸','🌼']; f.forEach((k,i)=>{ const s=document.createElement('span'); s.className='kytka'; s.textContent=k; s.style.left=(4+i*11+Math.random()*5)+'%'; s.style.bottom=`calc(var(--lane)*${(.02+Math.random()*.12).toFixed(3)} + env(safe-area-inset-bottom))`; lane.appendChild(s); }); }
+/* ikony: 'i:název|náhradní emoji' → ikona Lucide (když se knihovna nenačte, zůstane emoji) */
+function ikona(x){ if(typeof x==='string'&&x.startsWith('i:')){ const [n,f]=x.slice(2).split('|'); return `<i data-lucide="${n}" class="lic">${f||''}</i>`; } return x||''; }
+function ikony(){ try{ if(window.lucide) lucide.createIcons(); }catch(e){} }
+function fotoHTML(key,cls){ const o=OBRAZY[key]; if(!o) return ''; return `<button class="foto ${cls||''}" data-foto="${key}" aria-label="Zvětšit obrázek: ${esc(o.t)}"><img src="${o.th}" alt="${esc(o.t)}" loading="lazy"${o.pos?` style="object-position:${o.pos}"`:''}><span class="lupa">${ikona('i:zoom-in|🔍')}</span></button>`; }
+function ukazFoto(key){ const o=OBRAZY[key]; if(!o) return; const img=$('#lbImg'); img.src=o.big; img.alt=o.t;
+  $('#lbCap').innerHTML=`<b>${esc(o.t)}</b><span>${esc(o.p)}</span><small>${esc(o.k)}</small>`; $('#lightbox').hidden=false; ikony(); }
+function renderGalerie(){ $('#galGrid').innerHTML=Object.entries(OBRAZY).map(([k,o])=>`<figure class="gal">${fotoHTML(k)}<figcaption>${esc(o.t)}</figcaption></figure>`).join(''); ikony(); }
+document.addEventListener('click',e=>{ const f=e.target.closest('[data-foto]'); if(f){ e.preventDefault(); ukazFoto(f.dataset.foto); } });
+
+/* ---------- odměna: císařská pečeť ---------- */
+const POCHVALY=['Výborně!','Skvěle!','Bravo!','Přesně tak!','Císařsky dobře!','Paráda!','Tak je to!'];
+const PECET_SVG=(()=>{ let blob=''; for(let i=0;i<11;i++){ const a=i/11*Math.PI*2+.3, r=39+(i%3)*1.6; blob+=`<circle cx="${(50+Math.cos(a)*r).toFixed(1)}" cy="${(50+Math.sin(a)*r).toFixed(1)}" r="${6+(i%2)*1.5}"/>`; }
+  return `<svg viewBox="0 0 100 100" aria-hidden="true"><g class="pv"><circle cx="50" cy="50" r="42"/>${blob}</g><circle cx="50" cy="50" r="31" class="pk1"/><circle cx="50" cy="50" r="27" class="pk2"/><text x="50" y="58" text-anchor="middle" class="pm">MT</text></svg>`; })();
+function odmena(){ const f=$('#fb'); if(!f) return; const zlata=st&&st.ck===0, t=zlata&&Math.random()<.35?'Bez chyby!':pick(POCHVALY);
+  f.insertAdjacentHTML('afterbegin',`<span class="pecet${zlata?' zlata':''}">${PECET_SVG}</span>`);
+  const tx=f.querySelector('.fbt'); if(tx) tx.insertAdjacentHTML('afterbegin',`<b class="chvala">${t}</b> `);
+  Snd.razitko(); }
+function idleZvirata(){} function zrusBezce(){} function kytky(){}
 
 /* ---------- efekty ---------- */
 function jiskry(el,n=10){ const r=el.getBoundingClientRect(), x=r.left+r.width/2, y=r.top+r.height/2, fx=$('#fx'); const B=['#ffc93c','#2fb36a','#2f7ff0','#ff5d8f','#8a5cf0','#ff8a3d'];
@@ -505,7 +600,7 @@ const FW={cv:null,cx:null,raf:0,end:0,rk:[],pt:[],W:0,H:0,
   fit(){ if(!this.cv) return; const d=Math.min(2,window.devicePixelRatio||1); this.W=innerWidth; this.H=innerHeight; this.cv.width=this.W*d; this.cv.height=this.H*d; this.cx.setTransform(d,0,0,d,0,0); },
   stop(){ this.end=0; this.rk=[]; this.pt=[]; },
   loop(t){ const c=this.cx,W=this.W,H=this.H;
-    if(t<this.end&&Math.random()<.065) this.rk.push({x:W*(.12+Math.random()*.76),y:H,vx:(Math.random()-.5)*1.6,vy:-(H*.012+Math.random()*H*.006),h:Math.floor(Math.random()*360)});
+    if(t<this.end&&Math.random()<.065) this.rk.push({x:W*(.12+Math.random()*.76),y:H,vx:(Math.random()-.5)*1.6,vy:-(H*.012+Math.random()*H*.006),h:pick([42,48,38,350,200,160])});
     c.clearRect(0,0,W,H);
     for(const r of this.rk){ r.x+=r.vx; r.y+=r.vy; r.vy+=H*.00018; c.fillStyle=`hsl(${r.h},100%,60%)`; c.beginPath(); c.arc(r.x,r.y,3.2,0,7); c.fill(); if(r.vy>=-1){ r.dead=1; this.boom(r); } }
     this.rk=this.rk.filter(r=>!r.dead);
@@ -527,32 +622,32 @@ const FW={cv:null,cx:null,raf:0,end:0,rk:[],pt:[],W:0,H:0,
    Každé téma má vlastní oddíl s výkladem a hrou, otázky jsou pokaždé jinak formulované;
    otázky ve znění sešitu jsou až na konci ve „Zkoušení jako ve škole“. */
 const REFORMY=[ // [ikona, název, krátce]
-  ['🪙','jednotná měna','v celé říši se platí stejnými penězi'],
-  ['🏫','školská reforma','od roku 1774 povinná školní docházka'],
-  ['📜','jednotné zákony','všude v říši platí stejná pravidla'],
-  ['🧮','sčítání obyvatel','úředníci spočítali všechny lidi'],
-  ['🏠','číslování domů','každý dům musí mít číslo'],
-  ['💉','zdravotní reforma','očkování a nemocnice'],
-  ['🧵','zřízení manufaktur','velké dílny, každý dělá jen část práce'],
+  ['i:coins|🪙','jednotná měna','v celé říši se platí stejnými penězi'],
+  ['i:school|🏫','školská reforma','od roku 1774 povinná školní docházka'],
+  ['i:scroll-text|📜','jednotné zákony','všude v říši platí stejná pravidla'],
+  ['i:users|🧮','sčítání obyvatel','úředníci spočítali všechny lidi'],
+  ['i:house|🏠','číslování domů','každý dům musí mít číslo'],
+  ['i:syringe|💉','zdravotní reforma','očkování a nemocnice'],
+  ['i:factory|🧵','zřízení manufaktur','velké dílny, každý dělá jen část práce'],
 ];
 const RNAZ=REFORMY.map(r=>r[1]);
 const jine=(ok,n=2)=>shuffle(RNAZ.filter(x=>x!==ok)).slice(0,n);
 
 /* 1 · Kdo byla Marie Terezie */
 const KDOBYLA=[
-  {typ:'quiz',obr:'mt',text:'Ahoj, já jsem <b>Marie Terezie</b>! Narodila jsem se roku <b>1717</b> ve <b>Vídni</b>. Byla jsem z rodu <b>Habsburků</b> a stala jsem se i <b>českou královnou</b>.',
+  {typ:'quiz',obr:'img:mt11',text:'Ahoj, já jsem <b>Marie Terezie</b>! Narodila jsem se roku <b>1717</b> ve <b>Vídni</b>. Byla jsem z rodu <b>Habsburků</b> a stala jsem se i <b>českou královnou</b>. Na obraze je mi asi 11 let – stejně jako tobě.',
     q:'Ve kterém městě Marie Terezie žila a vládla?',ok:'ve Vídni',ne:['v Praze','v Paříži'],proc:'Vídeň byla hlavním městem habsburské říše – patřily k ní i české země.'},
-  {typ:'quiz',obr:'👑',text:'Vládla jsem od roku <b>1740</b> do roku <b>1780</b> – celých <b>40 let</b>! Byla to doba, které dnes říkáme <b>novověk</b>.',
+  {typ:'quiz',obr:'img:mt',text:'Vládla jsem od roku <b>1740</b> do roku <b>1780</b> – celých <b>40 let</b>! Byla to doba, které dnes říkáme <b>novověk</b>.',
     q:'Jak dlouho Marie Terezie vládla?',ok:'40 let',ne:['4 roky','400 let'],proc:'1780 − 1740 = 40 let.'},
-  {typ:'quiz',obr:'👨‍👩‍👧‍👦',text:'S manželem <b>Františkem Štěpánem</b> jsme měli <b>16 dětí</b>! Můj syn <b>Josef II.</b> po mně vládl.',
+  {typ:'quiz',obr:'img:rodina',text:'S manželem <b>Františkem Štěpánem</b> jsme měli <b>16 dětí</b>! Můj syn <b>Josef II.</b> po mně vládl.',
     q:'Kolik dětí měla Marie Terezie?',ok:'16',ne:['2','30'],proc:'Šestnáct! A z toho vznikla jedna slavná přezdívka – uvidíš hned.'},
-  {typ:'quiz',obr:'🗺️',text:'Moje dcery a synové se přivdali a přiženili do královských rodin po celé Evropě. <b>Marie Antoinetta</b> se stala <b>francouzskou královnou</b>, <b>Marie Karolína</b> královnou v Neapoli v Itálii… A tak jsem měla <b>vnoučata po celé Evropě</b>. Proto se mi říká <b>Evropská babička</b>!',
+  {typ:'quiz',obr:'img:antoinetta',text:'Moje dcery a synové se přivdali a přiženili do královských rodin po celé Evropě. <b>Marie Antoinetta</b> se stala <b>francouzskou královnou</b>, <b>Marie Karolína</b> královnou v Neapoli v Itálii… A tak jsem měla <b>vnoučata po celé Evropě</b>. Proto se mi říká <b>Evropská babička</b>!',
     q:'Jakou přezdívku Marie Terezie dostala?',ok:'Evropská babička',ne:['Železná dáma','Vídeňská princezna'],proc:'Evropská babička – protože měla vnoučata po celé Evropě.'},
   {typ:'vyber',q:'Ve kterých zemích žily děti a vnoučata Marie Terezie?',lbl:'🗺️ Evropská babička',
     ano:['Francie','Itálie','Rakousko','Německo'],
     ne:[['Amerika','tam nikdo z její rodiny nevládl.'],['Čína','tak daleko se její děti neprovdaly.'],['Austrálie','tu tenkrát Evropané teprve objevovali.']],
     proc:'Francie, Itálie, Rakousko, Německo… Vnoučata měla po celé Evropě – proto Evropská babička.'},
-  {typ:'quiz',obr:'💡',text:'Chtěla jsem, aby se v mé říši žilo lépe. V 18. století lidé začali víc věřit <b>rozumu</b> a <b>vzdělání</b> – této době se říká <b>osvícenství</b>. A tak jsem začala s <b>reformami</b>. Co to přesně je, zjistíš v oddíle <b>Co je reforma?</b>',
+  {typ:'quiz',obr:'i:lightbulb|💡',text:'Chtěla jsem, aby se v mé říši žilo lépe. V 18. století lidé začali víc věřit <b>rozumu</b> a <b>vzdělání</b> – této době se říká <b>osvícenství</b>. A tak jsem začala s <b>reformami</b>. Co to přesně je, zjistíš v oddíle <b>Co je reforma?</b>',
     q:'Čemu lidé v osvícenství začali víc věřit?',ok:'rozumu a vzdělání',ne:['kouzlům a čarodějnicím','jen penězům'],proc:'Osvícenství = osvícení rozumu.'},
 ];
 
@@ -561,9 +656,9 @@ const STROJ=[
   {typ:'osa',nadpis:'🕰️ Seřaď období dějin od nejstaršího po nejmladší. Ťukej popořadě.',
     udal:[['pravěk','lovci mamutů'],['starověk','pyramidy, Řím'],['středověk','hrady, rytíři, Karel IV.'],['novověk','Marie Terezie']],
     konec:'✓ Pravěk → starověk → středověk → novověk. Marie Terezie patří do novověku!'},
-  {typ:'quiz',obr:'🕰️',lbl:'Stroj času',text:'Stroj času přistál v roce <b>1760</b>. Po ulicích jezdí kočáry, na trhu se platí tolary a ve Vídni vládne <b>Marie Terezie</b>. Pravěk, starověk i středověk jsou dávno pryč…',
+  {typ:'quiz',obr:'i:hourglass|⏳',lbl:'Stroj času',text:'Stroj času přistál v roce <b>1760</b>. Po ulicích jezdí kočáry, na trhu se platí tolary a ve Vídni vládne <b>Marie Terezie</b>. Pravěk, starověk i středověk jsou dávno pryč…',
     q:'V jakém období jsme přistáli?',ok:'v novověku',ne:['ve středověku','v pravěku'],proc:'Marie Terezie žila v novověku.'},
-  {typ:'quiz',obr:'🧮',lbl:'Stroj času',text:'<b>Jak poznat století?</b> Vezmi první dvě číslice roku a přičti 1.<br>Rok <b>1740</b> → 17 + 1 = <b>18. století</b>.',
+  {typ:'quiz',obr:'i:calculator|🧮',lbl:'Stroj času',text:'<b>Jak poznat století?</b> Vezmi první dvě číslice roku a přičti 1.<br>Rok <b>1740</b> → 17 + 1 = <b>18. století</b>.',
     q:'Ve kterém století vládla Marie Terezie (1740–1780)?',ok:'v 18. století',ne:['v 17. století','v 19. století'],proc:'1740 i 1780: 17 + 1 = 18. století. Pozor na chyták – není to 17. století!'},
   {typ:'quiz',lbl:'🧮 Stroj času',q:'Rok 1774 (děti musí začít chodit do školy) – které je to století?',ok:'18. století',ne:['17. století','14. století'],proc:'17 + 1 = 18. století.'},
   {typ:'quiz',lbl:'🧮 Stroj času',q:'Rok 1348 (Karel IV. založil v Praze univerzitu) – které je to století?',ok:'14. století',ne:['13. století','18. století'],proc:'13 + 1 = 14. století – to byl ještě středověk.'},
@@ -585,7 +680,7 @@ const JE_REFORMA=[
   ['Královna si nechá ušít nové šaty.',0,'Hezké, ale není to žádná změna systému. 👗'],
 ];
 const REFORMA=()=>[
-  {typ:'quiz',obr:'🛠️',lbl:'Co je reforma?',text:'Představ si, že chceš mít hezčí pokojíček. Nevyměníš všechno za jeden den – nejdřív vymaluješ, pak přibude nový stůl, pak polička… Tak funguje <b>reforma</b>: je to <b>zásadní změna systému</b>, která přinese <b>zlepšení</b> a dělá se <b>postupnými kroky</b>.',
+  {typ:'quiz',obr:'i:paint-roller|🖌️',lbl:'Co je reforma?',text:'Představ si, že chceš mít hezčí pokojíček. Nevyměníš všechno za jeden den – nejdřív vymaluješ, pak přibude nový stůl, pak polička… Tak funguje <b>reforma</b>: je to <b>zásadní změna systému</b>, která přinese <b>zlepšení</b> a dělá se <b>postupnými kroky</b>.',
     q:'Jak se dělá reforma?',ok:'postupnými kroky',ne:['za jedinou noc','kouzelným proutkem'],proc:'Reforma = zásadní změna systému, zlepšení, postupnými kroky.'},
   ...shuffle(JE_REFORMA).slice(0,6).map(t=>({typ:'tf',v:t[0],ok:t[1],proc:t[2],otazka:'Je to reforma?',lab:['✅ Je to reforma','🙅 Není to reforma'],okText:'Tohle reforma je.'})),
   {typ:'dopln',zadani:'🧩 Slož, co znamená slovo reforma.',pod:'Ťukej na slova, která patří do mezer.',
@@ -595,18 +690,18 @@ const REFORMA=()=>[
 
 /* 4 · Reformy Marie Terezie */
 const ZASTAVKY=[
-  ['🪙','<b>Dřív:</b> v každé zemi se platilo jinými penězi a kupci se pořád dohadovali, kolik co stojí.<br><b>Za Marie Terezie:</b> v celé říši se platí stejnými penězi – třeba stříbrným tolarem.','jednotná měna'],
-  ['🏫','<b>Dřív:</b> číst a psát umělo jen málo dětí, většina pásla husy a pomáhala na poli.<br><b>Za Marie Terezie:</b> od roku 1774 musí všechny děti od 6 do 12 let chodit do školy.','školská reforma'],
-  ['📜','<b>Dřív:</b> v každém kraji platila trochu jiná pravidla a tresty.<br><b>Za Marie Terezie:</b> pro celou říši platí stejné zákony.','jednotné zákony'],
-  ['🧮','<b>Dřív:</b> nikdo nevěděl, kolik lidí v říši vlastně žije.<br><b>Za Marie Terezie:</b> úředníci obešli všechny vesnice a lidi spočítali.','sčítání obyvatel'],
-  ['🏠','<b>Dřív:</b> domy neměly žádná čísla – najdi pak, kde bydlí kovář Jan!<br><b>Za Marie Terezie:</b> každý dům musí mít své číslo.','číslování domů'],
-  ['💉','<b>Dřív:</b> nebezpečné nemoci jako neštovice zabíjely spoustu lidí.<br><b>Za Marie Terezie:</b> začalo se očkovat a stavěly se nemocnice. Očkovat nechala i vlastní děti.','zdravotní reforma'],
-  ['🧵','<b>Dřív:</b> řemeslník vyrobil všechno sám, doma a pomalu.<br><b>Za Marie Terezie:</b> vznikají manufaktury – velké dílny, kde každý dělá jen jednu část práce, a tak se vyrábí rychleji.','zřízení manufaktur'],
+  ['img:tolar','<b>Dřív:</b> v každé zemi se platilo jinými penězi a kupci se pořád dohadovali, kolik co stojí.<br><b>Za Marie Terezie:</b> v celé říši se platí stejnými penězi – třeba stříbrným tolarem.','jednotná měna'],
+  ['i:school|🏫','<b>Dřív:</b> číst a psát umělo jen málo dětí, většina pásla husy a pomáhala na poli.<br><b>Za Marie Terezie:</b> od roku 1774 musí všechny děti od 6 do 12 let chodit do školy.','školská reforma'],
+  ['i:scroll-text|📜','<b>Dřív:</b> v každém kraji platila trochu jiná pravidla a tresty.<br><b>Za Marie Terezie:</b> pro celou říši platí stejné zákony.','jednotné zákony'],
+  ['i:users|🧮','<b>Dřív:</b> nikdo nevěděl, kolik lidí v říši vlastně žije.<br><b>Za Marie Terezie:</b> úředníci obešli všechny vesnice a lidi spočítali.','sčítání obyvatel'],
+  ['i:house|🏠','<b>Dřív:</b> domy neměly žádná čísla – najdi pak, kde bydlí kovář Jan!<br><b>Za Marie Terezie:</b> každý dům musí mít své číslo.','číslování domů'],
+  ['i:syringe|💉','<b>Dřív:</b> nebezpečné nemoci jako neštovice zabíjely spoustu lidí.<br><b>Za Marie Terezie:</b> začalo se očkovat a stavěly se nemocnice. Očkovat nechala i vlastní děti.','zdravotní reforma'],
+  ['i:factory|🧵','<b>Dřív:</b> řemeslník vyrobil všechno sám, doma a pomalu.<br><b>Za Marie Terezie:</b> vznikají manufaktury – velké dílny, kde každý dělá jen jednu část práce, a tak se vyrábí rychleji.','zřízení manufaktur'],
 ];
 const REF_PAD={typ:'chytej',zadani:'👑 Chytej jen reformy <b>Marie Terezie</b>!',pod:'Co zavedl až Josef II. nebo co tenkrát ještě nebylo, nech spadnout.',
   dobre:REFORMY,
-  spatne:[['🕊️','zrušení nevolnictví','to udělal až Josef II.'],['⛪','toleranční patent','ten vydal až Josef II.'],['🪪','povinné příjmení','to nařídil až Josef II.'],
-    ['💡','elektřina','ta tenkrát ještě nebyla!'],['📺','televize','ta tenkrát ještě nebyla!'],['🚂','železnice','vlaky jezdily až mnohem později!']],
+  spatne:[['i:bird|🕊️','zrušení nevolnictví','to udělal až Josef II.'],['i:church|⛪','toleranční patent','ten vydal až Josef II.'],['i:id-card|🪪','povinné příjmení','to nařídil až Josef II.'],
+    ['i:lightbulb|💡','elektřina','ta tenkrát ještě nebyla!'],['i:tv|📺','televize','ta tenkrát ještě nebyla!'],['i:train-front|🚂','železnice','vlaky jezdily až mnohem později!']],
   konec:'✓ Paráda! Reformy Marie Terezie: jednotná měna, školská reforma, jednotné zákony, sčítání obyvatel, číslování domů, zdravotní reforma a manufaktury.'};
 const REFORMY_MT=()=>[
   ...shuffle(ZASTAVKY).map((z,i)=>({typ:'quiz',obr:z[0],text:z[1],lbl:`🚶 Procházka rokem 1780 · zastávka ${i+1} z 7`,q:'Jak se tahle reforma jmenuje?',ok:z[2],ne:jine(z[2]),proc:`${cap(z[2])} – reforma Marie Terezie.`})),
@@ -630,22 +725,22 @@ const SKOLA_PAD={typ:'chytej',zadani:'🎒 Ťukej jen na věci, které byly ve �
 
 /* 6 · Josef II. a nevolnictví */
 const JOSEF=[
-  {typ:'quiz',obr:'j2',lbl:'Josef II. · 1/5',text:'Po Marii Terezii vládl od roku <b>1780</b> její syn <b>Josef II.</b> V reformách pokračoval – a někdy byl ještě odvážnější než maminka.',
+  {typ:'quiz',obr:'img:josef',lbl:'Josef II. · 1/5',text:'Po Marii Terezii vládl od roku <b>1780</b> její syn <b>Josef II.</b> V reformách pokračoval – a někdy byl ještě odvážnější než maminka.',
     q:'Kdo byl Josef II.?',ok:'syn Marie Terezie',ne:['manžel Marie Terezie','tatínek Marie Terezie'],proc:'Josef II. byl nejstarší syn Marie Terezie. Vládl 1780–1790.'},
-  {typ:'quiz',obr:'👨‍🌾',lbl:'Josef II. · 2/5',text:'Tohle je <b>Honza</b>. Rád by se ve městě vyučil kovářem a oženil se s Aničkou ze sousední vsi. Jenže je <b>nevolník</b>: patří k panství, a <b>bez svolení pána</b> se nesmí odstěhovat, oženit ani jít do učení nebo studovat. Tomu se říká <b>nevolnictví</b>.',
+  {typ:'quiz',obr:'i:user|👨‍🌾',lbl:'Josef II. · 2/5',text:'Tohle je <b>Honza</b>. Rád by se ve městě vyučil kovářem a oženil se s Aničkou ze sousední vsi. Jenže je <b>nevolník</b>: patří k panství, a <b>bez svolení pána</b> se nesmí odstěhovat, oženit ani jít do učení nebo studovat. Tomu se říká <b>nevolnictví</b>.',
     q:'Co Honza jako nevolník nesměl bez svolení pána?',ok:'odstěhovat se, oženit se, jít do učení',ne:['jíst k obědu polévku','hrát si se psem'],proc:'Nevolnictví = poddaný patřil k panství a bez svolení pána se nesměl odstěhovat, oženit ani jít studovat.'},
-  {typ:'quiz',obr:'🕊️',lbl:'Josef II. · 3/5',text:'Roku <b>1781</b> Josef II. <b>zrušil nevolnictví</b>. Honza už nemusí nikoho prosit – může jít do města na učení i se oženit! Na panském poli ale dál musí odpracovat robotu.',
+  {typ:'quiz',obr:'i:bird|🕊️',lbl:'Josef II. · 3/5',text:'Roku <b>1781</b> Josef II. <b>zrušil nevolnictví</b>. Honza už nemusí nikoho prosit – může jít do města na učení i se oženit! Na panském poli ale dál musí odpracovat robotu.',
     q:'Co udělal Josef II. roku 1781?',ok:'zrušil nevolnictví',ne:['zavedl jednotnou měnu','postavil Pražský hrad'],proc:'Zrušení nevolnictví – rok 1781, Josef II.'},
-  {typ:'quiz',obr:'⛪',lbl:'Josef II. · 4/5',text:'Sousedka Anna je <b>evangelička</b>. Dřív se směla modlit jen potajmu, protože povolená byla jen katolická víra. Josef II. vydal <b>toleranční patent</b> – teď může svou víru vyznávat veřejně.',
+  {typ:'quiz',obr:'i:church|⛪',lbl:'Josef II. · 4/5',text:'Sousedka Anna je <b>evangelička</b>. Dřív se směla modlit jen potajmu, protože povolená byla jen katolická víra. Josef II. vydal <b>toleranční patent</b> – teď může svou víru vyznávat veřejně.',
     q:'Co povolil toleranční patent?',ok:'vyznávat i jiné než katolické náboženství',ne:['nosit klobouk v kostele','jezdit kočárem bez koní'],proc:'Toleranční patent = tolerance, snášenlivost k jiné víře.'},
-  {typ:'quiz',obr:'🪪',lbl:'Josef II. · 5/5',text:'Dřív se lidem říkalo třeba „Honza od mlýna“ nebo „Jan Kovářův“ a jméno se mohlo měnit. Josef II. nařídil <b>povinné příjmení</b> – každý musí mít stálé příjmení, které se dědí z otce na děti. Proto má většina dětí stejné příjmení jako táta!',
+  {typ:'quiz',obr:'i:id-card|🪪',lbl:'Josef II. · 5/5',text:'Dřív se lidem říkalo třeba „Honza od mlýna“ nebo „Jan Kovářův“ a jméno se mohlo měnit. Josef II. nařídil <b>povinné příjmení</b> – každý musí mít stálé příjmení, které se dědí z otce na děti. Proto má většina dětí stejné příjmení jako táta!',
     q:'Co nařídil Josef II. se jmény?',ok:'každý musí mít stálé příjmení',ne:['každý rok se vybere nové jméno','děti dostanou jména po zvířátkách'],proc:'Povinné příjmení – Josef II.'},
 ];
 const KDO=[
   ...REFORMY.map(r=>[r[0],cap(r[1]),'mt',`Marie Terezie – ${r[2]}.`]),
-  ['🕊️','Zrušení nevolnictví (1781)','j2','Josef II. – lidé se mohli stěhovat, ženit nebo studovat bez svolení pána.'],
-  ['⛪','Toleranční patent (1781)','j2','Josef II. – kromě katolíků mohli svou víru vyznávat i evangelíci a pravoslavní.'],
-  ['🪪','Povinné příjmení','j2','Josef II. – každý musel mít stálé příjmení, které se dědí po otci.'],
+  ['i:bird|🕊️','Zrušení nevolnictví (1781)','j2','Josef II. – lidé se mohli stěhovat, ženit nebo studovat bez svolení pána.'],
+  ['i:church|⛪','Toleranční patent (1781)','j2','Josef II. – kromě katolíků mohli svou víru vyznávat i evangelíci a pravoslavní.'],
+  ['i:id-card|🪪','Povinné příjmení','j2','Josef II. – každý musel mít stálé příjmení, které se dědí po otci.'],
 ];
 const JOSEF_KROKY=()=>{ const mt=shuffle(KDO.filter(k=>k[2]==='mt')).slice(0,5), j2=KDO.filter(k=>k[2]==='j2');
   return [...JOSEF,...shuffle([...mt,...j2]).map(k=>({typ:'kdo',ik:k[0],v:k[1],ok:k[2],proc:k[3]}))]; };
@@ -672,6 +767,38 @@ const TF=[
   ['Zakázala krátké sukně.',0,'Výmysl! Krátké sukně tenkrát nikdo nenosil, tak nebylo co zakazovat. 😄'],
   ['Zavedla elektřinu do všech domů.',0,'Výmysl! Elektřina v domech byla až o víc než 100 let později. 😄'],
   ['Bydlela na Pražském hradě.',0,'Výmysl. Sídlila ve Vídni.'],
+  ['Byla korunována českou královnou v Praze.',1,'Ano, roku 1743. (Navíc – v sešitě to není.)'],
+  ['Pruský král Fridrich II. byl její nejlepší kamarád.',0,'Výmysl! Byl to její nepřítel – vzal jí většinu Slezska.'],
+  ['Úředním jazykem se stala čeština.',0,'Výmysl. Úředním jazykem byla němčina.'],
+  ['Povolila demokratické volby.',0,'Výmysl. Tak „osvícená“ zase nebyla – vládla sama jako panovnice.'],
+  ['Daně musela platit i šlechta.',1,'Ano – dřív platili hlavně poddaní, za Marie Terezie i vrchnost.'],
+];
+/* Zajímavosti navíc – co v sešitě není, ale k Marii Terezii patří */
+const NAVIC=[
+  {typ:'quiz',obr:'i:scroll|📜',lbl:'Navíc · 1/8',text:'Tatínek Marie Terezie, císař <b>Karel VI.</b>, neměl syna. Proto sepsal <b>pragmatickou sankci</b> – listinu, podle které mohla po něm vládnout i dcera.',
+    q:'Proč mohla vládnout žena?',ok:'otec to zajistil pragmatickou sankcí',ne:['vyhrála volby','vyhrála závod v běhu'],proc:'Pragmatická sankce zajistila, že po Karlu VI. mohla nastoupit jeho dcera.'},
+  {typ:'quiz',obr:'i:swords|⚔️',lbl:'Navíc · 2/8',text:'Hned v roce 1740 ji napadl pruský král <b>Fridrich II.</b> a vzal jí většinu <b>Slezska</b>. Ostatní země ubránila.',
+    q:'Kdo jí vzal většinu Slezska?',ok:'pruský král Fridrich II.',ne:['francouzský král','turecký sultán'],proc:'Fridrich II. Pruský – Slezsko už Habsburkům zůstalo jen malé.'},
+  {typ:'quiz',obr:'i:crown|👑',lbl:'Navíc · 3/8',text:'Roku <b>1743</b> ji v <b>Praze</b> korunovali na <b>českou královnu</b>. Sídlila ale ve Vídni.',
+    q:'Kde byla Marie Terezie korunována českou královnou?',ok:'v Praze',ne:['v Brně','v Paříži'],proc:'V Praze, roku 1743.'},
+  {typ:'quiz',obr:'img:schonbrunn',lbl:'Navíc · 4/8',text:'Ráda pobývala na zámku <b>Schönbrunn</b> u Vídně. Jeho žluté barvě se dodnes říká „schönbrunnská žlutá“.',
+    q:'Jak se jmenuje slavný zámek Marie Terezie u Vídně?',ok:'Schönbrunn',ne:['Versailles','Karlštejn'],proc:'Schönbrunn – dnes ho každý rok navštíví miliony lidí.'},
+  {typ:'quiz',obr:'i:wheat|🌾',lbl:'Navíc · 5/8',text:'Poddaní museli zadarmo pracovat na panském poli – říkalo se tomu <b>robota</b>. Marie Terezie ji <b>omezila</b> na méně dní. A <b>daně</b> nově musela platit i šlechta.',
+    q:'Co udělala Marie Terezie s robotou?',ok:'omezila ji na méně dní',ne:['úplně ji zrušila','zdvojnásobila ji'],proc:'Robotu omezila – úplně zrušená byla až mnohem později.'},
+  {typ:'quiz',obr:'i:shield|🛡️',lbl:'Navíc · 6/8',text:'Vybudovala <b>stálé vojsko</b> – armádu připravenou i v době míru. A roku <b>1776</b> zakázala <b>mučení</b> při výslechu.',
+    q:'Co Marie Terezie roku 1776 zakázala?',ok:'mučení při výslechu',ne:['tanec na plesech','pití kávy'],proc:'Zákaz mučení – rok 1776.'},
+  {typ:'quiz',obr:'img:terezin',lbl:'Navíc · 7/8',text:'Josef II. nechal roku <b>1780</b> u Litoměřic postavit pevnost a pojmenoval ji po své mamince – <b>Terezín</b>.',
+    q:'Po kom je pojmenované město Terezín?',ok:'po Marii Terezii',ne:['po svaté Terezii','po Terezce z pohádky'],proc:'Terezín = město Marie Terezie. Založil ho její syn Josef II.'},
+  {typ:'quiz',obr:'i:package|⚰️',lbl:'Navíc · 8/8',text:'Josef II. chtěl šetřit dřevo, a tak nařídil pohřbívat v <b>úsporné rakvi</b> se sklápěcím dnem, kterou šlo použít znovu. Lidé se tak zlobili, že nařízení brzy zrušil.',
+    q:'Proč Josef II. vymyslel úspornou rakev?',ok:'chtěl šetřit dřevo',ne:['chtěl barevné rakve','aby se do ní vešli dva'],proc:'Šetřit dřevo – ale tohle se lidem vůbec nelíbilo. 😄'},
+];
+const KDO_NAVIC=[
+  ['i:wheat|🌾','Omezení roboty','mt','Marie Terezie – poddaní robotovali méně dní.'],
+  ['i:banknote|💰','Daně musí platit i šlechta','mt','Marie Terezie – peníze potřebovala hlavně na vojsko.'],
+  ['i:shield|🛡️','Stálé vojsko','mt','Marie Terezie – armáda připravená i v míru.'],
+  ['i:gavel|⚖️','Zákaz mučení (1776)','mt','Marie Terezie – mučení při výslechu zakázala roku 1776.'],
+  ['i:castle|🏰','Založení pevnosti Terezín (1780)','j2','Josef II. – a pojmenoval ji po mamince.'],
+  ['i:package|⚰️','„Úsporná rakev“','j2','Josef II. – chtěl šetřit dřevo, nařízení ale brzy zrušil.'],
 ];
 
 /* 8 · Velký test – z každého tématu aspoň jedna otázka, pokaždé jinak položená */
@@ -715,23 +842,25 @@ const KARTY=[
 ];
 
 const EX=[
-  {id:'m1',title:'Kdo byla Marie Terezie',desc:'Odkud byla, jak dlouho vládla a proč se jí říká Evropská babička',zvire:'marie',barva:'#e2557f',
+  {id:'m1',foto:'mt',title:'Kdo byla Marie Terezie',desc:'Odkud byla, jak dlouho vládla a proč se jí říká Evropská babička',zvire:'marie',barva:'#8e2c48',
     kroky:()=>KDOBYLA.map(k=>({...k,cast:'Kdo byla Marie Terezie'}))},
-  {id:'m4',title:'Stroj času',desc:'Novověk a 18. století – a jak poznat, které je to století',zvire:'leopard',barva:'#ff8a3d',nove:1,
+  {id:'m4',ik:'i:hourglass|⏳',title:'Stroj času',desc:'Novověk a 18. století – a jak poznat, které je to století',zvire:'leopard',barva:'#b8742b',nove:1,
     kroky:()=>STROJ.map(k=>({...k,cast:'Stroj času'}))},
-  {id:'r1',title:'Co je reforma?',desc:'Co to slovo znamená – a co reforma je a co není',zvire:'kun',barva:'#2fb36a',nove:1,
+  {id:'r1',ik:'i:paint-roller|🖌️',title:'Co je reforma?',desc:'Co to slovo znamená – a co reforma je a co není',zvire:'kun',barva:'#3d7a4a',nove:1,
     kroky:()=>REFORMA().map(k=>({...k,cast:'Co je reforma?'}))},
-  {id:'r2',title:'Reformy Marie Terezie',desc:'Procházka rokem 1780: 7 reforem, chytačka a velké hledání',zvire:'pes',barva:'#2f7ff0',nove:1,
+  {id:'r2',foto:'tolar',title:'Reformy Marie Terezie',desc:'Procházka rokem 1780: 7 reforem, chytačka a velké hledání',zvire:'pes',barva:'#2b5c8a',nove:1,
     kroky:()=>REFORMY_MT().map(k=>({...k,cast:'Reformy Marie Terezie'}))},
-  {id:'m5',title:'Do školy! (1774)',desc:'Školská reforma zblízka: co bylo ve škole v 18. století?',zvire:'delfin',barva:'#8a5cf0',
+  {id:'m5',ik:'i:school|🏫',title:'Do školy! (1774)',desc:'Školská reforma zblízka: co bylo ve škole v 18. století?',zvire:'delfin',barva:'#6a4c93',
     kroky:()=>[{...SKOLA_PAD,cast:'Co bylo ve škole v roce 1774?'},...SKOLA_Q.map(q=>({typ:'quiz',...q,cast:'Škola za Marie Terezie'}))]},
-  {id:'m3',title:'Josef II. a nevolnictví',desc:'Příběh nevolníka Honzy, tři změny Josefa II. a kdo co zavedl',zvire:'velryba',barva:'#00a0b8',nove:1,
+  {id:'m3',foto:'josef',title:'Josef II. a nevolnictví',desc:'Příběh nevolníka Honzy, tři změny Josefa II. a kdo co zavedl',zvire:'velryba',barva:'#1f6f78',nove:1,
     kroky:()=>JOSEF_KROKY().map(k=>({...k,cast:'Josef II. a nevolnictví'}))},
-  {id:'m2',title:'Pravda, nebo výmysl?',desc:'Rozsuď 12 tvrzení – co je pravda a co si někdo vymyslel?',zvire:'pes',barva:'#d19a00',
+  {id:'m2',ik:'i:scale|⚖️',title:'Pravda, nebo výmysl?',desc:'Rozsuď 12 tvrzení – co je pravda a co si někdo vymyslel?',zvire:'pes',barva:'#a3802a',
     kroky:()=>shuffle(TF).slice(0,12).map(t=>({typ:'tf',v:t[0],ok:t[1],proc:t[2],cast:'Pravda, nebo výmysl?'}))},
-  {id:'m6',title:'Velký test',desc:'12 otázek ze všeho, co ses naučila – dáš to bez chyby?',zvire:'velryba',barva:'#c2185b',
+  {id:'z1',foto:'schonbrunn',title:'Zajímavosti navíc',desc:'Co v sešitě není, ale k Marii Terezii patří: Slezsko, Schönbrunn, robota, Terezín…',zvire:'kun',barva:'#7a5c2e',nove:1,
+    kroky:()=>[...NAVIC,...shuffle(KDO_NAVIC).slice(0,4).map(k=>({typ:'kdo',ik:k[0],v:k[1],ok:k[2],proc:k[3]}))].map(k=>({...k,cast:'Zajímavosti navíc'}))},
+  {id:'m6',ik:'i:clipboard-check|📋',title:'Velký test',desc:'12 otázek ze všeho, co ses naučila – dáš to bez chyby?',zvire:'velryba',barva:'#7d2a3c',
     kroky:()=>VELKY_TEST().map(k=>({...k,cast:'Velký test'}))},
-  {id:'m8',title:'Zkoušení jako ve škole',desc:'Paní učitelka se ptá – zkus odpovědět a otoč kartičku',zvire:'marie',barva:'#ff5d8f',nove:1,
+  {id:'m8',ik:'i:graduation-cap|🎓',title:'Zkoušení jako ve škole',desc:'Paní učitelka se ptá – zkus odpovědět a otoč kartičku',zvire:'marie',barva:'#24406b',nove:1,
     kroky:()=>KARTY.map(k=>({typ:'karta',...k,cast:'Zkoušení jako ve škole'}))},
 ];
 
@@ -743,22 +872,22 @@ function save(){ try{ localStorage.setItem(KEY,JSON.stringify(store)); }catch(e)
 let st=null, cleanupFn=null;
 function cleanup(){ if(cleanupFn){ const f=cleanupFn; cleanupFn=null; f(); } }
 function updateHvezdy(){ $('#hvezdy').textContent=EX.reduce((a,e)=>a+(+store.hv[e.id]||0),0); }
-function updateMute(){ $('#mute').textContent=store.muted?'🔇':'🔊'; }
-function show(id){ cleanup(); $('#home').hidden=id!=='home'; $('#ex').hidden=id!=='ex'; $('#back').hidden=id==='home'; window.scrollTo(0,0); idleZvirata(id==='home'); }
+function updateMute(){ $('#mute').innerHTML=ikona(store.muted?'i:volume-x|🔇':'i:volume-2|🔊'); ikony(); }
+function show(id){ cleanup(); $('#home').hidden=id!=='home'; $('#ex').hidden=id!=='ex'; $('#back').hidden=id==='home'; window.scrollTo(0,0); }
 const FOOT='<div class="fb" id="fb"></div><div class="nav" id="nav"></div>';
-function fb(t,cls){ const f=$('#fb'); if(!f) return; f.innerHTML=t||''; f.className='fb '+(cls||''); }
+function fb(t,cls){ const f=$('#fb'); if(!f) return; f.innerHTML=t?`<span class="fbt">${t}</span>`:''; f.className='fb '+(cls||''); }
 
 function renderHome(){
   st=null; $('#h1').textContent='Marie Terezie'; $('#sub').textContent='Vlastivěda pro 5. třídu · podle Ladina sešitu 👑';
   const vse=EX.every(e=>store.hv[e.id]);
   $('#home').innerHTML=`<div class="karty">${EX.map((e,i)=>{ const h=store.hv[e.id]||0;
-    return `<button class="exCard${h?' hotove':''}" data-i="${i}" style="--c:${e.barva}">${e.nove&&!h?'<span class="nove">NOVÉ</span>':''}<span class="num">${i+1}</span><span class="tx"><b>${e.title}</b><small>${e.desc}</small><span class="hv">${'★'.repeat(h)}<span class="off">${'★'.repeat(3-h)}</span></span></span><span class="mini">${zvireSVG(e.zvire)}</span></button>`; }).join('')}</div>
-    ${vse?'<div class="banner">👑 Všechno hotovo – Marie Terezie by z tebe měla radost!</div>':''}<p class="tip">Ťukni dole na zvířátka 👇</p>`;
-  updateHvezdy(); show('home');
+    return `<button class="exCard${h?' hotove':''}" data-i="${i}" style="--c:${e.barva}">${e.nove&&!h?'<span class="nove">NOVÉ</span>':''}<span class="num">${i+1}</span><span class="tx"><b>${e.title}</b><small>${e.desc}</small><span class="hv">${'★'.repeat(h)}<span class="off">${'★'.repeat(3-h)}</span></span></span>${e.foto?`<span class="mini mfoto"><img src="${OBRAZY[e.foto].th}" alt=""${OBRAZY[e.foto].pos?` style="object-position:${OBRAZY[e.foto].pos}"`:''}></span>`:`<span class="mini med">${ikona(e.ik)}</span>`}</button>`; }).join('')}</div>
+    ${vse?'<div class="banner">👑 Všechno hotovo – Marie Terezie by z tebe měla radost!</div>':''}<button class="tipB" id="tipGal">${ikona('i:images|🖼️')} Jak Marie Terezie opravdu vypadala? Podívej se do <b>Obrazárny</b></button>`;
+  updateHvezdy(); show('home'); ikony();
 }
 function startEx(i){ zavriFinale(); const ex=EX[i]; st={idx:i,ex,kroky:ex.kroky(),i:0,chyby:0,ck:0,done:false,perf:[]}; $('#h1').textContent=ex.title; show('ex'); renderKrok(); }
 function renderKrok(){ cleanup(); const k=st.kroky[st.i]; st.done=false; st.ck=0; $('#sub').textContent=k.cast; renderDots();
-  const c=$('#card'); c.className='card typ-'+k.typ; c.innerHTML=''; R[k.typ](k,c); void c.offsetWidth; c.classList.add('vjezd'); window.scrollTo(0,0); }
+  const c=$('#card'); c.className='card typ-'+k.typ; c.innerHTML=''; R[k.typ](k,c); ikony(); void c.offsetWidth; c.classList.add('vjezd'); window.scrollTo(0,0); }
 function renderDots(){ $('#dots').innerHTML=st.kroky.map((k,i)=>`<i class="${i<st.i||(i===st.i&&st.done)?(st.perf[i]?'ok':'done'):i===st.i?'cur':''}"></i>`).join(''); $('#pocet').textContent=`${st.i+1} / ${st.kroky.length}`; }
 function chyba(msg){ st.chyby++; st.ck++; Snd.buzz(); fb(msg,'bad'); }
 function hotovo(msg,opt={}){ if(!st||st.done) return; st.done=true; st.perf[st.i]=st.ck===0; if(!opt.tichy) Snd.ding(); if(msg) fb(msg,opt.cls||'good'); if(!opt.bezOdmeny) odmena(); renderDots();
@@ -768,7 +897,7 @@ function slovaHTML(v){ return v.split(' ').map((w,i)=>`<span class="slovo" data-
 
 /* ---------- jednotlivé typy úkolů ---------- */
 const R={};
-function obrHTML(o){ if(o==='mt') return `<div class="obrMT"><svg viewBox="36 -4 68 112" aria-hidden="true">${ZV.marie}</svg></div>`; if(o==='j2') return BUSTA.j2; return `<div class="obrE">${o}</div>`; }
+function obrHTML(o){ if(o&&o.startsWith('img:')) return fotoHTML(o.slice(4)); if(o==='mt') return fotoHTML('mt'); if(o==='j2') return fotoHTML('josef'); return `<div class="obrE">${ikona(o)}</div>`; }
 function oznacSpravne(c,sel,isOk){ c.querySelectorAll(sel).forEach(x=>{ x.disabled=true; if(isOk(x)) x.classList.add('spravne'); }); }
 R.quiz=(k,c)=>{
   const opts=shuffle([k.ok,...k.ne]);
@@ -790,9 +919,9 @@ R.tf=(k,c)=>{
     else { shake(b); chyba(''); hotovo('Kdepak! '+(k.ok?(k.okText||'Je to pravda.')+' ':'')+k.proc,{cls:'bad',bezOdmeny:true,tichy:true}); } }));
 };
 R.kdo=(k,c)=>{
-  c.innerHTML=`<div class="ukol">Kdo zavedl tuhle reformu?<small>Reforma ${st.i+1} z ${st.kroky.length}</small></div>
-    <div class="reforma"><span class="rik">${k.ik}</span><span>${esc(k.v)}</span></div>
-    <div class="porty"><button class="port" data-a="mt">${BUSTA.mt}<b>Marie Terezie</b><small>vládla 1740–1780</small></button><button class="port" data-a="j2">${BUSTA.j2}<b>Josef II.</b><small>syn, vládl 1780–1790</small></button></div>${FOOT}`;
+  c.innerHTML=`<div class="ukol">Kdo zavedl tuhle změnu?<small>Marie Terezie, nebo její syn Josef II.?</small></div>
+    <div class="reforma"><span class="rik">${ikona(k.ik)}</span><span>${esc(k.v)}</span></div>
+    <div class="porty"><button class="port" data-a="mt"><img class="portImg" src="${OBRAZY.mt.th}" alt=""><b>Marie Terezie</b><small>vládla 1740–1780</small></button><button class="port" data-a="j2"><img class="portImg" src="${OBRAZY.josef.th}" alt=""><b>Josef II.</b><small>syn, vládl 1780–1790</small></button></div>${FOOT}`;
   c.querySelectorAll('.port').forEach(b=>b.addEventListener('click',()=>{ if(st.done) return; const spr=b.dataset.a===k.ok;
     oznacSpravne(c,'.port',x=>x.dataset.a===k.ok);
     if(spr){ jiskry(b,12); hotovo('✓ '+k.proc); }
@@ -819,14 +948,14 @@ R.chytej=(k,c)=>{
   cleanupFn=()=>{ konec=true; cancelAnimationFrame(raf); };
   const spawn=()=>{ const stary=Math.random()<.55, d=stary?pick(k.dobre):pick(k.spatne);
     const el=document.createElement('button'); el.className='pad';
-    el.innerHTML=(d[0]==='tab'?'<i class="tabulka"></i>':`<span class="pe">${d[0]}</span>`)+`<span class="pl">${d[1]}</span>`;
-    hr.appendChild(el); const it={el,stary,d,x:Math.random()*Math.max(10,hr.clientWidth-el.offsetWidth),y:-el.offsetHeight-4,v:hr.clientHeight/(5.6-Math.min(2,n*.2))};
+    el.innerHTML=(d[0]==='tab'?'<i class="tabulka"></i>':`<span class="pe">${ikona(d[0])}</span>`)+`<span class="pl">${d[1]}</span>`;
+    hr.appendChild(el); ikony(); const it={el,stary,d,x:Math.random()*Math.max(10,hr.clientWidth-el.offsetWidth),y:-el.offsetHeight-4,v:hr.clientHeight/(5.6-Math.min(2,n*.2))};
     el.style.transform=`translate(${it.x}px,${it.y}px)`; items.push(it);
     el.addEventListener('pointerdown',e=>{ e.preventDefault(); if(konec||it.hit) return; it.hit=true;
       if(it.stary){ n++; el.classList.add('chycen'); Snd.ok(); jiskry(el,8); $('#chN').textContent=`${n} / ${CIL_CHYT}`; fb(`✓ ${d[1]} – ${d[2]}`,'good');
         if(n>=CIL_CHYT){ konec=true; cancelAnimationFrame(raf); items.forEach(o=>{ if(!o.hit) o.el.classList.add('pryc'); });
           setTimeout(()=>hotovo(k.konec),350); } }
-      else { el.classList.add('spatne'); shake(hr); chyba(`${d[0]} ${d[1]} – ${d[2]||k.spatneProc}`); }
+      else { el.classList.add('spatne'); shake(hr); chyba(`${d[1]} – ${d[2]||k.spatneProc}`); }
       setTimeout(()=>el.remove(),450); }); };
   const loop=t=>{ if(konec) return; const dt=Math.min(.05,last?(t-last)/1000:0); last=t; odSpawnu+=dt;
     if(odSpawnu>Math.max(.75,1.15-n*.03)){ odSpawnu=0; spawn(); }
@@ -875,25 +1004,20 @@ R.dopln=(k,c)=>{
 };
 
 /* ---------- finále ---------- */
-let parade=[];
 function finale(){
   cleanup(); const ex=st.ex, ch=st.chyby, h=ch<=1?3:ch<=4?2:1, idx=st.idx;
   store.hv[ex.id]=Math.max(store.hv[ex.id]||0,h); save(); updateHvezdy();
   const dalsiEx=EX[idx+1];
-  $('#finale').innerHTML=`<div class="fcard"><div class="fmedal">${zvireSVG(ex.zvire)}</div><h2>Hotovo, Lado! 🎉</h2><p class="fsub">${ex.title}</p>
+  $('#finale').innerHTML=`<div class="fcard listina"><div class="lHead">Císařská listina</div>
+    <p class="lText">My, Marie Terezie, císařovna a královna česká, tímto stvrzujeme, že</p>
+    <h2>Lada</h2><p class="fsub">úspěšně zvládla oddíl <b>${ex.title}</b></p>
     <div class="fhv">${[0,1,2].map(i=>`<span class="${i<h?'on':''}" style="animation-delay:${.35+i*.35}s">★</span>`).join('')}</div>
-    <p class="fch">${ch===0?'Bez jediné chyby! 🤩':ch===1?'Jen jedna chybička! 👏':'Chyb: '+ch+' – příště to bude ještě lepší!'}</p>
-    <div class="fbtns">${dalsiEx?`<button class="dalsi" data-f="next">Další cvičení →</button>`:''}<button class="sek" data-f="again">Znovu 🔁</button><button class="sek" data-f="home">Domů 🏠</button></div></div>`;
-  $('#finale').hidden=false; Snd.fanfare(); FW.start(6500); prehlidka();
+    <p class="fch">${ch===0?'Bez jediné chyby!':ch===1?'Jen jedna chybička!':'Chyb: '+ch+' – příště to bude ještě lepší.'}</p>
+    <div class="podpisRadek"><div class="podpis">Marie Terezie<small>vlastní rukou</small></div><span class="pecet velka${ch<=1?' zlata':''}">${PECET_SVG}</span></div>
+    <div class="fbtns">${dalsiEx?`<button class="dalsi" data-f="next">Další oddíl →</button>`:''}<button class="sek" data-f="again">Znovu</button><button class="sek" data-f="home">Domů</button></div></div>`;
+  $('#finale').hidden=false; Snd.fanfare(); FW.start(5000);
 }
-function prehlidka(){ zrusBezce(); parade.forEach(e=>e.remove()); parade=[];
-  PORADI.forEach((z,i)=>{ lane.insertAdjacentHTML('beforeend',zvireHTML(z,'run')); const el=lane.lastElementChild; parade.push(el); const w=el.offsetWidth, x=xPozice(i,w);
-    el.style.transform=`translateX(${-w-30}px)`;
-    setTimeout(async()=>{ if(!el.isConnected) return; await anim(el,-w-30,x,1300+i*150,'cubic-bezier(.2,.75,.35,1)'); if(!el.isConnected) return;
-      el.classList.replace('run','mav'); setTimeout(()=>{ if(el.isConnected){ bubli(el,FINAL[z],i%2); Snd.hlas(z); } },i*420); },i*230); }); }
-function zavriFinale(){ if($('#finale').hidden) return; $('#finale').hidden=true; FW.stop(); const W=lane.clientWidth;
-  parade.forEach(el=>{ const b=el.querySelector('.bub'); if(b) b.classList.remove('on'); el.classList.remove('mav'); el.classList.add('run');
-    const x=el.getBoundingClientRect().left; anim(el,x,W+40,800,'cubic-bezier(.55,0,.9,.55)').then(()=>el.remove()); }); parade=[]; }
+function zavriFinale(){ if($('#finale').hidden) return; $('#finale').hidden=true; FW.stop(); }
 $('#finale').addEventListener('click',e=>{ const b=e.target.closest('[data-f]'); if(!b) return; const f=b.dataset.f, idx=st?st.idx:0;
   zavriFinale(); if(f==='next') startEx(idx+1); else if(f==='again') startEx(idx); else renderHome(); });
 
@@ -904,9 +1028,27 @@ $('#mute').addEventListener('click',()=>{ store.muted=!store.muted; Snd.muted=st
 $('#tahakB').addEventListener('click',()=>{ $('#tahak').hidden=false; });
 $('#tahakX').addEventListener('click',()=>{ $('#tahak').hidden=true; });
 $('#tahak').addEventListener('click',e=>{ if(e.target.id==='tahak') $('#tahak').hidden=true; });
-let rT=0; addEventListener('resize',()=>{ clearTimeout(rT); rT=setTimeout(()=>{ if(!$('#home').hidden) idleZvirata(true); if(FW.raf) FW.fit(); },150); });
+let rT=0; addEventListener('resize',()=>{ clearTimeout(rT); rT=setTimeout(()=>{ if(FW.raf) FW.fit(); },150); });
 
-load(); updateMute(); kytky(); renderHome();
+load(); updateMute(); renderHome(); renderGalerie();
+$('#galB').addEventListener('click',()=>{ $('#galerie').hidden=false; });
+$('#home').addEventListener('click',e=>{ if(e.target.closest('#tipGal')) $('#galerie').hidden=false; });
+$('#galX').addEventListener('click',()=>{ $('#galerie').hidden=true; });
+$('#galerie').addEventListener('click',e=>{ if(e.target.id==='galerie') $('#galerie').hidden=true; });
+$('#lbX').addEventListener('click',()=>{ $('#lightbox').hidden=true; });
+$('#lightbox').addEventListener('click',e=>{ if(e.target.id==='lightbox') $('#lightbox').hidden=true; });
+addEventListener('load',ikony);
+if(TEST){ const demo=new URLSearchParams(location.search).get('demo'), dk=s=>{ const st0=window.__mt&&__mt.st(); return st0; };
+  if(demo){ const s=document.createElement('style'); s.textContent='*,*::before,*::after{animation-duration:0s!important;animation-delay:0s!important}'; document.head.appendChild(s); }
+  setTimeout(()=>{ const ix=id=>EX.findIndex(e=>e.id===id);
+    if(demo==='kapitola'){ startEx(ix('m1')); const b=$('#card .opt'); }
+    if(demo==='pecet'){ startEx(ix('m1')); const k=st.kroky[0]; [...$$('#card .opt')].find(b=>b.textContent===k.ok).click(); }
+    if(demo==='kdo'){ startEx(ix('m3')); st.i=6; renderKrok(); }
+    if(demo==='stanice'){ startEx(ix('r2')); }
+    if(demo==='listina'){ startEx(ix('r1')); finale(); }
+    if(demo==='galerie'){ $('#galerie').hidden=false; }
+    if(demo==='lightbox'){ ukazFoto('mt11'); }
+  },300); }
 if(TEST) window.__mt={st:()=>st,startEx,dalsi,finale,R,EX};
 </script>
 </body>

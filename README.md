@@ -23,5 +23,9 @@ každé téma má vlastní oddíl s výkladem a hrou a otázky jsou pokaždé ji
 Devět oddílů – Kdo byla Marie Terezie (Vídeň, 1740–1780, 16 dětí, Evropská babička), Stroj času (novověk, jak poznat 18. století),
 Co je reforma? (zásadní změna systému, zlepšení, postupnými kroky), Reformy Marie Terezie (procházka rokem 1780 po 7 reformách,
 chytačka, hledání všech sedmi), Do školy! (školská reforma 1774), Josef II. a nevolnictví (příběh nevolníka Honzy, toleranční patent,
-povinné příjmení, kdo co zavedl), Pravda, nebo výmysl?, Velký test (z každého tématu aspoň jedna otázka), Zkoušení jako ve škole (kartičky).
+povinné příjmení, kdo co zavedl), Pravda, nebo výmysl?, Zajímavosti navíc (co v sešitě není: pragmatická sankce, Slezsko, korunovace,
+Schönbrunn, robota, vojsko, zákaz mučení, Terezín, úsporná rakev), Velký test (z každého tématu aspoň jedna otázka), Zkoušení jako ve škole (kartičky).
+Vzhled pro starší školačku: papír a zlato, písmo Playfair Display, ikony Lucide (CDN, s náhradními emoji), odměna = císařská pečeť,
+na konci císařská listina. Obrazárna se skutečnými obrazy a fotkami z Wikimedia Commons (načítají se přímo odtud, autor a licence u každého).
+`?test&demo=pecet|listina|galerie|lightbox|kdo|stanice` otevře danou obrazovku pro snímky.
 Používá stejný engine jako `cesky-test/`; zvířátka doplnila císařovna (`ZV.marie`) a portréty `BUSTA` v `zvirata.js`. `?test` zpřístupní `window.__mt`.
