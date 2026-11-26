@@ -1,0 +1,799 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Písemka i/y">
+<meta name="theme-color" content="#f7f6f1">
+<link rel="apple-touch-icon" href="icon.png">
+<link rel="icon" href="icon.png">
+<title>Písemka i/y</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&family=Bitter:wght@600;700;800&family=Caveat:wght@600;700&display=swap">
+<style>
+:root{
+  --ink:#1f2433; --muted:#667085; --paper:#fffefb; --line:#e4e0d4; --grid:#e3e9f1;
+  --modra:#2858c2; --modra2:#1b3f93; --cervena:#d3313a; --zelena:#1f7a5c; --zelena2:#16583f;
+  --m:#2858c2; --t:#b0532c;
+  --font:"Nunito","Arial Rounded MT Bold",system-ui,-apple-system,sans-serif;
+  --head:"Bitter",Georgia,"Times New Roman",serif;
+  --ruka:"Caveat","Bradley Hand","Segoe Print",cursive;
+  color-scheme:light;
+}
+[hidden]{display:none!important}
+*{box-sizing:border-box}
+html,body{min-height:100%}
+body{margin:0;font-family:var(--font);color:var(--ink);font-size:19px;line-height:1.4;
+  background-color:#f7f6f1;background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:26px 26px;background-attachment:fixed;
+  -webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none;
+  -webkit-user-select:none;user-select:none;touch-action:manipulation;overflow-x:hidden}
+button{font:inherit;color:inherit;cursor:pointer;touch-action:manipulation;background:none;border:0;padding:0;-webkit-appearance:none;appearance:none}
+button:focus-visible{outline:3px solid var(--modra);outline-offset:3px}
+.lic{width:1.15em;height:1.15em;stroke-width:1.9;vertical-align:-.2em;font-style:normal}
+
+#app{position:relative;z-index:1;max-width:1000px;margin:0 auto;padding:calc(env(safe-area-inset-top) + 12px) 16px calc(env(safe-area-inset-bottom) + 40px)}
+.top{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.ttl{flex:1;min-width:0}
+h1{font-family:var(--head);font-weight:800;font-size:clamp(26px,4vw,40px);line-height:1.08;margin:0}
+#sub{margin:4px 0 0;color:var(--muted);font-weight:700;font-size:clamp(15px,1.9vw,18px)}
+.topR{display:flex;align-items:center;gap:8px}
+.pill,.iconbtn{display:inline-flex;align-items:center;justify-content:center;gap:6px;background:var(--paper);border:1px solid var(--line);border-radius:999px;box-shadow:0 2px 6px rgba(40,40,60,.07);font-weight:900}
+.pill{padding:8px 14px;font-size:18px}
+.pill .hvz{color:#d9a21b}
+.iconbtn{min-width:48px;height:48px;padding:0 14px;font-size:20px}
+.iconbtn:active{transform:translateY(1px)}
+.txtbtn span{font-size:16px;font-weight:800}
+@media (max-width:600px){.top{flex-wrap:wrap}.ttl{order:3;flex-basis:100%}.topR{margin-left:auto}.iconbtn{min-width:44px;height:44px;padding:0 10px}h1{font-size:28px}.txtbtn span{display:none}}
+
+/* domů */
+.intro{display:flex;gap:16px;align-items:center;background:var(--paper);border:1px solid var(--line);border-left:6px solid var(--cervena);border-radius:16px;padding:14px 18px;margin:0 0 20px;box-shadow:0 6px 18px rgba(40,40,60,.06)}
+.intro p{margin:0;font-weight:700;font-size:clamp(17px,2.1vw,20px);line-height:1.45}
+.ruka{font-family:var(--ruka);font-weight:700;color:var(--cervena)}
+.intro .ruka{font-size:1.4em;line-height:1;white-space:nowrap}
+.introIk{flex:none;width:64px;height:64px;border-radius:50%;display:grid;place-items:center;background:#fdeceb;color:var(--cervena)}
+.introIk .lic{width:32px;height:32px}
+@media (max-width:600px){.introIk{display:none}}
+.karty{display:grid;grid-template-columns:1fr;gap:16px}
+@media (min-width:720px){.karty{grid-template-columns:1fr 1fr}}
+.exCard{position:relative;display:flex;align-items:center;gap:14px;text-align:left;background:var(--paper);border:1px solid var(--line);border-left:7px solid var(--c);border-radius:16px;padding:14px 14px 14px 16px;box-shadow:0 6px 18px rgba(40,40,60,.07);min-height:124px}
+.exCard:active{transform:translateY(2px)}
+.exCard .num{flex:none;width:34px;height:34px;border-radius:50%;border:2px solid var(--c);color:var(--c);font-weight:900;font-size:17px;display:grid;place-items:center}
+.exCard .tx{flex:1;min-width:0}
+.exCard b{display:block;font-family:var(--head);font-weight:700;font-size:clamp(20px,2.4vw,23px);line-height:1.15}
+.exCard small{display:block;color:var(--muted);font-weight:700;font-size:15px;margin-top:4px;line-height:1.3}
+.exCard .hv{display:block;margin-top:6px;font-size:22px;color:#d9a21b;letter-spacing:2px}
+.hv .off{color:#e3e2dc}
+.exCard .mini{flex:none;width:70px;height:70px;border-radius:50%;display:grid;place-items:center;background:color-mix(in srgb,var(--c) 12%,#fff);color:var(--c);box-shadow:inset 0 0 0 2px color-mix(in srgb,var(--c) 30%,#fff)}
+.exCard .mini .lic{width:34px;height:34px;stroke-width:1.7}
+.exCard .zn{position:absolute;top:-14px;right:-8px;width:44px;height:44px;border-radius:50%;background:#fff;border:2px solid var(--cervena);display:grid;place-items:center;font-family:var(--ruka);font-weight:700;font-size:30px;line-height:1;color:var(--cervena);transform:rotate(-8deg)}
+.exCard.hotove::after{content:"✓";position:absolute;top:-11px;right:-9px;width:32px;height:32px;border-radius:50%;background:var(--zelena);color:#fff;font-weight:900;display:grid;place-items:center;font-size:18px}
+.banner{margin-top:18px;background:#fff;border:2px dashed var(--cervena);border-radius:16px;padding:10px 18px;font-family:var(--ruka);font-weight:700;font-size:30px;color:var(--cervena);text-align:center;transform:rotate(-1deg)}
+.tipB{display:flex;align-items:center;justify-content:center;gap:8px;margin:18px auto 0;padding:12px 18px;border-radius:14px;background:var(--paper);border:1px solid var(--line);font-weight:800;font-size:17px}
+.tipB .lic{color:var(--modra)}
+
+/* cvičení */
+.exHead{display:flex;align-items:center;gap:10px;margin:0 0 10px}
+.dots{display:flex;flex-wrap:wrap;gap:6px;flex:1}
+.dots i{width:15px;height:15px;border-radius:50%;background:#fff;box-shadow:inset 0 0 0 2px #cfd6e2}
+.dots i.cur{background:#ffd84d;box-shadow:0 0 0 3px #fff;animation:tep 1s ease-in-out infinite alternate}
+.dots i.done{background:#a8cdbd}
+.dots i.ok{background:var(--zelena)}
+@keyframes tep{from{transform:scale(1)}to{transform:scale(1.25)}}
+.pocet{font-weight:900;color:var(--muted);font-size:17px;white-space:nowrap}
+.card{position:relative;background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:clamp(18px,3vw,30px);box-shadow:0 10px 30px rgba(40,40,60,.08)}
+.card.vjezd{animation:vjezd .35s cubic-bezier(.25,1.4,.5,1)}
+@keyframes vjezd{from{transform:translateX(40px);opacity:0}to{transform:none;opacity:1}}
+.ukol{font-weight:800;font-size:clamp(19px,2.4vw,23px);line-height:1.3}
+.ukol small{display:block;color:var(--muted);font-weight:700;font-size:16px;margin-top:3px}
+.veta{font-weight:700;margin:16px 0 18px}
+.veta.big{font-size:clamp(23px,3.3vw,34px);line-height:1.75}
+.gap{display:inline-block;min-width:1.05em;text-align:center;border-bottom:3px solid #9aa9c2;border-radius:6px 6px 0 0;line-height:1.15;margin:0 1px;color:var(--modra);font-weight:900}
+.gap.cur{background:#fff07a;border-color:#e0a800;animation:blik .9s ease-in-out infinite alternate}
+.gap.ok{background:#e6f3ee;border-color:var(--zelena)}
+.veta .gap.ok{min-width:.62em;margin:0}
+.gap.spatne{background:#fdeceb;border-color:var(--cervena);color:var(--cervena)}
+.gap.bad{animation:cervena .5s}
+@keyframes blik{from{background:#fff3a3}to{background:#ffe14d}}
+@keyframes cervena{0%,100%{background:#fff3a3}30%{background:#ffb3b6}}
+.pismena{display:flex;justify-content:center;gap:clamp(10px,2vw,18px);flex-wrap:wrap}
+.pism{min-width:clamp(72px,10.5vw,100px);height:clamp(78px,11vw,106px);padding:0 12px;border-radius:18px;background:#fff;border:2.5px solid var(--k);color:var(--k);font-weight:900;font-size:clamp(38px,5.2vw,50px);line-height:1;box-shadow:0 5px 0 var(--k);display:inline-flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;transition:transform .07s}
+.pism small{font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;opacity:.75}
+.pism:active{transform:translateY(4px);box-shadow:0 1px 0 var(--k)}
+.pism:disabled{opacity:.3;transform:translateY(4px);box-shadow:0 1px 0 var(--k)}
+.p-m{--k:var(--m)}.p-t{--k:var(--t)}.p-a{--k:var(--zelena)}
+.fb{display:flex;align-items:center;gap:12px;min-height:2.6em;margin-top:18px;padding:10px 16px;border-radius:14px;font-weight:700;font-size:clamp(17px,2vw,20px);line-height:1.35;background:#f3f4f7;color:var(--muted)}
+.fb:empty{background:transparent}
+.fb.good{background:#eaf4ef;color:#1b5a43}
+.fb.bad{background:#fdeceb;color:#a1272e}
+.fb .fbt{flex:1}
+.chvala{font-family:var(--ruka);font-size:1.45em;color:var(--cervena);font-weight:700;line-height:1;margin-right:4px}
+.nav{display:flex;justify-content:flex-end;margin-top:14px;min-height:10px}
+.dalsi{display:inline-flex;align-items:center;gap:8px;background:var(--zelena);color:#fff;font-weight:900;font-size:clamp(21px,2.6vw,26px);padding:13px 30px;border-radius:16px;box-shadow:0 5px 0 var(--zelena2);animation:pulz 1.1s ease-in-out infinite alternate}
+.dalsi:active{transform:translateY(4px);box-shadow:0 1px 0 var(--zelena2);animation:none}
+.dalsi:disabled{opacity:.5;animation:none}
+@keyframes pulz{from{transform:scale(1)}to{transform:scale(1.04)}}
+.sek{background:#fff;border:1px solid var(--line);font-weight:900;font-size:20px;padding:12px 22px;border-radius:14px;box-shadow:0 3px 0 var(--line)}
+.sek:active{transform:translateY(3px);box-shadow:none}
+.shake{animation:shake .4s}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-9px)}40%{transform:translateX(8px)}60%{transform:translateX(-6px)}80%{transform:translateX(4px)}}
+
+/* odměna: červená propiska */
+.znamka{flex:none;width:56px;height:56px;display:block;transform:rotate(-6deg);animation:razitko .45s cubic-bezier(.2,1.5,.4,1)}
+.znamka svg,.velkaZn svg{width:100%;height:100%;overflow:visible}
+.tah{fill:none;stroke:var(--cervena);stroke-width:6;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:70;stroke-dashoffset:70;animation:tah .45s .05s ease-out forwards}
+.kruh{fill:none;stroke:var(--cervena);stroke-width:3.5;stroke-linecap:round;stroke-dasharray:150;stroke-dashoffset:150;animation:tah .55s ease-out forwards}
+.zn{font:700 40px var(--ruka);fill:var(--cervena)}
+@keyframes tah{to{stroke-dashoffset:0}}
+@keyframes razitko{0%{transform:scale(1.6) rotate(-14deg);opacity:0}100%{transform:scale(1) rotate(-6deg);opacity:1}}
+
+/* pravidlo + otázka */
+.pribeh{display:flex;gap:18px;align-items:center;background:#fffaf0;border:1px solid var(--line);border-left:5px solid #f1c94b;border-radius:14px;padding:14px 18px;margin:0 0 16px}
+.pribeh p{margin:0;font-weight:700;font-size:clamp(18px,2.3vw,22px);line-height:1.5}
+.pribeh p b{color:var(--modra2)}
+.obrE{flex:none;width:78px;height:78px;border-radius:50%;display:grid;place-items:center;background:#fdf3d6;color:#b07d0e;font-size:38px}
+.obrE .lic{width:40px;height:40px;stroke-width:1.6}
+@media (max-width:600px){.pribeh{flex-direction:column;text-align:center}}
+.otq{font-size:clamp(21px,2.7vw,26px);margin-bottom:14px}
+.otq small{margin:0 0 4px}
+.opts{display:grid;gap:12px}
+@media (min-width:760px){.opts{grid-template-columns:repeat(var(--n,3),1fr)}}
+.opt{background:#fff;border:2px solid var(--line);border-radius:16px;padding:14px;font-weight:900;font-size:clamp(19px,2.3vw,23px);line-height:1.25;box-shadow:0 3px 0 var(--line);min-height:74px}
+.opt:active{transform:translateY(3px);box-shadow:none}
+.opt:disabled{opacity:.35}
+.opt.spravne,.opt.spravne:disabled{background:var(--zelena);border-color:var(--zelena);color:#fff;box-shadow:0 3px 0 var(--zelena2);opacity:1}
+
+/* série */
+.srTop{display:flex;align-items:center;gap:12px;margin:14px 0 4px}
+.srTop .pocit{font-weight:900;color:var(--muted);font-size:17px;min-width:64px}
+.srBar{flex:1;height:10px;border-radius:99px;background:#eef0f4;overflow:hidden}
+.srBar i{display:block;height:100%;width:0;background:var(--zelena);border-radius:99px;transition:width .3s}
+.srQ{text-align:center;font-weight:800;font-size:clamp(26px,4vw,40px);line-height:1.5;margin:18px 0 22px;min-height:1.5em}
+.srQ .srW{font-family:var(--head);font-weight:700}
+.srQ .gap.slovo{min-width:3.2em}
+.srQ .gap.slovo.ok{min-width:0;padding:0 .15em}
+.srQ.pop{animation:vjezd .3s}
+.srOpts{display:flex;gap:clamp(10px,2vw,16px);justify-content:center;flex-wrap:wrap}
+.sro{min-width:min(240px,42%);padding:16px 20px;border-radius:16px;background:#fff;border:2.5px solid var(--k);color:var(--k);font-weight:900;font-size:clamp(22px,2.9vw,28px);box-shadow:0 5px 0 var(--k)}
+.sro b{text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:5px}
+.sro:active{transform:translateY(4px);box-shadow:0 1px 0 var(--k)}
+.sro:disabled{opacity:.3}
+.sro.spravne,.sro.spravne:disabled{background:var(--zelena);border-color:var(--zelena);color:#fff;box-shadow:0 5px 0 var(--zelena2);opacity:1}
+
+/* najdi chybu */
+.oprV{line-height:2.4}
+.ow{position:relative;display:inline-block;font:inherit;font-weight:800;color:var(--ink);background:#f1f4f9;border-radius:10px;padding:0 8px;margin:2px 1px;line-height:1.45}
+.ow:active{background:#e1e8f3}
+.ow.ok{background:#eaf4ef;color:#1b5a43}
+.ow.chyba{background:#fdeceb}
+.ow s,.pg s{color:#7d8698;text-decoration-color:var(--cervena);text-decoration-thickness:3px}
+.oprava{position:absolute;left:50%;bottom:80%;transform:translateX(-50%) rotate(-5deg);font-family:var(--ruka);font-weight:700;font-size:1.15em;color:var(--cervena);white-space:nowrap;line-height:1;pointer-events:none;animation:pisu .35s ease-out}
+@keyframes pisu{from{opacity:0}to{opacity:1}}
+
+/* rychlovka */
+.ryTop{display:flex;align-items:center;gap:14px;margin:16px 0 6px}
+.ryCas{flex:1;height:14px;border-radius:99px;background:#eef0f4;overflow:hidden}
+.ryCas i{display:block;height:100%;width:100%;background:linear-gradient(90deg,var(--cervena),#f0a43a);border-radius:99px}
+.ryBody{font-weight:900;font-size:20px;white-space:nowrap}
+.ryBody b{font-size:28px;color:var(--modra)}
+.ryQ{text-align:center;font-weight:800;font-size:clamp(30px,4.6vw,46px);line-height:1.5;margin:20px 0 22px;min-height:1.6em}
+.odpocet{display:inline-block;color:var(--cervena);font-family:var(--head);animation:vyskoc .4s cubic-bezier(.3,1.7,.5,1)}
+.ryVysl{font-family:var(--head);font-size:1.2em}
+.ryRek{font-family:var(--ruka);color:var(--cervena);font-size:.95em;transform:rotate(-3deg)}
+.ryMal{color:var(--muted);font-size:.5em}
+
+/* písemka */
+.papir{position:relative;background:#fff;border:1px solid #dfe3ea;border-radius:6px;box-shadow:0 3px 10px rgba(40,40,60,.06);padding:12px 18px 16px 52px;margin:14px 0 16px}
+.papir::before{content:"";position:absolute;left:36px;top:0;bottom:0;width:2px;background:#f2a9ad}
+.pHead{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;color:var(--muted);font-weight:800;font-size:15px;border-bottom:1px solid #e6eaf0;padding-bottom:6px;margin-bottom:6px}
+.pHead .ruka{font-size:26px;color:var(--modra);line-height:.8}
+.pText{margin:0;font-weight:700;font-size:clamp(21px,2.9vw,29px);line-height:2.1em;background-image:linear-gradient(transparent calc(100% - 1px),#dbe4f0 calc(100% - 1px));background-size:100% 2.1em}
+.pg{cursor:pointer;min-width:1.1em}
+.pg.vypl{color:var(--modra);min-width:.7em;margin:0}
+.pg.spr{border-color:transparent;color:var(--modra);min-width:0;margin:0;padding:0 .04em}
+.pg.spatne{min-width:.7em;margin:0 .06em}
+.pg.spatne{position:relative;background:transparent;border-color:var(--cervena)}
+.pg .oprava{bottom:58%}
+.pStav{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:16px;flex-wrap:wrap;min-height:10px}
+.pStav span{font-weight:800;color:var(--muted)}
+.vysledek{display:flex;gap:18px;align-items:flex-start;margin-top:16px;background:#fffaf9;border:1px solid #f3d3d3;border-radius:16px;padding:14px 18px}
+.velkaZn{flex:none;width:92px;height:92px;transform:rotate(-6deg)}
+.vysledek h3{margin:4px 0 0;font-family:var(--head);font-size:24px}
+.vysledek p{margin:4px 0 0;font-weight:700}
+.pChyby{margin:6px 0 0;padding-left:22px;font-weight:700;font-size:17px;line-height:1.5}
+@media (max-width:600px){.vysledek{flex-direction:column;align-items:center;text-align:left}}
+
+/* chytačka */
+.pocit{text-align:center;font-weight:900;font-size:22px;color:var(--zelena);margin:10px 0}
+.hriste{position:relative;height:clamp(300px,42vh,430px);border-radius:16px;overflow:hidden;background:#fbfcfe;background-image:linear-gradient(#e8eef6 1px,transparent 1px);background-size:100% 34px;border:1px solid var(--line);touch-action:none}
+.pad{position:absolute;left:0;top:0;display:flex;align-items:center;background:#fff;border:2px solid #cfd8e6;border-radius:14px;padding:8px 14px;box-shadow:0 4px 0 rgba(0,0,0,.06);will-change:transform}
+.pl{font-weight:900;font-size:clamp(19px,2.4vw,24px);white-space:nowrap}
+.mz{display:inline-block;width:.75em;height:.95em;border-bottom:3px solid #e0a800;background:#fff3a3;border-radius:4px 4px 0 0;margin:0 1px;vertical-align:-.12em}
+.pad.chycen{animation:chycen .4s forwards;background:#eaf4ef;border-color:var(--zelena)}
+.pad.spatne{animation:spatne .45s forwards;background:#fdeceb;border-color:var(--cervena)}
+.pad.pryc{transition:opacity .3s;opacity:0}
+@keyframes chycen{to{scale:1.4;opacity:0}}
+@keyframes spatne{30%{rotate:-10deg}60%{rotate:10deg}100%{opacity:0}}
+
+/* efekty */
+#fx{position:fixed;inset:0;pointer-events:none;z-index:70}
+.jiskra{position:fixed;width:10px;height:10px;border-radius:50%}
+#fw{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:55}
+
+/* žákovská knížka + tahák */
+.ovl{position:fixed;inset:0;z-index:50;background:rgba(20,24,36,.45);display:flex;align-items:flex-start;justify-content:center;overflow:auto;padding:calc(env(safe-area-inset-top) + 20px) 16px 30px}
+.fcard,.tcard{position:relative;background:var(--paper);border-radius:22px;padding:22px 26px 24px;max-width:600px;width:100%;box-shadow:0 14px 40px rgba(0,0,0,.25);animation:vyskoc .5s cubic-bezier(.3,1.5,.5,1)}
+@keyframes vyskoc{from{transform:scale(.6);opacity:0}to{transform:none;opacity:1}}
+.zavri{position:absolute;top:12px;right:12px;width:46px;height:46px;border-radius:50%;background:#f0f2f6;font-weight:900;font-size:22px}
+.zk{background:#f4f8fd;border:1px solid #c9d6ea;text-align:center;padding:0 0 22px;overflow:hidden}
+.zkHead{background:var(--modra2);color:#fff;font-family:var(--head);font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:15px;padding:12px 16px}
+.zk h2{font-family:var(--head);font-size:clamp(34px,5.5vw,48px);margin:16px 0 0;line-height:1.05}
+.zk .fsub{margin:2px 16px 0;color:var(--muted);font-weight:800}
+.zkTab{width:calc(100% - 40px);margin:16px auto 6px;border-collapse:collapse;background:#fff;font-weight:700;font-size:16px}
+.zkTab th{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:800;padding:6px 8px;border:1px solid #c9d6ea;background:#eaf0f9}
+.zkTab td{padding:8px;border:1px solid #c9d6ea;vertical-align:middle;line-height:1.3}
+.zkTab td small{color:var(--muted);font-size:14px}
+.zkTab .zkZn{font-family:var(--ruka);font-size:58px;line-height:1;color:var(--cervena);font-weight:700;width:96px}
+.fhv{font-size:50px;line-height:1;margin:10px 0 2px;letter-spacing:6px}
+.fhv span{color:#dfe3ea;display:inline-block}
+.fhv span.on{color:#d9a21b;animation:hvezda .55s cubic-bezier(.3,1.8,.5,1) both}
+@keyframes hvezda{from{transform:scale(0) rotate(-90deg)}to{transform:none}}
+.fch{font-family:var(--ruka);font-size:32px;color:var(--cervena);font-weight:700;margin:6px 20px 16px;line-height:1.1}
+.fbtns{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;padding:0 16px}
+.fbtns .dalsi{font-size:22px;padding:12px 24px}
+.tcard{text-align:left;max-width:760px}
+.tcard h2{margin:0 0 4px;font-family:var(--head);font-size:28px}
+.tcard h3{margin:18px 0 6px;font-family:var(--head);font-size:20px;color:var(--modra2)}
+.tcard ul{margin:0;padding-left:22px;font-weight:700;line-height:1.55}
+.vs{width:100%;border-collapse:collapse;font-size:16px;font-weight:700;margin-top:6px}
+.vs td{padding:6px 8px;border-bottom:1px solid #eceae2;vertical-align:top;line-height:1.45}
+.vs td:first-child{font-weight:900;font-size:19px;color:var(--t);width:40px;text-align:center;white-space:nowrap}
+.pozn{color:var(--muted);font-weight:700;font-size:15px;margin:10px 0 0}
+@media (prefers-reduced-motion:reduce){.dalsi,.gap.cur,.dots i.cur{animation:none}}
+</style>
+</head>
+<body>
+<div id="app">
+  <header class="top">
+    <button id="back" class="iconbtn" hidden aria-label="Zpět domů">← Domů</button>
+    <div class="ttl"><h1 id="h1">Písemka i/y</h1><p id="sub"></p></div>
+    <div class="topR">
+      <span class="pill" title="Hvězdičky"><span class="hvz">★</span> <b id="hvezdy">0</b></span>
+      <button id="tahakB" class="iconbtn txtbtn" aria-label="Tahák s pravidly"><i data-lucide="book-open" class="lic">📖</i><span>Tahák</span></button>
+      <button id="mute" class="iconbtn" aria-label="Zvuk">🔊</button>
+    </div>
+  </header>
+  <main id="home"></main>
+  <main id="ex" hidden>
+    <div class="exHead"><div class="dots" id="dots"></div><span class="pocet" id="pocet"></span></div>
+    <section class="card" id="card"></section>
+  </main>
+</div>
+
+<canvas id="fw" hidden></canvas>
+<div id="fx"></div>
+<div id="finale" class="ovl" hidden></div>
+<div id="tahak" class="ovl" hidden>
+  <div class="tcard">
+    <button class="zavri" id="tahakX" aria-label="Zavřít">✕</button>
+    <h2>Tahák – i, í, y, ý</h2>
+    <p class="pozn" style="margin-top:0">Čtyři pravidla, která se schovávají ve cvičení 22.</p>
+    <h3>1 · Přídavná jména: jarní, nebo mladý?</h3>
+    <ul>
+      <li>jako <b>JARNÍ</b> → vždycky <b>í / i</b>: rybí, kozí, buvolí, pumí, ryzího, cizích, moderními</li>
+      <li>přídavná jména <b>od zvířat</b> (čí?) jsou jako jarní: rybí, kozí, psí, slepičí, medvědí</li>
+      <li>jako <b>MLADÝ</b> → <b>ý / y</b>: nový → novými, teplý → teplých, bílý</li>
+      <li>tip: řekni si <b>základní tvar</b> – s modern_mi spacáky → ten spacák je moderní → jarní → í</li>
+      <li>7. pád množného čísla končí na <b>-mi</b> → moderními, novými</li>
+    </ul>
+    <h3>2 · Podstatná jména rodu mužského</h3>
+    <ul>
+      <li><b>živé</b> = vzor <b>pán</b>: kdo? co? (1. pád) → <b>-i</b>: ti čápi, psi, kluci</li>
+      <li>koho? co? (4. pád) → <b>-y</b>: pro psy, vidím čápy, pochválila kluky</li>
+      <li><b>neživé</b> = vzor <b>hrad</b> → vždycky <b>-y</b>: pokrmy, spacáky, sýry, pamlsky</li>
+    </ul>
+    <h3>3 · Slovesa</h3>
+    <ul>
+      <li><b>přítomný čas</b> (co dělá teď?) → <b>í</b>: nosí, vyrábí, sedí, chodí</li>
+      <li><b>minulý čas</b> → koncovka podle podmětu (kdo to udělal?):</li>
+    </ul>
+    <table class="vs">
+      <tr><td>-i</td><td>rod mužský životný: čápi odlétli, kluci běželi</td></tr>
+      <tr><td>-y</td><td>rod mužský neživotný a ženský: spacáky ležely, kočky spaly · <b>děti přicházely</b> (po dětech vždycky -y)</td></tr>
+      <tr><td>-a</td><td>rod střední: mláďata se narodila</td></tr>
+    </table>
+    <h3>4 · Vyjmenovaná slova</h3>
+    <ul>
+      <li>po <b>B, F, L, M, P, S, V, Z</b> píšeme <b>y</b> jen ve vyjmenovaných a příbuzných slovech, jinak <b>i</b></li>
+      <li><b>sýr</b> (po S), <b>vy-, vý-</b> (po V) – ale <b>Milada, Libor, minulý</b> vyjmenovaná nejsou → i</li>
+    </ul>
+    <table class="vs">
+      <tr><td>B</td><td>by, být, bydlit, obyvatel, byt, příbytek, nábytek, dobytek, obyčej, bystrý, bylina, kobyla, býk, Přibyslav</td></tr>
+      <tr><td>L</td><td>slyšet, mlýn, blýskat se, polykat, plynout, plýtvat, vzlykat, lysý, lýtko, lýko, lyže, pelyněk, plyš</td></tr>
+      <tr><td>M</td><td>my, mýt, myslit, mýlit se, hmyz, myš, hlemýžď, mýtit, zamykat, smýkat, dmýchat, chmýří, nachomýtnout se, Litomyšl</td></tr>
+      <tr><td>P</td><td>pýcha, pytel, pysk, netopýr, slepýš, pyl, kopyto, klopýtat, třpytit se, zpytovat, pykat, pýr, pýřit se, čepýřit se</td></tr>
+      <tr><td>S</td><td>syn, sytý, sýr, syrový, sychravý, usychat, sýkora, sýček, sysel, syčet, sypat</td></tr>
+      <tr><td>V</td><td>vy, vysoký, výskat, zvykat, žvýkat, vydra, výr, vyžle, povyk, výheň · předpona vy-, vý-</td></tr>
+      <tr><td>Z</td><td>brzy, jazyk, nazývat se</td></tr>
+    </table>
+    <p class="pozn">Podle cvičení 22 z Ladiny učebnice češtiny.</p>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+<script>
+'use strict';
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const TEST=/[?&]test\b/.test(location.search);
+const wait=ms=>new Promise(r=>setTimeout(r,ms));
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+/* ---------- zvuky ---------- */
+const Snd={ctx:null,muted:false,
+  init(){ if(!this.ctx){ try{ this.ctx=new (window.AudioContext||window.webkitAudioContext)(); }catch(e){} } if(this.ctx&&this.ctx.state==='suspended') this.ctx.resume().catch(()=>{}); },
+  tone(f,dur,o={}){ if(!this.ctx||this.muted) return; const c=this.ctx,t=c.currentTime+(o.at||0),os=c.createOscillator(),g=c.createGain(); os.type=o.type||'sine'; os.frequency.setValueAtTime(f,t); if(o.slide) os.frequency.exponentialRampToValueAtTime(o.slide,t+dur); g.gain.setValueAtTime(0.0001,t); g.gain.linearRampToValueAtTime(o.vol||0.12,t+0.012); g.gain.exponentialRampToValueAtTime(0.0001,t+dur); os.connect(g).connect(c.destination); os.start(t); os.stop(t+dur+0.05); },
+  noise(dur,o={}){ if(!this.ctx||this.muted) return; const c=this.ctx,n=Math.floor(c.sampleRate*dur),b=c.createBuffer(1,n,c.sampleRate),d=b.getChannelData(0); for(let i=0;i<n;i++) d[i]=(Math.random()*2-1)*Math.pow(1-i/n,1.5); const s=c.createBufferSource(); s.buffer=b; const f=c.createBiquadFilter(); f.type=o.type||'highpass'; f.frequency.value=o.f||1800; const g=c.createGain(); g.gain.value=o.vol||.15; s.connect(f).connect(g).connect(c.destination); s.start(c.currentTime+(o.at||0)); },
+  tick(){ this.tone(880,.06,{type:'triangle',vol:.08}); },
+  ok(){ this.tone(660,.09,{type:'triangle',vol:.1}); this.tone(990,.16,{type:'triangle',vol:.08,at:.07}); },
+  ding(){ [[784,0],[988,.08],[1319,.16]].forEach(([f,d])=>this.tone(f,.24,{type:'triangle',vol:.09,at:d})); },
+  buzz(){ this.tone(170,.22,{type:'sawtooth',vol:.05,slide:110}); },
+  fanfare(){ [[523,0],[659,.12],[784,.24],[1047,.36],[784,.52],[1047,.64]].forEach(([f,d])=>this.tone(f,.3,{type:'triangle',vol:.09,at:d})); },
+  pop(){ this.tone(140,.25,{vol:.07,slide:60}); this.noise(.22,{type:'lowpass',f:1300,vol:.09}); },
+  pero(){ this.noise(.07,{f:3200,vol:.12}); this.noise(.09,{f:2600,vol:.1,at:.08}); },
+  zvonek(){ [[1568,0],[1319,.16],[1568,.32],[1319,.48]].forEach(([f,d])=>this.tone(f,.22,{type:'triangle',vol:.07,at:d})); }
+};
+document.addEventListener('pointerdown',()=>Snd.init(),{passive:true});
+
+/* ikony: 'i:název|náhradní emoji' → ikona Lucide (když se knihovna nenačte, zůstane emoji) */
+function ikona(x){ if(typeof x==='string'&&x.startsWith('i:')){ const [n,f]=x.slice(2).split('|'); return `<i data-lucide="${n}" class="lic">${f||''}</i>`; } return x||''; }
+function ikony(){ try{ if(window.lucide) lucide.createIcons(); }catch(e){} }
+const KL={i:'p-m','í':'p-m',y:'p-t','ý':'p-t',a:'p-a'}, POPIS={i:'měkké','í':'měkké',y:'tvrdé','ý':'tvrdé'};
+function klavesy(pism){ return `<div class="pismena">${pism.map(l=>`<button class="pism ${KL[l]||'p-m'}" data-l="${l}">${l}${POPIS[l]?`<small>${POPIS[l]}</small>`:''}</button>`).join('')}</div>`; }
+const mezera=t=>esc(t).replace('_','<span class="gap">&nbsp;</span>');
+
+/* ---------- odměna: červená propiska ---------- */
+const POCHVALY=['Výborně!','Správně!','Paráda!','Přesně tak!','Skvěle!','Tak je to!','Bravo!'];
+const FAJFKA='<svg viewBox="0 0 60 60" aria-hidden="true"><path class="tah" d="M10 32 L24 46 L52 12"/></svg>';
+const ZN_SVG=z=>`<svg viewBox="0 0 60 60" aria-hidden="true"><ellipse class="kruh" cx="30" cy="31" rx="24" ry="22"/><text x="30" y="45" text-anchor="middle" class="zn">${z}</text></svg>`;
+function odmena(){ const f=$('#fb'); if(!f) return; const cista=st&&st.ck===0;
+  f.insertAdjacentHTML('afterbegin',`<span class="znamka">${cista?ZN_SVG(1):FAJFKA}</span>`);
+  const tx=f.querySelector('.fbt'); if(tx) tx.insertAdjacentHTML('afterbegin',`<b class="chvala">${cista&&Math.random()<.3?'Jednička!':pick(POCHVALY)}</b> `);
+  Snd.pero(); }
+
+/* ---------- efekty ---------- */
+function jiskry(el,n=10){ const r=el.getBoundingClientRect(), x=r.left+r.width/2, y=r.top+r.height/2, fx=$('#fx'); const B=['#d3313a','#2858c2','#f1c94b','#1f7a5c','#7a4fb5'];
+  for(let i=0;i<n;i++){ const s=document.createElement('i'); s.className='jiskra'; s.style.background=B[i%B.length]; s.style.left=(x-5)+'px'; s.style.top=(y-5)+'px'; fx.appendChild(s);
+    const a=Math.random()*Math.PI*2, d=40+Math.random()*55;
+    if(s.animate) s.animate([{transform:'translate(0,0) scale(1)',opacity:1},{transform:`translate(${Math.cos(a)*d}px,${Math.sin(a)*d}px) scale(.3)`,opacity:0}],{duration:600+Math.random()*250,easing:'cubic-bezier(.2,.7,.4,1)',fill:'forwards'});
+    setTimeout(()=>s.remove(),900); } }
+function shake(el){ el.classList.remove('shake'); void el.offsetWidth; el.classList.add('shake'); }
+const FW={cv:null,cx:null,raf:0,end:0,rk:[],pt:[],W:0,H:0,
+  start(ms){ this.cv=$('#fw'); this.cx=this.cv.getContext('2d'); this.cv.hidden=false; this.fit(); this.end=performance.now()+ms; if(!this.raf) this.raf=requestAnimationFrame(t=>this.loop(t)); },
+  fit(){ if(!this.cv) return; const d=Math.min(2,window.devicePixelRatio||1); this.W=innerWidth; this.H=innerHeight; this.cv.width=this.W*d; this.cv.height=this.H*d; this.cx.setTransform(d,0,0,d,0,0); },
+  stop(){ this.end=0; this.rk=[]; this.pt=[]; },
+  loop(t){ const c=this.cx,W=this.W,H=this.H;
+    if(t<this.end&&Math.random()<.065) this.rk.push({x:W*(.12+Math.random()*.76),y:H,vx:(Math.random()-.5)*1.6,vy:-(H*.012+Math.random()*H*.006),h:pick([355,215,45,140,270])});
+    c.clearRect(0,0,W,H);
+    for(const r of this.rk){ r.x+=r.vx; r.y+=r.vy; r.vy+=H*.00018; c.fillStyle=`hsl(${r.h},90%,58%)`; c.beginPath(); c.arc(r.x,r.y,3.2,0,7); c.fill(); if(r.vy>=-1){ r.dead=1; this.boom(r); } }
+    this.rk=this.rk.filter(r=>!r.dead);
+    c.lineWidth=3.6; c.lineCap='round';
+    for(const p of this.pt){ const px=p.x,py=p.y; p.x+=p.vx; p.y+=p.vy; p.vx*=.985; p.vy=p.vy*.985+.06; p.a-=p.d; c.strokeStyle=`hsla(${p.h},90%,${p.l}%,${Math.max(0,p.a)})`; c.beginPath(); c.moveTo(px,py); c.lineTo(p.x,p.y); c.stroke(); }
+    this.pt=this.pt.filter(p=>p.a>0);
+    if(t<this.end||this.rk.length||this.pt.length) this.raf=requestAnimationFrame(t2=>this.loop(t2)); else { this.raf=0; c.clearRect(0,0,W,H); this.cv.hidden=true; } },
+  boom(r){ const n=48+Math.floor(Math.random()*26), sp=2.2+Math.random()*2.6, h2=(r.h+40+Math.random()*90)%360;
+    for(let i=0;i<n;i++){ const a=Math.PI*2*i/n, s=sp*(.55+Math.random()*.6); this.pt.push({x:r.x,y:r.y,vx:Math.cos(a)*s,vy:Math.sin(a)*s,a:1,d:.011+Math.random()*.01,h:i%3?r.h:h2,l:48+Math.random()*16}); }
+    Snd.pop(); }
+};
+
+/* ---------- obsah: cvičení 22 a pravidla, která v něm jsou ----------
+   {x} = mezera se správným písmenem, ke každé mezeře jedno vysvětlení.
+   Pravidla: 1) přídavná jména jako jarní (rybí, kozí, ryzího, cizích, moderními)
+             2) podstatná jména pán × hrad (čápi, psy, pokrmy)
+             3) slovesa: přítomný čas -í (nosí, vyrábí), shoda přísudku s podmětem (čápi odlétli, děti přicházely)
+             4) vyjmenovaná slova (sýr, vy-) × slova, která vyjmenovaná nejsou (Milada, Libor, minulý) */
+const CV22=[ // přesně podle učebnice
+  ['M{i}lada nos{í} řetízek z ryz{í}ho zlata.',['Milada – jméno, není to vyjmenované slovo → i','nosí – sloveso v přítomném čase (ona nosí) → í','ryzí → ryzího – přídavné jméno jako jarní → í']],
+  ['Ryb{í} pokrm{y} jsou zdravé.',['rybí – jaký pokrm? rybí, jako jarní → í','pokrmy – ten pokrm je neživý, jako hrady → y']],
+  ['Pamlsky pro ps{y} se v{y}ráb{í} z buvol{í} kůže.',['pro koho? pro psy – 4. pád, jako pány → y','vy- – předpona vy-, vyjmenované slovo po V → y','vyrábí – sloveso v přítomném čase → í','buvolí – čí kůže? buvolí, jako jarní → í']],
+  ['M{i}nulý rok se v zoo narodila pum{í} mláďata.',['minulý – není to vyjmenované slovo → i','pumí – čí mláďata? pumí, jako jarní → í']],
+  ['L{i}bor má rád koz{í} s{ý}r.',['Libor – jméno, není to vyjmenované slovo → i','kozí – jaký sýr? kozí, jako jarní → í','sýr – vyjmenované slovo po S → ý']],
+  ['Čáp{i} odlétl{i} do ciz{í}ch krajů.',['kdo? ti čápi – 1. pád, živé jako páni → i','čápi odlétli – podmět je rodu mužského životného → i','cizí → cizích – jako jarní → í']],
+  ['Děti přicházel{y} s modern{í}m{i} spacáky.',['děti přicházely – po dětech vždycky → y','moderní → moderními – jako jarní → í','moderními – 7. pád množného čísla končí na -mi → i']],
+];
+
+/* 1) jarní × mladý */
+const ZVIRATA=[ // [zvíře, přídavné jméno, k čemu]
+  ['koza','kozí','sýr'],['ryba','rybí','polévka'],['buvol','buvolí','kůže'],['puma','pumí','mláďata'],['pes','psí','bouda'],
+  ['slepice','slepičí','vejce'],['medvěd','medvědí','tlapa'],['ovce','ovčí','vlna'],['husa','husí','pírko'],['kachna','kachní','peří'],
+  ['vlk','vlčí','smečka'],['liška','liščí','nora'],['kočka','kočičí','ocásek'],['lev','lví','hříva'],['orel','orlí','hnízdo'],
+  ['včela','včelí','med'],['myš','myší','díra'],['sova','soví','oči'],['kráva','kraví','mléko'],['pták','ptačí','zpěv']];
+const JARMLA=[ // [spojení s mezerou, správně, proč]
+  ['s modern_mi spacáky','í','moderní – jako jarní → í'],['s nov_mi spacáky','ý','nový – jako mladý → ý'],
+  ['do ciz_ch krajů','í','cizí – jako jarní → í'],['do tepl_ch krajů','ý','teplý – jako mladý → ý'],
+  ['z ryz_ho zlata','í','ryzí – jako jarní → í'],['s lesn_mi zvířaty','í','lesní – jako jarní → í'],
+  ['s divok_mi zvířaty','ý','divoký – jako mladý → ý'],['k sousedn_m domům','í','sousední – jako jarní → í'],
+  ['k vysok_m stromům','ý','vysoký – jako mladý → ý'],['s domác_mi úkoly','í','domácí – jako jarní → í'],
+  ['s těžk_mi úkoly','ý','těžký – jako mladý → ý'],['o letn_ch prázdninách','í','letní – jako jarní → í'],
+  ['o dlouh_ch prázdninách','ý','dlouhý – jako mladý → ý'],['se kočič_mi tlapkami','í','kočičí – jako jarní → í'],
+  ['koz_ sýr','í','kozí – jako jarní → í'],['bíl_ sýr','ý','bílý – jako mladý → ý']];
+const GAPS_A=[
+  ['Tatínek koupil ryb{í} prsty a slepič{í} vejce.',['rybí – jaké prsty? rybí, jako jarní → í','slepičí – jaká vejce? slepičí, jako jarní → í']],
+  ['Medvěd{í} mláďata si hrála u lesn{í}ho potoka.',['medvědí – čí mláďata? medvědí, jako jarní → í','lesní → lesního – jako jarní → í']],
+  ['Děda má prsten z ryz{í}ho stříbra a hodinky z ryz{í}ho zlata.',['ryzí → ryzího – jako jarní → í','ryzí → ryzího – jako jarní → í']],
+  ['V ciz{í}ch zemích mluví lidé ciz{í}mi jazyky.',['cizí → cizích – jako jarní → í','cizí → cizími – jako jarní → í']],
+  ['Lada přišla s nov{ý}m batohem a modern{í}m{i} sluchátky.',['nový → novým – jako mladý → ý','moderní → moderními – jako jarní → í','7. pád množného čísla končí na -mi → i']],
+  ['V obchodě prodávají koz{í} a ovč{í} sýr.',['kozí – jaký sýr? kozí, jako jarní → í','ovčí – jaký sýr? ovčí, jako jarní → í']],
+  ['Kluci spali pod širým nebem s tepl{ý}m{i} spacáky.',['teplý → teplými – jako mladý → ý','7. pád množného čísla končí na -mi → i']]];
+
+/* 2) pán × hrad */
+const ZIVE=[ // [slovo, živé?, množné číslo]
+  ['čáp',1,'čápi'],['pes',1,'psi'],['buvol',1,'buvoli'],['kluk',1,'kluci'],['holub',1,'holubi'],['vlk',1,'vlci'],['kos',1,'kosi'],['brouk',1,'brouci'],
+  ['pokrm',0,'pokrmy'],['spacák',0,'spacáky'],['sýr',0,'sýry'],['řetízek',0,'řetízky'],['hrad',0,'hrady'],['strom',0,'stromy'],['batoh',0,'batohy'],['pamlsek',0,'pamlsky']];
+const PSI=[ // [věta s mezerou, správně, proč]
+  ['Ps_ štěkají na pošťáka.','i','kdo štěká? psi – 1. pád, jako páni → i'],['Koupili jsme pamlsky pro ps_.','y','pro koho? pro psy – 4. pád, jako pány → y'],
+  ['Čáp_ hnízdí na komíně.','i','kdo hnízdí? čápi – 1. pád → i'],['Na louce jsme viděli čáp_.','y','koho jsme viděli? čápy – 4. pád → y'],
+  ['Kluc_ hrají fotbal.','i','kdo hraje? kluci – 1. pád → i'],['Paní učitelka pochválila kluk_.','y','koho pochválila? kluky – 4. pád → y'],
+  ['Buvol_ se pasou u řeky.','i','kdo se pase? buvoli – 1. pád → i'],['Fotografovali jsme buvol_.','y','koho jsme fotografovali? buvoly – 4. pád → y'],
+  ['Holub_ sedí na střeše.','i','kdo sedí? holubi – 1. pád → i'],['V parku krmíme holub_.','y','koho krmíme? holuby – 4. pád → y'],
+  ['Rybí pokrm_ jsou zdravé.','y','pokrm je neživý → jako hrady → y'],['Spacák_ máme ve stanu.','y','spacák je neživý → jako hrady → y'],
+  ['Kozí sýr_ voní.','y','sýr je neživý → jako hrady → y'],['Vlc_ žijí ve smečkách.','i','kdo žije ve smečkách? vlci – 1. pád → i'],
+  ['Myslivec pozoroval vlk_.','y','koho pozoroval? vlky – 4. pád → y']];
+const GAPS_B=[
+  ['Ps{i} dostali pamlsk{y} z buvolí kůže.',['kdo dostal? psi – 1. pád, živé jako páni → i','ten pamlsek je neživý, jako hrady → y']],
+  ['Na komíně hnízdí čáp{i} a na střeše sedí holub{i}.',['kdo hnízdí? čápi – 1. pád → i','kdo sedí? holubi – 1. pád → i']],
+  ['Fotografovali jsme čáp{y} i buvol{y}.',['koho? čápy – 4. pád, jako pány → y','koho? buvoly – 4. pád, jako pány → y']],
+  ['Kluc{i} si vzali spacák{y} a batoh{y}.',['kdo? kluci – 1. pád → i','ten spacák je neživý, jako hrady → y','ten batoh je neživý, jako hrady → y']],
+  ['Tatínek nakrmil ps{y} a uvařil zdravé pokrm{y}.',['koho nakrmil? psy – 4. pád → y','ten pokrm je neživý, jako hrady → y']]];
+
+/* 3) slovesa */
+const SHODA=[ // [věta s mezerou, správně, proč]
+  ['Čápi odlétl_ do Afriky.','i','čápi – ten čáp, rod mužský životný → i'],['Děti přicházel_ do školy.','y','děti – po dětech vždycky → y'],
+  ['Mláďata se narodil_ v noci.','a','mláďata – to mládě, rod střední → a'],['Kluci hrál_ fotbal.','i','kluci – ten kluk, rod mužský životný → i'],
+  ['Holky zpíval_ ve sboru.','y','holky – ta holka, rod ženský → y'],['Stromy rostl_ do výšky.','y','stromy – ten strom, rod mužský neživotný → y'],
+  ['Psi štěkal_ na pošťáka.','i','psi – ten pes, rod mužský životný → i'],['Kočky spal_ na gauči.','y','kočky – ta kočka, rod ženský → y'],
+  ['Auta jezdil_ po dálnici.','a','auta – to auto, rod střední → a'],['Spacáky ležel_ ve stanu.','y','spacáky – ten spacák, rod mužský neživotný → y'],
+  ['Buvoli se pásl_ u řeky.','i','buvoli – ten buvol, rod mužský životný → i'],['Pamlsky voněl_ po celém domě.','y','pamlsky – ten pamlsek, rod mužský neživotný → y'],
+  ['Kuřata pípal_ na dvoře.','a','kuřata – to kuře, rod střední → a'],['Rodiče přijel_ pozdě večer.','i','rodiče – rod mužský životný → i'],
+  ['Děti si hrál_ na písku.','y','děti – po dětech vždycky → y'],['Pumy lovil_ v noci.','y','pumy – ta puma, rod ženský → y']];
+const GAPS_C=[
+  ['Babička vař{í} oběd a děda sed{í} v křesle.',['vaří – přítomný čas (co dělá?) → í','sedí – přítomný čas → í']],
+  ['Lada chod{í} do páté třídy a Zorka chod{í} do třetí.',['chodí – přítomný čas → í','chodí – přítomný čas → í']],
+  ['V továrně se v{y}ráb{í} čokoláda.',['vy- – předpona vy-, vyjmenované slovo po V → y','vyrábí – přítomný čas → í']],
+  ['Kluci běžel{i} na hřiště a holky je dohnal{y}.',['kluci běželi – rod mužský životný → i','holky dohnaly – rod ženský → y']],
+  ['Ptáci odlétl{i} na jih a děti se za nimi dlouho díval{y}.',['ptáci odlétli – rod mužský životný → i','děti se dívaly – po dětech vždycky → y']]];
+
+/* 4) vyjmenovaná slova */
+const VYJ_Y=[ // [slovo s mezerou, vysvětlení] – sem patří y/ý
+  ['kozí s_r','sýr – vyjmenované slovo po S → ý'],['v_rábí','vy- – vyjmenovaná předpona po V → y'],['m_dlo','mýdlo – příbuzné s mýt → ý'],
+  ['jaz_k','jazyk – vyjmenované slovo po Z → y'],['v_soký strom','vysoký – vyjmenované slovo po V → y'],['ob_vatel','obyvatel – vyjmenované slovo po B → y'],
+  ['m_slet','myslet – vyjmenované slovo po M → y'],['sl_šet','slyšet – vyjmenované slovo po L → y'],['s_kora','sýkora – vyjmenované slovo po S → ý'],
+  ['školní v_let','výlet – předpona vý- → ý'],['kob_la','kobyla – vyjmenované slovo po B → y'],['b_k na pastvě','býk – vyjmenované slovo po B → ý'],
+  ['ml_n','mlýn – vyjmenované slovo po L → ý'],['p_tel brambor','pytel – vyjmenované slovo po P → y'],['m_š','myš – vyjmenované slovo po M → y'],['s_n a dcera','syn – vyjmenované slovo po S → y']];
+const VYJ_I=[ // sem patří i/í
+  ['M_lada','Milada – není vyjmenované slovo → i'],['L_bor','Libor – není vyjmenované slovo → i'],['m_nulý rok','minulý – není vyjmenované slovo → i'],
+  ['m_lý kamarád','milý – není vyjmenované slovo → i'],['s_la','síla – není vyjmenované slovo → í'],['v_dět','vidět – není vyjmenované slovo → i'],
+  ['b_lý sníh','bílý – není vyjmenované slovo → í'],['l_stí','listí – není vyjmenované slovo → i'],['p_sek','písek – není vyjmenované slovo → í'],
+  ['z_ma','zima – není vyjmenované slovo → i'],['s_lnice','silnice – není vyjmenované slovo → i'],['v_tr','vítr – není vyjmenované slovo → í'],
+  ['F_lip','Filip – není vyjmenované slovo → i'],['m_nuta','minuta – není vyjmenované slovo → i'],['v_dlička','vidlička – není vyjmenované slovo → i']];
+const GAPS_D=[
+  ['Ke snídani byl chléb se s{ý}rem a s{y}rová mrkev.',['sýr – vyjmenované slovo po S → ý','syrový – vyjmenované slovo po S → y']],
+  ['Babička v{y}rábí s{ý}r z kozího mléka.',['vy- – předpona vy-, vyjmenované slovo po V → y','sýr – vyjmenované slovo po S → ý']],
+  ['M{i}lan a L{i}bor jeli m{i}nulý týden na hory.',['Milan – jméno, není vyjmenované slovo → i','Libor – jméno, není vyjmenované slovo → i','minulý – není vyjmenované slovo → i']],
+  ['Naše m{y}š se jmenuje M{i}lada.',['myš – vyjmenované slovo po M → y','Milada – jméno, není vyjmenované slovo → i']],
+  ['V{ý}let na hrad se nám moc l{í}bil.',['vý- – předpona vý-, vyjmenovaná po V → ý','líbit se – není vyjmenované slovo → í']]];
+
+/* najdi chybu */
+const OPRAV=[ // [věta s jednou chybou, špatně, správně, proč]
+  ['Babička uvařila ryby polévku.','ryby','rybí','jaká polévka? rybí – jako jarní → í'],
+  ['Čápy odlétli do Afriky.','Čápy','Čápi','kdo odlétl? čápi – 1. pád → i'],
+  ['Děti si hráli na zahradě.','hráli','hrály','po dětech vždycky -y: děti si hrály'],
+  ['Na trhu prodávali kozý sýr.','kozý','kozí','jaký sýr? kozí – jako jarní → í'],
+  ['Mylada má ráda zmrzlinu.','Mylada','Milada','Milada není vyjmenované slovo → i'],
+  ['Pes dostal pamlsek z buvolý kůže.','buvolý','buvolí','čí kůže? buvolí – jako jarní → í'],
+  ['Kluci si vzali nové spacáki.','spacáki','spacáky','spacák je neživý, jako hrady → y'],
+  ['Ta čokoláda se virábí v Belgii.','virábí','vyrábí','vy- je vyjmenovaná předpona → y'],
+  ['Mynulý týden jsme byli v zoo.','Mynulý','Minulý','minulý není vyjmenované slovo → i'],
+  ['Tatínek koupil granule pro psi.','psi','psy','pro koho? pro psy – 4. pád → y'],
+  ['Babička nosý brýle.','nosý','nosí','přítomný čas (co dělá?) → í'],
+  ['V zoo se narodilo medvědý mládě.','medvědý','medvědí','čí mládě? medvědí – jako jarní → í'],
+  ['Děti přišly s modernými batohy.','modernými','moderními','moderní je jako jarní → moderními'],
+  ['Lybor jí rád sýr.','Lybor','Libor','Libor není vyjmenované slovo → i'],
+  ['Ve sklepě zrál kozí sír.','sír','sýr','sýr je vyjmenované slovo po S → ý'],
+  ['Holky běželi na autobus.','běželi','běžely','holky – rod ženský → y']];
+
+/* rychlovka */
+const RYCH=[ // [spojení s {písmenem}, proč]
+  ['ryb{í} polévka','rybí – jako jarní'],['koz{í} mléko','kozí – jako jarní'],['z buvol{í} kůže','buvolí – jako jarní'],['pum{í} mládě','pumí – jako jarní'],
+  ['z ryz{í}ho zlata','ryzí – jako jarní'],['do ciz{í}ch krajů','cizí – jako jarní'],['s modern{í}mi spacáky','moderní – jako jarní'],['s nov{ý}mi spacáky','nový – jako mladý'],
+  ['do tepl{ý}ch krajů','teplý – jako mladý'],['medvěd{í} tlapa','medvědí – jako jarní'],['slepič{í} vejce','slepičí – jako jarní'],['ps{í} bouda','psí – jako jarní'],
+  ['ti čáp{i}','kdo? čápi – 1. pád'],['vidím čáp{y}','koho? čápy – 4. pád'],['pamlsky pro ps{y}','pro koho? psy – 4. pád'],['ps{i} štěkají','kdo? psi – 1. pád'],
+  ['zdravé pokrm{y}','pokrm – neživý, jako hrady'],['teplé spacák{y}','spacák – neživý, jako hrady'],['kluc{i} hrají','kdo? kluci – 1. pád'],['pozval kluk{y}','koho? kluky – 4. pád'],
+  ['Milada nos{í}','nosí – přítomný čas'],['se v{y}rábí','vy- – vyjmenovaná předpona'],['se vyráb{í}','vyrábí – přítomný čas'],['čápi odlétl{i}','čápi – rod mužský životný'],
+  ['děti přicházel{y}','po dětech vždycky -y'],['kočky spal{y}','kočky – rod ženský'],['stromy rostl{y}','stromy – rod mužský neživotný'],['kluci běžel{i}','kluci – rod mužský životný'],
+  ['M{i}lada','není vyjmenované slovo'],['L{i}bor','není vyjmenované slovo'],['m{i}nulý rok','není vyjmenované slovo'],['kozí s{ý}r','sýr – vyjmenované slovo po S'],
+  ['m{y}š','myš – vyjmenované slovo po M'],['jaz{y}k','jazyk – vyjmenované slovo po Z'],['školní v{ý}let','vý- – vyjmenovaná předpona'],['s{y}n a dcera','syn – vyjmenované slovo po S'],
+  ['s{i}la','není vyjmenované slovo'],['v{i}dět','není vyjmenované slovo'],['Zorka sed{í}','sedí – přítomný čas'],['holky zpíval{y}','holky – rod ženský'],['lesn{í} zvířata','lesní – jako jarní']];
+
+/* zkušební písemka – každá věta má dvě podobné varianty, takže je pokaždé trochu jiná */
+const ZKOUSKA=[
+  [['M{i}lan nos{í} hodinky z ryz{í}ho zlata.',['Milan – jméno, není vyjmenované slovo → i','nosí – přítomný čas → í','ryzí → ryzího – jako jarní → í']],
+   ['L{í}da nos{í} prstýnek z ryz{í}ho stříbra.',['Lída – jméno, není vyjmenované slovo → í','nosí – přítomný čas → í','ryzí → ryzího – jako jarní → í']]],
+  [['Koz{í} s{ý}r{y} jsou výborné.',['kozí – jako jarní → í','sýr – vyjmenované slovo po S → ý','ten sýr je neživý, jako hrady → y']],
+   ['Ryb{í} prst{y} jsou chutné.',['rybí – jako jarní → í','ten prst je neživý, jako hrady → y']]],
+  [['Hračky pro ps{y} se v{y}ráb{í} z ovč{í} vlny.',['pro koho? pro psy – 4. pád → y','vy- – předpona vy-, vyjmenovaná po V → y','vyrábí – přítomný čas → í','ovčí – jako jarní → í']],
+   ['Krmítka pro pták{y} se v{y}ráb{í} z lesn{í}ho dřeva.',['pro koho? pro ptáky – 4. pád → y','vy- – předpona vy-, vyjmenovaná po V → y','vyrábí – přítomný čas → í','lesní → lesního – jako jarní → í']]],
+  [['M{i}nulý týden se v zoo narodila lv{í} mláďata.',['minulý – není vyjmenované slovo → i','lví – čí mláďata? lví, jako jarní → í']],
+   ['M{i}nulou neděli jsme viděli medvěd{í} mláďata.',['minulý – není vyjmenované slovo → i','medvědí – čí mláďata? medvědí, jako jarní → í']]],
+  [['M{i}lada má ráda ovč{í} s{ý}r.',['Milada – jméno, není vyjmenované slovo → i','ovčí – jako jarní → í','sýr – vyjmenované slovo po S → ý']],
+   ['F{i}lip jí rád koz{í} s{ý}r.',['Filip – jméno, není vyjmenované slovo → i','kozí – jako jarní → í','sýr – vyjmenované slovo po S → ý']]],
+  [['Holub{i} odletěl{i} do sousedn{í}ch zahrad.',['kdo? holubi – 1. pád → i','holubi odletěli – rod mužský životný → i','sousední → sousedních – jako jarní → í']],
+   ['Vlc{i} běžel{i} do hlubok{ý}ch lesů.',['kdo? vlci – 1. pád → i','vlci běželi – rod mužský životný → i','hluboký → hlubokých – jako mladý → ý']]],
+  [['Děti se vracel{y} se školn{í}m{i} taškami.',['děti se vracely – po dětech vždycky → y','školní → školními – jako jarní → í','7. pád množného čísla končí na -mi → i']],
+   ['Holky přišl{y} s nov{ý}m{i} batohy.',['holky přišly – rod ženský → y','nový → novými – jako mladý → ý','7. pád množného čísla končí na -mi → i']]]];
+
+const vety=(pole,n,cast)=>shuffle(pole).slice(0,n).map(([t,h])=>({typ:'gaps',t,h,cast}));
+const EX=[
+  {id:'a',title:'Zvířecí a jarní',desc:'Přídavná jména: rybí, kozí, buvolí, ryzího, moderními',ik:'i:paw-print|🐾',barva:'#2858c2',kroky:()=>[
+    {typ:'quiz',cast:'Pravidlo · přídavná jména od zvířat',obr:'i:paw-print|🐾',text:'Přídavná jména <b>od zvířat</b> – <b>rybí, kozí, buvolí, pumí</b> – se píšou jako <b>JARNÍ</b>. Mají <b>měkké í</b> ve všech tvarech: rybí, rybího, rybími, rybích.',
+      q:'Jaký je sýr z kozího mléka?',ok:'kozí sýr',ne:['kozý sýr'],proc:'Kozí sýr – jako jarní, vždycky í.'},
+    {typ:'serie',cast:'Zvířecí dílna',zadani:'Udělej ze zvířete přídavné jméno',pod:'Všechna jsou jako jarní – hlídej si koncovku.',
+      items:shuffle(ZVIRATA).slice(0,8).map(([z,a,n])=>({q:`${z} → ___ ${n}`,opts:[a,a.replace(/í$/,'ý')],ok:a,proc:`${a} ${n} – jako jarní → í`})),konec:'Osm zvířecích přídavných jmen – všechna jako jarní.'},
+    {typ:'quiz',cast:'Pravidlo · jarní, nebo mladý?',obr:'i:scale|⚖️',text:'Ne všechna přídavná jména jsou jako jarní. <b>Nový, teplý, bílý</b> jsou jako <b>MLADÝ</b> → tvrdé <b>ý</b>. Když nevíš, řekni si <b>základní tvar</b>: s modern_mi spacáky → ten spacák je <b>moderní</b> → jako jarní → <b>í</b>.',
+      q:'s nov_mi spacáky – co tam patří?',ok:'ý – nový je jako mladý',ne:['í – nový je jako jarní'],proc:'Nový → novými, jako mladý → ý.'},
+    {typ:'serie',cast:'Jarní, nebo mladý?',zadani:'Doplň í, nebo ý',pod:'Řekni si základní tvar: moderní (jarní), nebo nový (mladý)?',
+      items:shuffle(JARMLA).slice(0,10).map(([q,ok,proc])=>({q,opts:['í','ý'],ok,proc}))},
+    ...vety(GAPS_A,4,'Věty · doplň i, í, y, ý')]},
+  {id:'b',title:'Páni, psi a hrady',desc:'Podstatná jména: čápi, psy, pokrmy',ik:'i:dog|🐕',barva:'#1f7a6d',kroky:()=>[
+    {typ:'quiz',cast:'Pravidlo · vzor pán, nebo hrad?',obr:'i:dog|🐕',text:'U podstatných jmen rodu mužského se nejdřív zeptej: <b>je to živé?</b> Čáp, pes, kluk jsou živé → vzor <b>PÁN</b>. Pokrm, spacák, hrad jsou neživé → vzor <b>HRAD</b> a v množném čísle mají vždycky <b>-y</b>: pokrmy, spacáky.',
+      q:'Podle kterého vzoru se píše slovo SPACÁK?',ok:'hrad – je neživý',ne:['pán – je živý'],proc:'Spacák je neživý → hrad → spacáky.'},
+    {typ:'serie',cast:'Živé, nebo neživé?',zadani:'Je to živé, nebo neživé?',pod:'Živé = vzor pán, neživé = vzor hrad.',fix:true,
+      items:shuffle([...shuffle(ZIVE.filter(z=>z[1])).slice(0,4),...shuffle(ZIVE.filter(z=>!z[1])).slice(0,4)]).map(([w,z,pl])=>({q:`ten ${w}`,opts:['živé – pán','neživé – hrad'],ok:z?'živé – pán':'neživé – hrad',proc:z?`${w} je živý → vzor pán: ti ${pl}`:`${w} je neživý → vzor hrad: ty ${pl}`}))},
+    {typ:'quiz',cast:'Pravidlo · psi, nebo psy?',obr:'i:circle-help|❓',text:'U živých (vzor pán) rozhoduje otázka. <b>Kdo? Co?</b> (1. pád) → <b>-i</b>: ti psi, ti čápi. <b>Koho? Co?</b> (4. pád) → <b>-y</b>: pro psy, vidím čápy. Stejně jako <b>páni</b> × <b>pány</b>.',
+      q:'Pamlsky pro ps_ – co tam patří?',ok:'y – pro koho? pro psy',ne:['i – kdo? psi'],proc:'Pro koho? Pro psy – 4. pád → y.'},
+    {typ:'serie',cast:'Psi, nebo psy?',zadani:'Doplň i, nebo y',pod:'Zeptej se: kdo? (→ i), nebo koho? (→ y). Neživé mají vždycky y.',
+      items:shuffle(PSI).slice(0,10).map(([q,ok,proc])=>({q,opts:['i','y'],ok,proc}))},
+    ...vety(GAPS_B,4,'Věty · doplň i, í, y, ý')]},
+  {id:'c',title:'Kdo to udělal?',desc:'Slovesa: nosí, vyrábí · čápi odlétli, děti přicházely',ik:'i:footprints|👣',barva:'#7a4fb5',kroky:()=>[
+    {typ:'quiz',cast:'Pravidlo · přítomný čas',obr:'i:clock|⏰',text:'Slovesa v <b>přítomném čase</b> (co dělá teď?) mají na konci vždycky <b>měkké í</b>: ona <b>nosí</b>, vyrábí, sedí, chodí.',
+      q:'Milada nos_ řetízek. Co tam patří?',ok:'í – nosí',ne:['ý – nosý'],proc:'Nosí – přítomný čas → í.'},
+    {typ:'quiz',cast:'Pravidlo · minulý čas',obr:'i:users|👥',text:'V <b>minulém čase</b> rozhoduje <b>podmět</b> (kdo to udělal?): rod mužský životný → <b>-i</b> (čápi odlétli) · mužský neživotný a ženský → <b>-y</b> (spacáky ležely, kočky spaly) · střední → <b>-a</b> (mláďata se narodila). A pozor: <b>děti → vždycky -y</b>!',
+      q:'Děti přicházel_ s moderními spacáky.',ok:'y – děti přicházely',ne:['i – děti přicházeli','a – děti přicházela'],proc:'Po dětech vždycky -y: děti přicházely.'},
+    {typ:'serie',cast:'-i, -y, nebo -a?',zadani:'Doplň koncovku',pod:'Kdo to udělal? Najdi podmět a zjisti jeho rod.',
+      items:shuffle(SHODA).slice(0,12).map(([q,ok,proc])=>({q,opts:['i','y','a'],ok,proc}))},
+    ...vety(GAPS_C,4,'Věty · doplň i, í, y, ý')]},
+  {id:'d',title:'Vyjmenovaná, nebo ne?',desc:'sýr, vyrábí – ale Milada, Libor, minulý',ik:'i:list-checks|📋',barva:'#b0532c',kroky:()=>[
+    {typ:'quiz',cast:'Pravidlo · vyjmenovaná slova',obr:'i:list-checks|📋',text:'Po <b>B, F, L, M, P, S, V, Z</b> se <b>y</b> píše jen ve <b>vyjmenovaných slovech</b> a ve slovech příbuzných. <b>Sýr</b> je vyjmenované slovo po S, <b>vy-</b> a <b>vý-</b> po V. Všude jinde je <b>i</b>: Milada, Libor, minulý.',
+      q:'Které z těchto slov je vyjmenované?',ok:'sýr',ne:['Milada','minulý'],proc:'Sýr je vyjmenované slovo po S. Milada a minulý vyjmenovaná nejsou → i.'},
+    {typ:'chytej',cast:'Chytačka',zadani:'Chytej jen slova, kam patří <b>y</b> nebo <b>ý</b>!',pod:'Kam patří i nebo í, to nech spadnout.',dobre:VYJ_Y,spatne:VYJ_I,cil:10,konec:'Deset slov s y chyceno – vyjmenovaná slova ti jdou.'},
+    {typ:'quiz',cast:'Otázka',q:'Proč se píše vyrábí s y?',ok:'vy- je vyjmenovaná předpona',ne:['protože je to sloveso','protože je na začátku slova'],proc:'Předpona vy-/vý- má vždycky y: vyrábí, vyběhl, výlet.'},
+    {typ:'quiz',cast:'Otázka',q:'Které slovo patří mezi vyjmenovaná slova po S?',ok:'syrový',ne:['silný','sídliště'],proc:'Po S: syn, sytý, sýr, syrový, sychravý, usychat, sýkora, sýček, sysel, syčet, sypat.'},
+    ...vety(GAPS_D,4,'Věty · doplň i, í, y, ý')]},
+  {id:'e',title:'Najdi chybu',desc:'Teď jsi paní učitelka: v každé větě je jedna chyba',ik:'i:pen-line|🖊️',barva:'#d3313a',kroky:()=>
+    shuffle(OPRAV).slice(0,8).map(([v,bad,good,proc])=>({typ:'oprav',v,bad,good,proc,cast:'Oprav červenou propiskou'}))},
+  {id:'f',title:'Rychlovka',desc:'60 sekund, všechna pravidla napřeskáčku. Překonáš svůj rekord?',ik:'i:timer|⏱️',barva:'#c98a12',kroky:()=>[{typ:'rychlovka',cast:'Rychlovka · 60 sekund'}]},
+  {id:'g',title:'Zkušební písemka',akuz:'zkušební písemku',desc:'Nanečisto: podobné věty jako ve cvičení 22, bez nápověd. Pokaždé trochu jiné.',ik:'i:file-pen-line|📝',barva:'#4b6584',kroky:()=>[
+    {typ:'pisemka',vety:ZKOUSKA.map(v=>pick(v)),nadpis:'Zkušební písemka – podobné věty jako ve cvičení 22',zahlavi:'Zkušební písemka · Český jazyk',cast:'Zkušební písemka · nanečisto'}]},
+  {id:'h',title:'Písemka: cvičení 22',akuz:'písemku z cvičení 22',desc:'Přesně cvičení 22 z učebnice. Na konci oprava červenou propiskou a známka.',ik:'i:graduation-cap|🎓',barva:'#1b3f93',kroky:()=>[
+    {typ:'pisemka',vety:CV22,nadpis:'Cvičení 22 – doplň i, í, y, ý',zahlavi:'Písemka · Český jazyk · cvičení 22',cast:'Písemka · cvičení 22 z učebnice'}]},
+];
+
+/* ---------- stav ---------- */
+const KEY='pisemka-iy-v1';
+let store={hv:{},zn:{},rekord:0,muted:false};
+function load(){ try{ const s=JSON.parse(localStorage.getItem(KEY)||'null'); if(s&&typeof s==='object') store=Object.assign(store,s); }catch(e){} if(!store.hv||typeof store.hv!=='object') store.hv={}; if(!store.zn||typeof store.zn!=='object') store.zn={}; Snd.muted=!!store.muted; }
+function save(){ try{ localStorage.setItem(KEY,JSON.stringify(store)); }catch(e){} }
+let st=null, cleanupFn=null;
+function cleanup(){ if(cleanupFn){ const f=cleanupFn; cleanupFn=null; f(); } }
+function updateHvezdy(){ $('#hvezdy').textContent=EX.reduce((a,e)=>a+(+store.hv[e.id]||0),0); }
+function updateMute(){ $('#mute').innerHTML=ikona(store.muted?'i:volume-x|🔇':'i:volume-2|🔊'); ikony(); }
+function show(id){ cleanup(); $('#home').hidden=id!=='home'; $('#ex').hidden=id!=='ex'; $('#back').hidden=id==='home'; window.scrollTo(0,0); }
+const FOOT='<div class="fb" id="fb"></div><div class="nav" id="nav"></div>';
+function fb(t,cls){ const f=$('#fb'); if(!f) return; f.innerHTML=t?`<span class="fbt">${t}</span>`:''; f.className='fb '+(cls||''); }
+
+function renderHome(){
+  st=null; $('#h1').textContent='Písemka i/y'; $('#sub').textContent='Doplň i, í, y, ý · příprava na písemku podle cvičení 22';
+  const vse=EX.every(e=>store.hv[e.id]);
+  $('#home').innerHTML=`<div class="intro"><span class="introIk">${ikona('i:pen-line|✏️')}</span><p><b>Písemka bude jako cvičení 22:</b> doplnit i, í, y, ý do vět. Ve 20 mezerách se schovávají <b>4 pravidla</b> – každé si procvičíš v jednom oddílu. Pak oprava chyb, rychlovka a písemka nanečisto. <span class="ruka">Lado, to dáš!</span></p></div>
+    <div class="karty">${EX.map((e,i)=>{ const h=store.hv[e.id]||0, zn=store.zn[e.id];
+      return `<button class="exCard${h&&!zn?' hotove':''}" data-i="${i}" style="--c:${e.barva}">${zn?`<span class="zn" title="Nejlepší známka">${zn}</span>`:''}<span class="num">${i+1}</span><span class="tx"><b>${e.title}</b><small>${e.desc}</small><span class="hv">${'★'.repeat(h)}<span class="off">${'★'.repeat(3-h)}</span></span></span><span class="mini">${ikona(e.ik)}</span></button>`; }).join('')}</div>
+    ${vse?'<div class="banner">Všechno procvičeno – na písemku jsi připravená!</div>':''}<button class="tipB" id="tipTahak">${ikona('i:book-open|📖')} Tahák se všemi pravidly</button>`;
+  updateHvezdy(); show('home'); ikony();
+}
+function startEx(i){ zavriFinale(); const ex=EX[i]; st={idx:i,ex,kroky:ex.kroky(),i:0,chyby:0,ck:0,done:false,perf:[]}; $('#h1').textContent=ex.title; show('ex'); renderKrok(); }
+function renderKrok(){ cleanup(); const k=st.kroky[st.i]; st.done=false; st.ck=0; $('#sub').textContent=k.cast; renderDots();
+  const c=$('#card'); c.className='card typ-'+k.typ; c.innerHTML=''; R[k.typ](k,c); ikony(); void c.offsetWidth; c.classList.add('vjezd'); window.scrollTo(0,0); }
+function renderDots(){ $('#dots').innerHTML=st.kroky.map((k,i)=>`<i class="${i<st.i||(i===st.i&&st.done)?(st.perf[i]?'ok':'done'):i===st.i?'cur':''}"></i>`).join(''); $('#pocet').textContent=`${st.i+1} / ${st.kroky.length}`; }
+function chyba(msg){ st.chyby++; st.ck++; Snd.buzz(); fb(msg,'bad'); }
+function hotovo(msg,opt={}){ if(!st||st.done) return; st.done=true; st.perf[st.i]=st.ck===0; if(!opt.tichy) Snd.ding(); if(msg) fb(msg,opt.cls||'good'); if(!opt.bezOdmeny) odmena(); renderDots();
+  const last=st.i===st.kroky.length-1; $('#nav').innerHTML=`<button class="dalsi" id="dalsiB">${last?'Dokončit':'Další →'}</button>`; $('#dalsiB').addEventListener('click',dalsi); }
+function dalsi(){ if(!st||!st.done) return; if(st.i>=st.kroky.length-1) finale(); else { st.i++; renderKrok(); } }
+
+/* ---------- jednotlivé typy úkolů ---------- */
+const R={};
+R.quiz=(k,c)=>{
+  const opts=shuffle([k.ok,...k.ne]);
+  const info=k.text?`<div class="pribeh"><span class="obrE">${ikona(k.obr||'i:lightbulb|💡')}</span><p>${k.text.replace('_','<span class="gap">&nbsp;</span>')}</p></div>`:'';
+  c.innerHTML=`${info}<div class="ukol otq"><small>${k.text?'Přečti si pravidlo a odpověz':'Vyber správnou odpověď'}</small>${mezera(k.q)}</div>
+    <div class="opts" style="--n:${opts.length}">${opts.map(o=>`<button class="opt">${esc(o)}</button>`).join('')}</div>${FOOT}`;
+  c.querySelectorAll('.opt').forEach(b=>b.addEventListener('click',()=>{ if(st.done||b.disabled) return;
+    if(b.textContent===k.ok){ c.querySelectorAll('.opt').forEach(x=>{ x.disabled=true; if(x===b) x.classList.add('spravne'); }); jiskry(b,10); hotovo(esc(k.proc)); }
+    else { b.disabled=true; shake(b); chyba(k.text?'Ještě ne. Přečti si pravidlo nahoře ještě jednou.':'Ještě ne. Zkus jinou odpověď.'); } }));
+};
+function zvyrazni(o,opts){ const ost=opts.filter(x=>x!==o&&x.length===o.length); if(o.length<2||!ost.length) return esc(o);
+  return [...o].map((ch,j)=>ost.some(x=>x[j]!==ch)?`<b>${esc(ch)}</b>`:esc(ch)).join(''); }
+R.serie=(k,c)=>{
+  const items=k.items, N=items.length, ja=st; let i=0, lock=false;
+  c.innerHTML=`<div class="ukol">${k.zadani}<small>${k.pod}</small></div>
+    <div class="srTop"><span class="pocit" id="srN"></span><div class="srBar"><i id="srBar"></i></div></div>
+    <div class="srQ" id="srQ"></div><div id="srO"></div>${FOOT}`;
+  const ukaz=()=>{ const it=items[i], slot=it.q.includes('___')?'___':it.q.includes('_')?'_':null; lock=false;
+    const Q=$('#srQ'); Q.innerHTML=slot?esc(it.q).replace(slot,`<span class="gap cur${slot==='___'?' slovo':''}" id="srG">&nbsp;</span>`):`<span class="srW">${esc(it.q)}</span>`;
+    Q.classList.remove('pop'); void Q.offsetWidth; Q.classList.add('pop');
+    $('#srN').textContent=`${i+1} / ${N}`; $('#srBar').style.width=(i/N*100)+'%';
+    const pism=it.opts.every(o=>o.length===1), opts=pism||k.fix?it.opts:shuffle(it.opts);
+    $('#srO').innerHTML=pism?klavesy(opts):`<div class="srOpts">${opts.map((o,j)=>`<button class="sro" data-o="${esc(o)}" style="--k:${['var(--m)','var(--t)','var(--zelena)'][j%3]}">${zvyrazni(o,opts)}</button>`).join('')}</div>`;
+    $$('#srO button').forEach(b=>b.addEventListener('click',()=>{ if(st!==ja||st.done||lock||b.disabled) return; const o=pism?b.dataset.l:b.dataset.o;
+      if(o===it.ok){ lock=true; const g=$('#srG'); if(g){ g.textContent=it.ok; g.classList.remove('cur'); g.classList.add('ok'); jiskry(g,8); } else { b.classList.add('spravne'); jiskry(b,8); }
+        Snd.ok(); fb('✓ '+esc(it.proc),'good'); i++; $('#srBar').style.width=(i/N*100)+'%';
+        setTimeout(()=>{ if(st!==ja||st.done||st.kroky[st.i]!==k) return; if(i>=N) hotovo(esc(k.konec||'Celá série je hotová!')); else { fb(''); ukaz(); } },950); }
+      else { b.disabled=true; shake(b); chyba('Ještě ne – '+esc(it.proc)); } })); };
+  ukaz();
+};
+R.gaps=(k,c)=>{
+  const parts=k.t.split(/\{([^}]+)\}/), ans=[]; let html='';
+  parts.forEach((p,i)=>{ if(i%2){ html+=`<span class="gap" data-g="${ans.length}">&nbsp;</span>`; ans.push(p); } else html+=esc(p); });
+  c.innerHTML=`<div class="ukol">Doplň <b>i, í, y, ý</b> do zvýrazněné mezery.<small>Mezer v této větě: ${ans.length}</small></div><div class="veta big">${html}</div>${klavesy(['i','í','y','ý'])}${FOOT}`;
+  let cur=0; const gaps=[...c.querySelectorAll('.gap')], btns=[...c.querySelectorAll('.pism')];
+  const mark=()=>gaps.forEach((g,j)=>g.classList.toggle('cur',j===cur)); mark();
+  btns.forEach(b=>b.addEventListener('click',()=>{ if(st.done||cur>=ans.length||b.disabled) return; const g=gaps[cur];
+    if(b.dataset.l===ans[cur]){ g.textContent=ans[cur]; g.classList.remove('cur','bad'); g.classList.add('ok'); Snd.ok(); jiskry(g,8); btns.forEach(x=>x.disabled=false);
+      const h=k.h[cur]; cur++; if(cur>=ans.length) hotovo(esc(h)+'<br>Věta je hotová!'); else { fb('✓ '+esc(h),'good'); mark(); } }
+    else { b.disabled=true; g.classList.remove('bad'); void g.offsetWidth; g.classList.add('bad'); shake(b); chyba('Nápověda: '+esc(k.h[cur])); } }));
+};
+R.chytej=(k,c)=>{
+  const CIL=k.cil||10;
+  c.innerHTML=`<div class="ukol">${k.zadani}<small>${k.pod}</small></div><div class="pocit" id="chN">0 / ${CIL}</div><div class="hriste" id="hr"></div>${FOOT}`;
+  const hr=$('#hr'); let n=0, konec=false, raf=0, last=0, odSpawnu=99, items=[];
+  cleanupFn=()=>{ konec=true; cancelAnimationFrame(raf); };
+  const spawn=()=>{ const ok=Math.random()<.55, d=ok?pick(k.dobre):pick(k.spatne);
+    const el=document.createElement('button'); el.className='pad'; el.dataset.ok=ok?1:0;
+    el.innerHTML=`<span class="pl">${esc(d[0]).replace('_','<span class="mz"></span>')}</span>`;
+    hr.appendChild(el); const it={el,ok,d,x:Math.random()*Math.max(10,hr.clientWidth-el.offsetWidth),y:-el.offsetHeight-4,v:hr.clientHeight/(5.8-Math.min(2,n*.2))};
+    el.style.transform=`translate(${it.x}px,${it.y}px)`; items.push(it);
+    el.addEventListener('pointerdown',e=>{ e.preventDefault(); if(konec||it.hit) return; it.hit=true;
+      if(it.ok){ n++; el.classList.add('chycen'); Snd.ok(); jiskry(el,8); $('#chN').textContent=`${n} / ${CIL}`; fb('✓ '+esc(d[1]),'good');
+        if(n>=CIL){ konec=true; cancelAnimationFrame(raf); items.forEach(o=>{ if(!o.hit) o.el.classList.add('pryc'); }); setTimeout(()=>hotovo(esc(k.konec)),350); } }
+      else { el.classList.add('spatne'); shake(hr); chyba(esc(d[1])); }
+      setTimeout(()=>el.remove(),450); }); };
+  const loop=t=>{ if(konec) return; const dt=Math.min(.05,last?(t-last)/1000:0); last=t; odSpawnu+=dt;
+    if(odSpawnu>Math.max(.8,1.2-n*.03)){ odSpawnu=0; spawn(); }
+    const H=hr.clientHeight;
+    items=items.filter(it=>{ if(it.hit) return false; it.y+=it.v*dt; it.el.style.transform=`translate(${it.x}px,${it.y}px)`; if(it.y>H+10){ it.el.remove(); return false; } return true; });
+    raf=requestAnimationFrame(loop); };
+  raf=requestAnimationFrame(loop);
+};
+R.oprav=(k,c)=>{
+  const holy=w=>w.replace(/[.,!?;:]/g,'');
+  c.innerHTML=`<div class="ukol">V téhle větě je <b>jedna chyba</b>. Najdi ji a ťukni na ni.<small>Jsi paní učitelka – vezmi červenou propisku.</small></div>
+    <div class="veta big oprV">${k.v.split(' ').map((w,i)=>`<button class="ow" data-i="${i}">${esc(w)}</button>`).join(' ')}</div>${FOOT}`;
+  c.querySelectorAll('.ow').forEach(b=>b.addEventListener('click',()=>{ if(st.done||b.classList.contains('ok')) return; const w=holy(b.textContent);
+    if(w===k.bad){ const konc=b.textContent.slice(w.length); b.classList.add('chyba'); b.innerHTML=`<s>${esc(w)}</s><span class="oprava">${esc(k.good)}</span>${esc(konc)}`;
+      c.querySelectorAll('.ow').forEach(x=>x.disabled=true); jiskry(b,8); hotovo(`Správně je <b>${esc(k.good)}</b> – ${esc(k.proc)}.`); }
+    else { b.classList.add('ok'); shake(b); chyba(`„${esc(w)}“ je napsané správně. Hledej dál.`); } }));
+};
+const bodu=n=>n===1?'bod':n>=2&&n<=4?'body':'bodů';
+R.rychlovka=(k,c)=>{
+  const dur=(TEST&&window.__ryDur)||60; let fronta=shuffle(RYCH), n=0, chyb=0, t0=0, tm=0, konec=false, cur=null, lock=true;
+  const rek=+store.rekord||0;
+  c.innerHTML=`<div class="ukol">Kolik toho stihneš za <b>${dur} sekund</b>?<small>Každá správná odpověď je bod. ${rek?`Tvůj rekord: <b>${rek}</b> – překonáš ho?`:'Zatím nemáš rekord – tak ho nastav!'}</small></div>
+    <div class="ryTop"><div class="ryCas"><i id="ryBar"></i></div><span class="ryBody"><b id="ryN">0</b> b.</span></div>
+    <div class="ryQ" id="ryQ"><button class="dalsi" id="ryStart">${ikona('i:timer|⏱️')} Start</button></div>
+    <div id="ryP" hidden>${klavesy(['i','í','y','ý'])}</div>${FOOT}`;
+  cleanupFn=()=>{ konec=true; clearInterval(tm); };
+  const btns=[...c.querySelectorAll('#ryP .pism')], slovo=t=>t.replace(/\{(.+?)\}/,'$1');
+  const dalsiQ=()=>{ if(konec) return; cur=fronta.shift(); if(!cur){ fronta=shuffle(RYCH); cur=fronta.shift(); }
+    $('#ryQ').innerHTML=esc(cur[0].replace(/\{.+?\}/,'§')).replace('§','<span class="gap cur" id="ryG">&nbsp;</span>'); lock=false; };
+  btns.forEach(b=>b.addEventListener('click',()=>{ if(lock||konec) return; lock=true; const [t,h]=cur, ans=t.match(/\{(.+?)\}/)[1], g=$('#ryG');
+    if(b.dataset.l===ans){ n++; $('#ryN').textContent=n; g.textContent=ans; g.classList.replace('cur','ok'); Snd.ok(); jiskry(g,6); fb('✓ '+esc(slovo(t)),'good'); setTimeout(dalsiQ,280); }
+    else { chyb++; g.textContent=ans; g.classList.remove('cur'); g.classList.add('spatne'); Snd.buzz(); shake(b); fb(`Správně je <b>${esc(slovo(t))}</b> – ${esc(h)}`,'bad'); fronta.splice(4,0,cur); setTimeout(dalsiQ,1400); } }));
+  const konecHry=()=>{ if(konec) return; konec=true; clearInterval(tm); cleanupFn=null; $('#ryP').hidden=true;
+    const novy=n>(+store.rekord||0); if(novy){ store.rekord=n; save(); }
+    st.chyby=chyb; st.ck=chyb; st.hvOverride=n>=18?3:n>=10?2:1; st.vysledek=`${n} ${bodu(n)} · chyb ${chyb}`;
+    st.komentar=n>=18?(chyb?'Bleskově rychlá!':'Bleskově rychlá a bez chyby!'):n>=10?'Pěkně rychlá – zkus překonat rekord!':'Příště to bude rychlejší!';
+    $('#ryQ').innerHTML=`<div class="ryVysl">${n} ${bodu(n)}</div>${novy?'<div class="ryRek">Nový rekord!</div>':`<div class="ryMal">tvůj rekord: ${store.rekord}</div>`}`;
+    Snd.zvonek(); hotovo(`Čas vypršel! Správně: <b>${n}</b>, chyb: <b>${chyb}</b>.${n>=18?'':' Na tři hvězdičky potřebuješ 18 bodů.'}`,{tichy:true,bezOdmeny:n<10}); };
+  $('#ryStart').addEventListener('click',async()=>{ $('#ryStart').disabled=true;
+    for(const x of ['3','2','1']){ if(konec) return; $('#ryQ').innerHTML=`<span class="odpocet">${x}</span>`; Snd.tick(); await wait(600); }
+    if(konec) return; $('#ryP').hidden=false; t0=performance.now(); Snd.ok();
+    tm=setInterval(()=>{ const p=Math.min(1,(performance.now()-t0)/(dur*1000)); $('#ryBar').style.width=((1-p)*100)+'%'; if(p>=1) konecHry(); },100); dalsiQ(); });
+};
+function znamka(ch,n){ const p=(n-ch)/n; return p>=.9?1:p>=.75?2:p>=.5?3:p>=.25?4:5; }
+const ZN_SLOVY={1:'výborně',2:'chvalitebně',3:'dobře',4:'dostatečně',5:'nedostatečně'};
+R.pisemka=(k,c)=>{
+  const ans=[], hints=[]; let html='';
+  k.vety.forEach(([t,h])=>{ let hi=0; t.split(/\{([^}]+)\}/).forEach((p,i)=>{ if(i%2){ html+=`<span class="gap pg" data-g="${ans.length}">&nbsp;</span>`; ans.push(p); hints.push(h[hi++]||''); } else html+=esc(p); }); html+=' '; });
+  const N=ans.length, vypl=new Array(N).fill(null); let cur=0, odevzdano=false;
+  c.innerHTML=`<div class="ukol">${k.nadpis}<small>Doplň i, í, y, ý. Nápovědy tu nejsou – jako ve škole. Když se spleteš, ťukni na mezeru a oprav ji.</small></div>
+    <div class="papir"><div class="pHead"><span>${k.zahlavi}</span><span>Jméno: <span class="ruka">Lada</span></span></div><p class="pText">${html}</p></div>
+    <div id="pP">${klavesy(['i','í','y','ý'])}</div>
+    <div class="pStav"><span id="pN">Doplněno 0 z ${N}</span><button class="dalsi" id="odevzdat" hidden>Odevzdat písemku</button></div>
+    <div id="pV"></div>${FOOT}`;
+  const gaps=[...c.querySelectorAll('.pg')];
+  const mark=()=>gaps.forEach((g,j)=>g.classList.toggle('cur',j===cur)); mark();
+  const stav=()=>{ const v=vypl.filter(Boolean).length; $('#pN').textContent=v<N?`Doplněno ${v} z ${N}`:'Všechno doplněno – zkontroluj si to a odevzdej.'; $('#odevzdat').hidden=v<N; };
+  gaps.forEach((g,j)=>g.addEventListener('click',()=>{ if(odevzdano) return; cur=j; mark(); fb(''); Snd.tick(); }));
+  c.querySelectorAll('#pP .pism').forEach(b=>b.addEventListener('click',()=>{ if(odevzdano) return;
+    if(cur<0){ fb('Ťukni na mezeru, kterou chceš změnit.',''); return; }
+    vypl[cur]=b.dataset.l; gaps[cur].textContent=b.dataset.l; gaps[cur].classList.add('vypl'); Snd.tick();
+    let nx=-1; for(let s=1;s<=N;s++){ const j=(cur+s)%N; if(!vypl[j]){ nx=j; break; } } cur=nx; mark(); stav(); fb(''); }));
+  $('#odevzdat').addEventListener('click',()=>{ if(odevzdano) return; odevzdano=true; cur=-1; mark(); $('#pP').hidden=true; $('#odevzdat').hidden=true; $('#pN').textContent='';
+    const chyby=[]; gaps.forEach((g,j)=>{ g.classList.remove('vypl'); if(vypl[j]===ans[j]) g.classList.add('spr'); else { g.classList.add('spatne'); g.innerHTML=`<s>${esc(vypl[j])}</s><span class="oprava">${esc(ans[j])}</span>`; chyby.push(j); } });
+    const ch=chyby.length, z=znamka(ch,N); st.chyby=ch; st.ck=ch; st.znamka=z; st.hvOverride=z===1?3:z===2?2:1; st.vysledek=`chyb: ${ch} z ${N}`;
+    $('#pV').innerHTML=`<div class="vysledek"><span class="velkaZn">${ZN_SVG(z)}</span><div><h3>${ch===0?'Bez jediné chyby!':`Chyb: ${ch} z ${N}`}</h3><p>Známka <b>${z}</b> – ${ZN_SLOVY[z]}.${ch?' Červeně je opravené, co mělo být jinak:':''}</p>${ch?`<ol class="pChyby">${chyby.map(j=>`<li>${esc(hints[j])}</li>`).join('')}</ol>`:''}</div></div>`;
+    Snd.zvonek(); Snd.pero();
+    hotovo(ch===0?'Paráda – celá písemka bez jediné chyby!':z<=2?'Skoro bez chyb! Projdi si červené opravy.':'Projdi si červené opravy a pravidla k nim – a zkus to znovu.',{bezOdmeny:true,tichy:true,cls:z<=2?'good':'bad'});
+    $('#pV').scrollIntoView({behavior:'smooth',block:'nearest'}); });
+};
+
+/* ---------- finále: žákovská knížka ---------- */
+function finale(){
+  cleanup(); const ex=st.ex, ch=st.chyby, idx=st.idx; let h=ch<=1?3:ch<=4?2:1; if(st.hvOverride) h=st.hvOverride;
+  const zn=st.znamka||({3:1,2:2,1:3})[h];
+  store.hv[ex.id]=Math.max(store.hv[ex.id]||0,h); if(st.znamka) store.zn[ex.id]=Math.min(store.zn[ex.id]||5,st.znamka); save(); updateHvezdy();
+  const dalsiEx=EX[idx+1], d=new Date(), datum=`${d.getDate()}. ${d.getMonth()+1}.`;
+  const kom=st.komentar||(zn===1?(ch===0?'Výborně, bez jediné chyby!':'Výborně, Lado!'):zn===2?'Chvalitebně – jen pár chybiček.':zn===3?'Dobře. Ještě to potrénuj!':'Nevadí – projdi si tahák a zkus to znovu.');
+  $('#finale').innerHTML=`<div class="fcard zk"><div class="zkHead">Žákovská knížka · Český jazyk</div>
+    <h2>Lada</h2><p class="fsub">${ex.akuz?`napsala <b>${esc(ex.akuz)}</b>`:`zvládla oddíl <b>${esc(ex.title)}</b>`}</p>
+    <table class="zkTab"><tr><th>Datum</th><th>Co</th><th>Známka</th></tr><tr><td>${datum}</td><td>${esc(ex.title)}${st.vysledek?`<br><small>${esc(st.vysledek)}</small>`:''}</td><td class="zkZn">${zn}</td></tr></table>
+    <div class="fhv">${[0,1,2].map(i=>`<span class="${i<h?'on':''}" style="animation-delay:${.3+i*.3}s">★</span>`).join('')}</div>
+    <p class="fch">${kom}</p>
+    <div class="fbtns">${dalsiEx?`<button class="dalsi" data-f="next">Další oddíl →</button>`:''}<button class="sek" data-f="again">Znovu</button><button class="sek" data-f="home">Domů</button></div></div>`;
+  $('#finale').hidden=false; Snd.fanfare(); if(zn<=2) FW.start(4500);
+}
+function zavriFinale(){ if($('#finale').hidden) return; $('#finale').hidden=true; FW.stop(); }
+$('#finale').addEventListener('click',e=>{ const b=e.target.closest('[data-f]'); if(!b) return; const f=b.dataset.f, idx=st?st.idx:0;
+  zavriFinale(); if(f==='next') startEx(idx+1); else if(f==='again') startEx(idx); else renderHome(); });
+
+/* ---------- ovládání ---------- */
+$('#home').addEventListener('click',e=>{ const b=e.target.closest('.exCard'); if(b) startEx(+b.dataset.i); if(e.target.closest('#tipTahak')) $('#tahak').hidden=false; });
+$('#back').addEventListener('click',()=>{ zavriFinale(); renderHome(); });
+$('#mute').addEventListener('click',()=>{ store.muted=!store.muted; Snd.muted=store.muted; save(); updateMute(); if(!store.muted){ Snd.init(); Snd.ok(); } });
+$('#tahakB').addEventListener('click',()=>{ $('#tahak').hidden=false; });
+$('#tahakX').addEventListener('click',()=>{ $('#tahak').hidden=true; });
+$('#tahak').addEventListener('click',e=>{ if(e.target.id==='tahak') $('#tahak').hidden=true; });
+let rT=0; addEventListener('resize',()=>{ clearTimeout(rT); rT=setTimeout(()=>{ if(FW.raf) FW.fit(); },150); });
+load(); updateMute(); renderHome();
+addEventListener('load',ikony);
+
+/* ---------- test: ?test&demo=… ukáže konkrétní obrazovku ---------- */
+if(TEST){ const demo=new URLSearchParams(location.search).get('demo');
+  if(demo){ const s=document.createElement('style'); s.textContent='*,*::before,*::after{animation-duration:0s!important;animation-delay:0s!important;transition:none!important}'; document.head.appendChild(s); }
+  const ix=id=>EX.findIndex(e=>e.id===id), jdi=(id,i)=>{ startEx(ix(id)); if(i){ st.i=i; renderKrok(); } };
+  const odpovezMezery=()=>{ const k=st.kroky[st.i]; k.t.replace(/\{([^}]+)\}/g,(m,a)=>{ [...$$('#card .pism')].find(b=>b.dataset.l===a).click(); return m; }); };
+  const vyplnPisemku=(spatne=[])=>{ const k=st.kroky[st.i], ans=[]; k.vety.forEach(([t])=>t.replace(/\{([^}]+)\}/g,(m,a)=>{ ans.push(a); return m; }));
+    const jine={i:'y','í':'ý',y:'i','ý':'í'}; ans.forEach((a,j)=>{ $$('#card .pg')[j].click(); const l=spatne.includes(j)?jine[a]:a; [...$$('#pP .pism')].find(b=>b.dataset.l===l).click(); }); };
+  setTimeout(()=>{
+    if(demo==='pravidlo') jdi('a');
+    if(demo==='serie') jdi('a',1);
+    if(demo==='jarni') jdi('a',3);
+    if(demo==='veta') jdi('a',4);
+    if(demo==='odmena'){ jdi('a',4); odpovezMezery(); }
+    if(demo==='zive') jdi('b',1);
+    if(demo==='shoda') jdi('c',2);
+    if(demo==='chytej') jdi('d',1);
+    if(demo==='oprav'){ jdi('e'); const k=st.kroky[0]; [...$$('#card .ow')].find(b=>b.textContent.replace(/[.,!?;:]/g,'')===k.bad).click(); }
+    if(demo==='rychlovka') jdi('f');
+    if(demo==='pisemka'){ jdi('h'); const k=st.kroky[0]; let n=0; k.vety.slice(0,2).forEach(([t])=>t.replace(/\{([^}]+)\}/g,(m,a)=>{ [...$$('#pP .pism')].find(b=>b.dataset.l===a).click(); n++; return m; })); }
+    if(demo==='opraveno'){ jdi('h'); vyplnPisemku([2,5,13]); $('#odevzdat').click(); }
+    if(demo==='knizka'){ jdi('h'); vyplnPisemku([5]); $('#odevzdat').click(); finale(); }
+    if(demo==='tahak') $('#tahak').hidden=false;
+  },300);
+  window.__iy={st:()=>st,startEx,dalsi,finale,renderKrok,R,EX,CV22,ZKOUSKA,RYCH};
+}
+</script>
+</body>
+</html>
