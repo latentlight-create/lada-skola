@@ -19,7 +19,10 @@ Po každém kroku proběhne zvířátko (pes, kůň, delfín, leopard, velryba),
 ## Marie Terezie (`marie-terezie/`)
 
 Vlastivěda pro 5. třídu: osvícenství, Marie Terezie a její reformy, navazující Josef II.
-Šest oddílů – Příběh (8 kapitol s otázkou), Pravda, nebo výmysl?, Kdo to zavedl? (Marie Terezie × Josef II.),
-Časová osa (1717, 1740, 1774, 1780), Do školy! (padací hra s věcmi z roku 1774 + otázky), Velký test (12 náhodných otázek).
-Obsah podle Malované vlastivědy 5 (osvícenství, reformy) a pracovního listu Žili byli (ČRo Junior).
+Osm oddílů – Otázky ze sešitu (přesně podle Ladina školního sešitu), Příběh (9 kapitol s otázkou), Pravda, nebo výmysl?,
+Kdo to zavedl? (Marie Terezie × Josef II.), Časová osa (1717, 1740, 1774, 1780), Do školy! (padací hra s věcmi z roku 1774 + otázky),
+Kartičky na test (otázka → otočit → věděla/nevěděla, co nevěděla, přijde znovu), Velký test (všechny otázky ze sešitu + pár dalších).
+Obsah hlavně podle Ladina sešitu (reforma = zásadní změna systému postupnými kroky, novověk, 18. st., jednotná měna, školská reforma,
+jednotné zákony, sčítání obyvatel, číslování domů, zdravotní reforma, manufaktury, Evropská babička; Josef II.: nevolnictví,
+toleranční patent, povinné příjmení; učebnice s. 14–17, PS s. 10–11), doplněno z Malované vlastivědy 5 a listu Žili byli (ČRo Junior).
 Používá stejný engine jako `cesky-test/`; zvířátka doplnila císařovna (`ZV.marie`) a portréty `BUSTA` v `zvirata.js`. `?test` zpřístupní `window.__mt`.

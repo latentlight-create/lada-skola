@@ -320,6 +320,19 @@ h1{font-weight:900;font-size:clamp(26px,4.2vw,42px);line-height:1.05;margin:0;le
 .pad.pryc{transition:opacity .3s;opacity:0}
 @keyframes chycen{to{scale:1.5;opacity:0}}
 @keyframes spatne{30%{rotate:-10deg}60%{rotate:10deg}100%{opacity:0}}
+.exCard .nove{position:absolute;top:-13px;left:18px;background:var(--red);color:#fff;font-weight:900;font-size:14px;letter-spacing:.04em;padding:3px 11px;border-radius:999px;box-shadow:0 3px 0 #b8323a;transform:rotate(-4deg)}
+.chip.vyb{font-size:clamp(18px,2.3vw,22px)}
+.chip.vyb.nepatri,.chip.vyb.nepatri:disabled{background:#ffe7e8;border-color:var(--red);color:#a3262c;box-shadow:0 4px 0 #f3a7ab;opacity:.85}
+.karta{text-align:center}
+.kmal{color:var(--muted);font-weight:800;font-size:16px}
+.kq{font-weight:900;font-size:clamp(26px,3.7vw,38px);line-height:1.25;margin:12px 0 16px;color:#3a2a55}
+.kt{color:var(--muted);font-weight:700;margin:0 0 16px}
+.ka{text-align:left;background:#fff7e3;border:3px solid #ffd98a;border-radius:22px;padding:14px 20px;font-weight:800;font-size:clamp(20px,2.6vw,26px);line-height:1.45;margin:0 auto 18px;max-width:680px;animation:vyskoc .4s cubic-bezier(.3,1.5,.5,1)}
+.ka ul{margin:0;padding-left:24px}
+.kbtns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.tt.ses td:first-child{width:42%;color:var(--muted)}
+.tt.ses td{font-size:17px}
+.pozn{color:var(--muted);font-weight:700;font-size:15px;margin:6px 0 0}
 .palac{position:absolute;right:3%;bottom:calc(var(--lane)*.27 + env(safe-area-inset-bottom));width:clamp(170px,27vw,310px);height:auto}
 </style>
 </head>
@@ -353,32 +366,46 @@ h1{font-weight:900;font-size:clamp(26px,4.2vw,42px);line-height:1.05;margin:0;le
   <div class="tcard">
     <button class="zavri" id="tahakX" aria-label="Zavřít">✕</button>
     <h2>📝 Tahák – Marie Terezie</h2>
+    <h3>📒 Ze školního sešitu (na test!)</h3>
+    <table class="tt ses">
+      <tr><td>Co znamená slovo <b>reforma</b>?</td><td><b>Zásadní změna systému, zlepšení, postupnými kroky.</b></td></tr>
+      <tr><td>Jak nazýváme <b>období</b> M. T.?</td><td><b>novověk</b></td></tr>
+      <tr><td>Kdy <b>vládla</b>?</td><td><b>1740–1780</b>, 18. století</td></tr>
+      <tr><td>Jaké <b>změny</b> proběhly?</td><td>jednotná měna · školská reforma · jednotné zákony · sčítání obyvatel · povinné číslování domů · zdravotní reforma (očkování, nemocnice) · zřízení manufaktur</td></tr>
+      <tr><td>Proč se jí říkalo <b>Evropská babička</b>?</td><td>Měla vnoučata po celé Evropě.</td></tr>
+      <tr><td>Jaké změny proběhly za <b>Josefa II.</b>?</td><td>zrušil nevolnictví · toleranční patent · povinné příjmení</td></tr>
+      <tr><td>Co je <b>nevolnictví</b>?</td><td>Poddaný patřil k panství – bez svolení pána se nesměl odstěhovat, oženit/vdát, ani jít studovat či do učení.</td></tr>
+    </table>
+    <p class="pozn">Učebnice str. 14–17 · pracovní sešit str. 10–11</p>
     <h3>Kdo byla</h3>
     <ul>
       <li>habsburská panovnice a česká královna, <b>vládla 1740–1780</b> (40 let), sídlila ve <b>Vídni</b></li>
       <li>narodila se <b>1717</b>, otec císař <b>Karel VI.</b> – <b>pragmatická sankce</b> (vládnout může i dcera)</li>
-      <li>manžel František Štěpán Lotrinský, <b>16 dětí</b>, syn <b>Josef II.</b></li>
+      <li>manžel František Štěpán Lotrinský, <b>16 dětí</b>, syn <b>Josef II.</b> – děti se přiženily a přivdaly po celé Evropě</li>
       <li>pruský král <b>Fridrich II.</b> jí vzal většinu <b>Slezska</b></li>
       <li><b>1743</b> korunována v Praze na českou královnu</li>
     </ul>
     <h3>Osvícenství</h3>
     <ul>
       <li><b>osvícenství</b> = osvícení rozumu – nejdůležitější je rozum a vzdělání</li>
-      <li><b>reforma</b> = změna k lepšímu</li>
+      <li><b>manufaktura</b> = velká dílna, lidé vyrábějí ručně a každý dělá jen část práce</li>
     </ul>
     <h3>Reformy Marie Terezie</h3>
     <table class="tt">
-      <tr><td>🏫 <b>povinná školní docházka</b></td><td>1774 · děti 6–12 let · čtení, psaní, počítání</td></tr>
-      <tr><td>🌾 <b>omezila robotu</b></td><td>poddaní robotovali méně dní</td></tr>
-      <tr><td>💰 <b>daně platí i šlechta</b></td><td>peníze hlavně na vojsko</td></tr>
-      <tr><td>🪖 <b>stálé vojsko</b></td><td>armáda připravená i v míru</td></tr>
-      <tr><td>🏠 <b>číslování domů</b></td><td>soupis lidí (i pro vojsko)</td></tr>
-      <tr><td>⚖️ <b>zákaz mučení</b></td><td>1776</td></tr>
+      <tr><td>🪙 <b>jednotná měna</b></td><td>stejné peníze v celé říši</td></tr>
+      <tr><td>🏫 <b>školská reforma</b></td><td>1774 povinná školní docházka · děti 6–12 let · čtení, psaní, počítání</td></tr>
+      <tr><td>📜 <b>jednotné zákony</b></td><td>všude platí stejné zákony</td></tr>
+      <tr><td>🧮 <b>sčítání obyvatel</b></td><td>kolik lidí v říši žije</td></tr>
+      <tr><td>🏠 <b>číslování domů</b></td><td>každý dům má číslo</td></tr>
+      <tr><td>💉 <b>zdravotní reforma</b></td><td>očkování, nemocnice</td></tr>
+      <tr><td>🧵 <b>manufaktury</b></td><td>podporovala jejich zakládání</td></tr>
+      <tr><td>➕ <b>a ještě</b></td><td>omezila robotu · daně platí i šlechta · stálé vojsko · zákaz mučení (1776)</td></tr>
     </table>
     <h3>Josef II. – syn, vládl 1780–1790</h3>
     <ul>
       <li><b>1781 zrušil nevolnictví</b> – lidé se mohli stěhovat, ženit a studovat bez svolení pána (robota zůstala)</li>
       <li><b>1781 toleranční patent</b> – lidé mohli vyznávat i jiné než katolické náboženství</li>
+      <li><b>povinné příjmení</b> – každý musel mít stálé příjmení, které se dědí</li>
     </ul>
     <h3>Zapamatuj si roky</h3>
     <ul><li><b>1717</b> narození · <b>1740</b> nástup na trůn · <b>1774</b> školní docházka · <b>1780</b> smrt · <b>1781</b> zrušení nevolnictví</li></ul>
@@ -499,29 +526,71 @@ const FW={cv:null,cx:null,raf:0,end:0,rk:[],pt:[],W:0,H:0,
     Snd.pop(); }
 };
 
-/* ---------- obsah: Marie Terezie (vlastivěda 5. třída – osvícenství, reformy) ---------- */
+/* ---------- obsah: Marie Terezie (vlastivěda 5. třída – podle Ladina sešitu + Malovaná vlastivěda 5) ---------- */
+/* Z Ladina školního sešitu (Uč. s. 14–17, PS s. 10–11): reforma = zásadní změna systému, zlepšení, postupnými kroky;
+   období = novověk; vládla 1740–1780 (18. st.); změny: jednotná měna, školská reforma, jednotné zákony, sčítání obyvatel,
+   povinné značení (číslování) domů, zdravotní reforma (očkování, nemocnice), zřízení manufaktur;
+   Evropská babička = měla vnoučata po celé Evropě; Josef II.: zrušil nevolnictví, toleranční patent, povinné příjmení. */
+const REF_MT=['jednotná měna','školská reforma','jednotné zákony','sčítání obyvatel','číslování domů','zdravotní reforma (očkování, nemocnice)','zřízení manufaktur'];
+const REF_J2=['zrušil nevolnictví','toleranční patent','povinné příjmení'];
 const PRIBEH=[
-  {obr:'mt',text:'Ahoj, já jsem <b>Marie Terezie</b>! Narodila jsem se roku <b>1717</b> ve Vídni. Patřila jsem do slavného rodu <b>Habsburků</b>, kteří vládli i v českých zemích.',
-    q:'Z jakého rodu byla Marie Terezie?',ok:'z rodu Habsburků',ne:['z rodu Přemyslovců','z rodu Lucemburků'],proc:'Marie Terezie byla Habsburkovna – Habsburkové vládli z Vídně.'},
+  {obr:'mt',text:'Ahoj, já jsem <b>Marie Terezie</b>! Narodila jsem se roku <b>1717</b> ve Vídni. Patřila jsem do slavného rodu <b>Habsburků</b>, kteří vládli i v českých zemích. Žila jsem v období, kterému říkáme <b>novověk</b>.',
+    q:'Z jakého rodu byla Marie Terezie?',ok:'z rodu Habsburků',ne:['z rodu Přemyslovců','z rodu Lucemburků'],proc:'Marie Terezie byla Habsburkovna – Habsburkové vládli z Vídně. Její období nazýváme novověk.'},
   {obr:'📜',text:'Můj tatínek, císař <b>Karel VI.</b>, neměl syna. Proto sepsal <b>pragmatickou sankci</b> – listinu, podle které mohla po něm vládnout i dcera.',
     q:'Proč mohla vládnout žena?',ok:'otec to zajistil pragmatickou sankcí',ne:['vyhrála volby','vyhrála závod v běhu'],proc:'Pragmatická sankce zajistila, že po Karlu VI. mohla nastoupit jeho dcera.'},
   {obr:'⚔️',text:'Na trůn jsem nastoupila roku <b>1740</b>, bylo mi 23 let. Hned mě napadl pruský král <b>Fridrich II.</b> a vzal mi většinu <b>Slezska</b>. Ostatní země jsem ubránila.',
     q:'Kdo jí vzal většinu Slezska?',ok:'pruský král Fridrich II.',ne:['francouzský král','turecký sultán'],proc:'Ve válkách o rakouské dědictví získal skoro celé Slezsko pruský král Fridrich II.'},
-  {obr:'👑',text:'Roku <b>1743</b> mě v Praze korunovali na <b>českou královnu</b>. Vládla jsem celých <b>40 let</b> – od roku 1740 do roku 1780. Sídlila jsem ve <b>Vídni</b>.',
-    q:'Kolik let Marie Terezie vládla?',ok:'40 let',ne:['10 let','70 let'],proc:'Vládla od roku 1740 do roku 1780 – to je 40 let.'},
-  {obr:'👨‍👩‍👧‍👦',text:'Můj manžel <b>František Štěpán Lotrinský</b> byl císař. Měli jsme <b>16 dětí</b>! Syn <b>Josef II.</b> po mně vládl a dcera Marie Antoinetta se stala francouzskou královnou.',
-    q:'Kolik dětí měla Marie Terezie?',ok:'16',ne:['3','30'],proc:'Měla 16 dětí – ne všechny se ale dožily dospělosti.'},
-  {obr:'💡',text:'V 18. století lidé začali víc věřit <b>rozumu</b> a <b>vzdělání</b>. Této době se říká <b>osvícenství</b>. Lidé chtěli <b>reformy</b> – změny k lepšímu.',
-    q:'Co je reforma?',ok:'změna k lepšímu',ne:['válka','korunovace'],proc:'Reforma = změna k lepšímu. Osvícenství = osvícení rozumu.'},
-  {obr:'🏫',text:'A tak jsem zavedla <b>reformy</b>: roku <b>1774</b> povinnou <b>školní docházku</b>, <b>omezila robotu</b> na méně dní, <b>daně</b> musela platit i šlechta, vybudovala jsem <b>stálé vojsko</b> a domy dostaly <b>čísla</b>.',
-    q:'Co zavedla Marie Terezie roku 1774?',ok:'povinnou školní docházku',ne:['zrušení nevolnictví','toleranční patent'],proc:'Roku 1774 vyšel Všeobecný školní řád – děti od 6 do 12 let měly chodit do školy.'},
-  {obr:'j2',text:'Zemřela jsem roku <b>1780</b>. Pak vládl můj syn <b>Josef II.</b> Pokračoval v reformách: <b>zrušil nevolnictví</b> a vydal <b>toleranční patent</b> – lidé mohli vyznávat i jiné než katolické náboženství.',
+  {obr:'👑',text:'Roku <b>1743</b> mě v Praze korunovali na <b>českou královnu</b>. Vládla jsem celých <b>40 let</b> – od roku <b>1740</b> do roku <b>1780</b>. To je <b>18. století</b>. Sídlila jsem ve <b>Vídni</b>.',
+    q:'Ve kterém století vládla Marie Terezie?',ok:'v 18. století',ne:['ve 14. století','ve 20. století'],proc:'Vládla 1740–1780. Roky 1701 až 1800 jsou 18. století.'},
+  {obr:'👨‍👩‍👧‍👦',text:'Můj manžel <b>František Štěpán Lotrinský</b> byl císař. Měli jsme <b>16 dětí</b>! Syn <b>Josef II.</b> po mně vládl. Ostatní děti se přiženily a přivdaly do královských rodin po celé Evropě – dcera Marie Antoinetta se stala francouzskou královnou. Proto mi říkají <b>Evropská babička</b>.',
+    q:'Proč se Marii Terezii říkalo Evropská babička?',ok:'měla vnoučata po celé Evropě',ne:['pekla nejlepší buchty v Evropě','byla nejstarší člověk v Evropě'],proc:'Její děti měly rodiny ve Francii, v Itálii i jinde – a tak měla vnoučata po celé Evropě.'},
+  {obr:'💡',text:'V 18. století lidé začali víc věřit <b>rozumu</b> a <b>vzdělání</b>. Této době se říká <b>osvícenství</b>. Lidé chtěli <b>reformy</b>. Reforma je <b>zásadní změna systému – zlepšení, které se dělá postupnými kroky</b>.',
+    q:'Co znamená slovo reforma?',ok:'zásadní změna systému – zlepšení postupnými kroky',ne:['rychlá válka mezi státy','slavnostní korunovace krále'],proc:'Reforma = zásadní změna systému, zlepšení, postupnými kroky.'},
+  {obr:'🏫',text:'A tak jsem začala s reformami. Zavedla jsem <b>jednotnou měnu</b> – stejné peníze v celé říši – a <b>jednotné zákony</b>. Roku <b>1774</b> přišla <b>školská reforma</b>: povinná školní docházka. Nechala jsem <b>sečíst obyvatele</b> a všechny domy musely mít <b>číslo</b>.',
+    q:'Co zavedla Marie Terezie roku 1774?',ok:'povinnou školní docházku',ne:['zrušení nevolnictví','toleranční patent'],proc:'Roku 1774 přišla školská reforma – děti od 6 do 12 let měly chodit do školy.'},
+  {obr:'💉',text:'Starala jsem se i o <b>zdraví</b>: <b>zdravotní reforma</b> přinesla <b>očkování</b> a nové <b>nemocnice</b>. Podporovala jsem <b>manufaktury</b> – velké dílny, kde spousta lidí vyráběla věci ručně a každý dělal jen kousek práce. A ještě jsem <b>omezila robotu</b>, daně musela platit i šlechta a vybudovala jsem <b>stálé vojsko</b>.',
+    q:'Co je manufaktura?',ok:'velká dílna, kde se vyrábí ručně a každý dělá jen část práce',ne:['továrna plná robotů','obchod s látkami'],proc:'Manufaktura = velká dílna. Práce se rozdělila, takže se vyrábělo rychleji. Marie Terezie zakládání manufaktur podporovala.'},
+  {obr:'j2',text:'Zemřela jsem roku <b>1780</b>. Pak vládl můj syn <b>Josef II.</b> <b>Zrušil nevolnictví</b> – lidé se už mohli bez svolení pána stěhovat, ženit a studovat. Vydal <b>toleranční patent</b> – lidé mohli vyznávat i jiné než katolické náboženství. A nařídil <b>povinné příjmení</b>.',
     q:'Kdo zrušil nevolnictví?',ok:'Josef II.',ne:['Marie Terezie','Karel VI.'],proc:'Nevolnictví zrušil roku 1781 syn Marie Terezie, Josef II.'},
+];
+/* otázky přesně podle sešitu */
+const SESIT=[
+  {typ:'quiz',q:'Co znamená slovo reforma?',ok:'zásadní změna systému – zlepšení postupnými kroky',ne:['rychlá válka mezi dvěma státy','slavnostní korunovace krále'],proc:'Reforma = zásadní změna systému, zlepšení, postupnými kroky.'},
+  {typ:'quiz',q:'Jak nazýváme období Marie Terezie?',ok:'novověk',ne:['pravěk','středověk'],proc:'Marie Terezie žila v novověku.'},
+  {typ:'quiz',q:'Kdy Marie Terezie vládla?',ok:'1740–1780, v 18. století',ne:['1346–1378, ve 14. století','1918–1938, ve 20. století'],proc:'Vládla 1740–1780, to je 18. století.'},
+  {typ:'vyber',q:'Jaké změny proběhly za Marie Terezie?',ano:REF_MT,
+    ne:[['zrušení nevolnictví','to udělal až její syn Josef II.'],['toleranční patent','ten vydal až Josef II.'],['povinné příjmení','to nařídil až Josef II.'],['zavedení elektřiny','elektřina tenkrát ještě nebyla!'],['stavba železnice','první vlak u nás jel až mnohem později.']],
+    proc:'Změny za Marie Terezie: jednotná měna, školská reforma, jednotné zákony, sčítání obyvatel, číslování domů, zdravotní reforma (očkování, nemocnice) a zřízení manufaktur.'},
+  {typ:'quiz',q:'Proč se Marii Terezii říkalo Evropská babička?',ok:'měla vnoučata po celé Evropě',ne:['pekla nejlepší buchty v Evropě','byla nejstarší člověk v Evropě'],proc:'Její děti se přiženily a přivdaly do královských rodin po celé Evropě – a tak měla vnoučata skoro všude.'},
+  {typ:'vyber',q:'Jaké změny proběhly v době panování Josefa II.?',ano:REF_J2,
+    ne:[['školská reforma','tu zavedla už Marie Terezie.'],['číslování domů','to zavedla už Marie Terezie.'],['jednotná měna','tu zavedla už Marie Terezie.'],['stavba metra','metro tenkrát ještě nebylo! 😄']],
+    proc:'Josef II.: zrušil nevolnictví, vydal toleranční patent a nařídil povinné příjmení.'},
+  {typ:'quiz',q:'Co je nevolnictví?',ok:'poddaní nesměli bez svolení pána odejít, ženit se ani studovat',ne:['povinnost chodit do školy','placení daní za psa'],proc:'Nevolník patřil k panství. Bez svolení pána se nesměl odstěhovat, oženit nebo vdát, ani jít studovat. Josef II. to roku 1781 zrušil – robota ale zůstala.'},
+];
+/* kartičky na test: otázka → zkusit odpovědět → otočit */
+const KARTY=[
+  {q:'Co znamená slovo reforma?',a:'Zásadní změna systému – zlepšení, postupnými kroky.'},
+  {q:'Jak nazýváme období Marie Terezie?',a:'Novověk.'},
+  {q:'Kdy Marie Terezie vládla?',a:'1740–1780, v 18. století.'},
+  {q:'Jaké změny proběhly za Marie Terezie?',a:['jednotná měna','školská reforma – povinná školní docházka (1774)','jednotné zákony','sčítání obyvatel','povinné číslování domů','zdravotní reforma – očkování, nemocnice','zřízení manufaktur']},
+  {q:'Proč se Marii Terezii říkalo Evropská babička?',a:'Měla vnoučata po celé Evropě – její děti se přiženily a přivdaly do královských rodin.'},
+  {q:'Jaké změny proběhly v době panování Josefa II.?',a:['zrušil nevolnictví','toleranční patent','povinné příjmení']},
+  {q:'Co je nevolnictví?',a:'Poddaný patřil k panství – bez svolení pána se nesměl odstěhovat, oženit nebo vdát, ani jít studovat či do učení.'},
+  {q:'Co povolil toleranční patent?',a:'Lidé mohli vyznávat i jiné než katolické náboženství.'},
+  {q:'Co je manufaktura?',a:'Velká dílna, kde lidé vyrábějí věci ručně a každý dělá jen část práce.'},
 ];
 const TF=[
   ['Marie Terezie vládla 40 let.',1,'Ano – od roku 1740 do roku 1780.'],
+  ['Žila v období, kterému říkáme novověk.',1,'Ano – Marie Terezie patří do novověku, do 18. století.'],
+  ['Vládla ve středověku.',0,'Výmysl. Vládla v novověku, v 18. století (1740–1780).'],
+  ['Říkalo se jí Evropská babička.',1,'Ano – měla vnoučata po celé Evropě.'],
   ['Měla 16 dětí.',1,'Ano, 16! Nejznámější je syn Josef II. a dcera Marie Antoinetta.'],
-  ['Zavedla povinnou školní docházku.',1,'Ano, roku 1774. Děti od 6 do 12 let se měly učit číst, psát a počítat.'],
+  ['Zavedla povinnou školní docházku.',1,'Ano, roku 1774 – to byla školská reforma. Děti od 6 do 12 let se měly učit číst, psát a počítat.'],
+  ['Zavedla jednotnou měnu.',1,'Ano – v celé říši se platilo stejnými penězi.'],
+  ['Nechala sečíst všechny obyvatele.',1,'Ano – úředníci spočítali, kolik lidí v říši žije.'],
+  ['Zakázala manufaktury.',0,'Výmysl! Naopak – zakládání manufaktur podporovala.'],
+  ['Reforma znamená, že se všechno změní během jednoho dne.',0,'Výmysl. Reforma je zásadní změna systému, ale dělá se postupnými kroky.'],
+  ['Josef II. nařídil, že každý musí mít příjmení.',1,'Ano – povinné příjmení zavedl Josef II.'],
   ['Zakázala krátké sukně.',0,'Výmysl! Krátké sukně tenkrát nikdo nenosil, tak nebylo co zakazovat. 😄'],
   ['Nechala očíslovat domy.',1,'Ano! Úředníci tak věděli, kolik lidí kde bydlí – a kolik mužů může jít k vojsku.'],
   ['Zrušila robotu úplně.',0,'Výmysl. Robotu jen omezila na méně dní. Úplně zrušená byla až mnohem později.'],
@@ -530,19 +599,25 @@ const TF=[
   ['Byla korunována českou královnou v Praze.',1,'Ano, roku 1743.'],
   ['Úředním jazykem se stala čeština.',0,'Výmysl. Habsburkové vládli z Vídně, úředním jazykem byla němčina.'],
   ['Pruský král Fridrich II. byl její nejlepší kamarád.',0,'Výmysl! Byl to její nepřítel – vzal jí většinu Slezska.'],
-  ['Vybudovala stálé vojsko.',1,'Ano – armádu, která byla připravená pořád, nejen když byla válka.'],
   ['Bydlela na Pražském hradě.',0,'Výmysl. Sídlila ve Vídni – v Hofburgu a na zámku Schönbrunn.'],
-  ['Nechala své děti očkovat proti neštovicím.',1,'Ano! Neštovice byly nebezpečná nemoc a ona se nebála nové vědy.'],
+  ['Nechala své děti očkovat proti neštovicím.',1,'Ano! Patřilo to ke zdravotní reformě – a ona se nebála nové vědy.'],
+  ['Nevolnictví zrušila Marie Terezie.',0,'Výmysl. Nevolnictví zrušil až její syn Josef II., roku 1781.'],
 ];
 const KDO=[
-  ['🏫','Povinná školní docházka (1774)','mt','Marie Terezie – Všeobecný školní řád z roku 1774.'],
+  ['🏫','Školská reforma – povinná školní docházka (1774)','mt','Marie Terezie – Všeobecný školní řád z roku 1774.'],
+  ['🪙','Jednotná měna – stejné peníze v celé říši','mt','Marie Terezie – v celé říši se platilo stejnými penězi.'],
+  ['📜','Jednotné zákony pro celou říši','mt','Marie Terezie – všude měly platit stejné zákony.'],
+  ['🧮','Sčítání obyvatel','mt','Marie Terezie – úředníci spočítali všechny lidi v říši.'],
+  ['🏠','Číslování domů','mt','Marie Terezie – každý dům musel mít číslo, aby se vědělo, kolik kde žije lidí.'],
+  ['💉','Zdravotní reforma – očkování a nemocnice','mt','Marie Terezie – nechala očkovat i vlastní děti a zakládaly se nemocnice.'],
+  ['🧵','Zřízení manufaktur – velkých dílen','mt','Marie Terezie – podporovala manufaktury, kde se vyrábělo ve velkém.'],
   ['🌾','Omezení roboty na méně dní','mt','Marie Terezie – poddaní museli na panském robotovat méně dní v týdnu.'],
   ['💰','Daně musí platit i šlechta','mt','Marie Terezie – peníze potřebovala hlavně na vojsko.'],
   ['🪖','Stálé vojsko','mt','Marie Terezie – armáda připravená i v době míru.'],
-  ['🏠','Číslování domů','mt','Marie Terezie – aby se vědělo, kolik kde žije lidí.'],
   ['⚖️','Zákaz mučení při výslechu','mt','Marie Terezie – mučení zakázala roku 1776.'],
   ['🕊️','Zrušení nevolnictví (1781)','j2','Josef II. – lidé se mohli stěhovat, ženit nebo studovat bez svolení pána. Robotovat ale museli dál.'],
   ['⛪','Toleranční patent (1781)','j2','Josef II. – kromě katolíků mohli svou víru vyznávat i evangelíci a pravoslavní.'],
+  ['🪪','Povinné příjmení','j2','Josef II. – každý musel mít stálé příjmení, které se dědí po otci.'],
   ['⚰️','„Úsporná rakev“ se sklápěcím dnem','j2','Josef II. – chtěl šetřit dřevo. Lidé se ale tak zlobili, že nařízení brzy zrušil. 😄'],
 ];
 const OSA1={nadpis:'Seřaď život Marie Terezie od začátku do konce. Ťukej na události popořadě.',udal:[
@@ -557,39 +632,48 @@ const SKOLA_Q=[
   {q:'Co se děti učily v obyčejné (triviální) škole?',ok:'číst, psát a počítat',ne:['programovat a anglicky','jezdit na koni a šermovat'],proc:'Triviální škola učila tři základní věci: čtení, psaní a počítání – a k tomu náboženství.'},
   {q:'Proč chtěla Marie Terezie, aby děti chodily do školy?',ok:'vzdělaní lidé byli pro stát užitečnější',ne:['aby rodiče měli doma klid','aby se děti naučily francouzsky'],proc:'Říše zaostávala. Vzdělaní lidé lépe hospodařili a byli z nich lepší řemeslníci, vojáci i úředníci.'},
 ];
+/* ses:1 = otázka ze sešitu – ve Velkém testu je vždycky */
 const TESTQ=[
-  {q:'Kdy vládla Marie Terezie?',ok:'1740–1780',ne:['1620–1648','1848–1916'],proc:'Vládla 40 let, od 1740 do 1780.'},
+  {q:'Co znamená slovo reforma?',ok:'zásadní změna systému – zlepšení postupnými kroky',ne:['rychlá válka mezi státy','slavnostní korunovace krále'],proc:'Reforma = zásadní změna systému, zlepšení, postupnými kroky.',ses:1},
+  {q:'Jak nazýváme období Marie Terezie?',ok:'novověk',ne:['pravěk','středověk'],proc:'Novověk.',ses:1},
+  {q:'Kdy vládla Marie Terezie?',ok:'1740–1780 (18. století)',ne:['1620–1648 (17. století)','1848–1916 (19. století)'],proc:'Vládla 40 let, od 1740 do 1780 – v 18. století.',ses:1},
+  {q:'Proč se Marii Terezii říkalo Evropská babička?',ok:'měla vnoučata po celé Evropě',ne:['pekla nejlepší buchty v Evropě','byla nejstarší člověk v Evropě'],proc:'Její děti se přiženily a přivdaly do královských rodin po celé Evropě.',ses:1},
+  {q:'Co z toho NEPATŘÍ mezi změny za Marie Terezie?',ok:'toleranční patent',ne:['jednotná měna','sčítání obyvatel'],proc:'Toleranční patent vydal až Josef II.',ses:1},
+  {q:'Která změna proběhla za Josefa II.?',ok:'povinné příjmení',ne:['jednotná měna','školská reforma'],proc:'Josef II.: zrušil nevolnictví, toleranční patent, povinné příjmení.',ses:1},
+  {q:'Co je nevolnictví?',ok:'poddaní nesměli bez svolení pána odejít, ženit se ani studovat',ne:['povinnost chodit do školy','placení daní za psa'],proc:'Nevolník patřil k panství a bez svolení pána nesměl skoro nic. Zrušil ho Josef II.',ses:1},
+  {q:'Co přinesla zdravotní reforma?',ok:'očkování a nemocnice',ne:['mobilní telefony','sanitky s blikačkou'],proc:'Zdravotní reforma Marie Terezie: očkování a nemocnice.'},
+  {q:'Co je manufaktura?',ok:'velká dílna, kde se vyrábí ručně a každý dělá jen část práce',ne:['továrna plná robotů','obchod s látkami'],proc:'Manufaktury Marie Terezie podporovala.'},
   {q:'Z jakého rodu byla?',ok:'z rodu Habsburků',ne:['z rodu Přemyslovců','z rodu Lucemburků'],proc:'Byla Habsburkovna.'},
   {q:'Kolik měla dětí?',ok:'16',ne:['4','25'],proc:'Měla 16 dětí.'},
   {q:'Jak se jmenoval její syn, který po ní vládl?',ok:'Josef II.',ne:['Karel IV.','František Josef I.'],proc:'Po Marii Terezii vládl syn Josef II.'},
   {q:'Která listina jí umožnila vládnout?',ok:'pragmatická sankce',ne:['toleranční patent','Zlatá bula sicilská'],proc:'Pragmatickou sankci sepsal její otec Karel VI.'},
   {q:'Kdo jí vzal většinu Slezska?',ok:'pruský král Fridrich II.',ne:['Napoleon','turecký sultán'],proc:'Fridrich II. Pruský.'},
   {q:'Jak se říká době, kdy byl nejdůležitější rozum a vzdělání?',ok:'osvícenství',ne:['baroko','gotika'],proc:'Osvícenství = osvícení rozumu.'},
-  {q:'Kdy zavedla povinnou školní docházku?',ok:'1774',ne:['1620','1918'],proc:'Roku 1774 – Všeobecný školní řád.'},
+  {q:'Kdy zavedla povinnou školní docházku?',ok:'1774',ne:['1620','1918'],proc:'Roku 1774 – školská reforma.'},
   {q:'Od kolika do kolika let měly děti chodit do školy?',ok:'od 6 do 12 let',ne:['od 3 do 6 let','od 15 do 19 let'],proc:'Od 6 do 12 let.'},
   {q:'Co udělala Marie Terezie s robotou?',ok:'omezila ji na méně dní',ne:['úplně ji zrušila','zdvojnásobila ji'],proc:'Robotu omezila – zrušená byla až později.'},
-  {q:'Kdo musel nově platit daně?',ok:'i šlechta (vrchnost)',ne:['jen děti','nikdo'],proc:'Daně musela platit i vrchnost.'},
   {q:'Proč dostaly domy čísla?',ok:'aby se vědělo, kolik kde žije lidí',ne:['aby byly domy hezčí','aby se v nich dalo hrát loterii'],proc:'Úředníci tak spočítali obyvatele – i muže pro vojsko.'},
-  {q:'Co vybudovala pro obranu říše?',ok:'stálé vojsko',ne:['Velkou čínskou zeď','obří hrad z písku'],proc:'Stálé vojsko – armádu připravenou i v míru.'},
-  {q:'Co zrušil Josef II. roku 1781?',ok:'nevolnictví',ne:['povinnou školní docházku','všechny daně'],proc:'Zrušil nevolnictví – lidé se mohli stěhovat a studovat bez svolení pána.'},
   {q:'Co povolil toleranční patent?',ok:'vyznávat i jiné než katolické náboženství',ne:['jezdit autem','volit prezidenta'],proc:'Toleranční patent Josefa II. povolil i jiná náboženství.'},
   {q:'Ve kterém městě Marie Terezie sídlila?',ok:'ve Vídni',ne:['v Praze','v Berlíně'],proc:'Sídlila ve Vídni.'},
-  {q:'Který jazyk se za Habsburků stal úředním jazykem i v Čechách?',ok:'němčina',ne:['čeština','angličtina'],proc:'Úředním jazykem byla němčina.'},
   {q:'Kde byla korunována českou královnou?',ok:'v Praze',ne:['v Paříži','v Brně'],proc:'V Praze, roku 1743.'},
 ];
 const EX=[
-  {id:'m1',title:'Příběh Marie Terezie',desc:'Kdo byla, odkud byla a co zažila – 8 krátkých kapitol, po každé otázka',zvire:'marie',barva:'#e2557f',
+  {id:'m7',title:'Otázky ze sešitu',desc:'Přesně ty otázky, které máš ve školním sešitě – na test!',zvire:'marie',barva:'#00a0b8',nove:1,
+    kroky:()=>SESIT.map(s=>({...s,ses:1,cast:'Otázky ze sešitu'}))},
+  {id:'m1',title:'Příběh Marie Terezie',desc:'Kdo byla, odkud byla a co zažila – 9 krátkých kapitol, po každé otázka',zvire:'marie',barva:'#e2557f',
     kroky:()=>PRIBEH.map(p=>({typ:'quiz',...p,cast:'Příběh Marie Terezie'}))},
   {id:'m2',title:'Pravda, nebo výmysl?',desc:'Rozsuď 12 tvrzení – co je pravda a co si někdo vymyslel?',zvire:'pes',barva:'#2f7ff0',
     kroky:()=>shuffle(TF).slice(0,12).map(t=>({typ:'tf',v:t[0],ok:t[1],proc:t[2],cast:'Pravda, nebo výmysl?'}))},
   {id:'m3',title:'Kdo to zavedl?',desc:'Marie Terezie, nebo její syn Josef II.? Roztřiď jejich reformy',zvire:'kun',barva:'#2fb36a',
-    kroky:()=>shuffle(KDO).map(k=>({typ:'kdo',ik:k[0],v:k[1],ok:k[2],proc:k[3],cast:'Marie Terezie, nebo Josef II.?'}))},
+    kroky:()=>{ const mt=shuffle(KDO.filter(k=>k[2]==='mt')).slice(0,8), j2=KDO.filter(k=>k[2]==='j2'); return shuffle([...mt,...j2]).map(k=>({typ:'kdo',ik:k[0],v:k[1],ok:k[2],proc:k[3],cast:'Marie Terezie, nebo Josef II.?'})); }},
   {id:'m4',title:'Časová osa',desc:'Seřaď život Marie Terezie a zapamatuj si roky 1717, 1740, 1774, 1780',zvire:'leopard',barva:'#ff8a3d',
     kroky:()=>[{typ:'osa',...OSA1,cast:'Časová osa · seřaď události'},{typ:'osa',...OSA2,cast:'Časová osa · důležité roky'}]},
-  {id:'m5',title:'Do školy! (1774)',desc:'Co bylo ve škole v 18. století? Chytej správné věci a zjisti, jak se tehdy učilo',zvire:'delfin',barva:'#8a5cf0',
+  {id:'m5',title:'Do školy! (1774)',desc:'Školská reforma: co bylo ve škole v 18. století? Chytej správné věci',zvire:'delfin',barva:'#8a5cf0',
     kroky:()=>[{typ:'chytej',cast:'Co bylo ve škole v roce 1774?'},...SKOLA_Q.map(q=>({typ:'quiz',...q,cast:'Škola za Marie Terezie'}))]},
-  {id:'m6',title:'Velký test',desc:'12 otázek ze všeho – jako opravdová písemka. Dáš všechno bez chyby?',zvire:'velryba',barva:'#d19a00',
-    kroky:()=>shuffle(TESTQ).slice(0,12).map(q=>({typ:'quiz',...q,cast:'Velký test',test:1}))},
+  {id:'m8',title:'Kartičky na test',desc:'Otázka – zkus odpovědět – otoč kartičku. Co nevíš, přijde znovu',zvire:'pes',barva:'#ff5d8f',nove:1,
+    kroky:()=>KARTY.map(k=>({typ:'karta',...k,cast:'Kartičky na test'}))},
+  {id:'m6',title:'Velký test',desc:'12 otázek – všechny ze sešitu plus pár dalších. Dáš to bez chyby?',zvire:'velryba',barva:'#d19a00',
+    kroky:()=>{ const ses=TESTQ.filter(q=>q.ses), dal=shuffle(TESTQ.filter(q=>!q.ses)).slice(0,Math.max(0,12-ses.length)); return shuffle([...ses,...dal]).map(q=>({typ:'quiz',...q,cast:'Velký test',test:1})); }},
 ];
 
 /* ---------- stav ---------- */
@@ -609,7 +693,7 @@ function renderHome(){
   st=null; $('#h1').textContent='Marie Terezie'; $('#sub').textContent='Vlastivěda pro 5. třídu · císařovna, osvícenství a reformy 👑';
   const vse=EX.every(e=>store.hv[e.id]);
   $('#home').innerHTML=`<div class="karty">${EX.map((e,i)=>{ const h=store.hv[e.id]||0;
-    return `<button class="exCard${h?' hotove':''}" data-i="${i}" style="--c:${e.barva}"><span class="num">${i+1}</span><span class="tx"><b>${e.title}</b><small>${e.desc}</small><span class="hv">${'★'.repeat(h)}<span class="off">${'★'.repeat(3-h)}</span></span></span><span class="mini">${zvireSVG(e.zvire)}</span></button>`; }).join('')}</div>
+    return `<button class="exCard${h?' hotove':''}" data-i="${i}" style="--c:${e.barva}">${e.nove&&!h?'<span class="nove">NOVÉ</span>':''}<span class="num">${i+1}</span><span class="tx"><b>${e.title}</b><small>${e.desc}</small><span class="hv">${'★'.repeat(h)}<span class="off">${'★'.repeat(3-h)}</span></span></span><span class="mini">${zvireSVG(e.zvire)}</span></button>`; }).join('')}</div>
     ${vse?'<div class="banner">👑 Všechno hotovo – Marie Terezie by z tebe měla radost!</div>':''}<p class="tip">Ťukni dole na zvířátka 👇</p>`;
   updateHvezdy(); show('home');
 }
@@ -630,7 +714,7 @@ function oznacSpravne(c,sel,isOk){ c.querySelectorAll(sel).forEach(x=>{ x.disabl
 R.quiz=(k,c)=>{
   const opts=shuffle([k.ok,...k.ne]);
   const info=k.text?`<div class="pribeh"><div class="obr">${obrHTML(k.obr)}</div><p>${k.text}</p></div>`:'';
-  const pre=k.text?`Kapitola ${st.i+1} z ${st.kroky.length} · `:k.test?`Otázka ${st.i+1} z ${st.kroky.length} · `:'';
+  const pre=k.text?`Kapitola ${st.i+1} z ${st.kroky.length} · `:k.test?`Otázka ${st.i+1} z ${st.kroky.length}${k.ses?' · 📒 ze sešitu':''} · `:k.ses?'📒 Otázka ze sešitu · ':'';
   c.innerHTML=`${info}<div class="ukol otq"><small>${pre}${k.text?'přečti si to a odpověz':'vyber správnou odpověď'}</small>❓ ${esc(k.q)}</div>
     <div class="opts">${opts.map(o=>`<button class="opt">${esc(o)}</button>`).join('')}</div>${FOOT}`;
   c.querySelectorAll('.opt').forEach(b=>b.addEventListener('click',()=>{ if(st.done||b.disabled) return;
@@ -690,6 +774,30 @@ R.chytej=(k,c)=>{
     items=items.filter(it=>{ if(it.hit) return false; it.y+=it.v*dt; it.el.style.transform=`translate(${it.x}px,${it.y}px)`; if(it.y>H+10){ it.el.remove(); return false; } return true; });
     raf=requestAnimationFrame(loop); };
   raf=requestAnimationFrame(loop);
+};
+
+R.vyber=(k,c)=>{
+  const items=shuffle([...k.ano.map(t=>({t,ok:1})),...k.ne.map(([t,why])=>({t,ok:0,why}))]); let n=0;
+  c.innerHTML=`<div class="ukol otq"><small>📒 Otázka ze sešitu · vyber všechny správné</small>❓ ${esc(k.q)}<small>Najdi všech ${k.ano.length} – pozor, některé tam nepatří!</small></div>
+    <div class="pocit" id="vbN">0 / ${k.ano.length}</div>
+    <div class="chips">${items.map((it,i)=>`<button class="chip vyb" data-i="${i}">${esc(it.t)}</button>`).join('')}</div>${FOOT}`;
+  c.querySelectorAll('.chip.vyb').forEach(b=>b.addEventListener('click',()=>{ if(st.done||b.disabled) return; const it=items[+b.dataset.i]; b.disabled=true;
+    if(it.ok){ n++; b.classList.add('found'); $('#vbN').textContent=`${n} / ${k.ano.length}`; Snd.ok(); jiskry(b,8);
+      if(n>=k.ano.length) hotovo('✓ '+k.proc); else fb(`✓ ${it.t} – zbývá ${k.ano.length-n}`,'good'); }
+    else { b.classList.add('nepatri'); shake(b); chyba(`${it.t} – ${it.why}`); } }));
+};
+R.karta=(k,c)=>{
+  const odp=Array.isArray(k.a)?`<ul>${k.a.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:esc(k.a);
+  c.innerHTML=`<div class="karta"><small class="kmal">🃏 Kartička ${k.opak?'· znovu 🔁':'ze sešitu'}</small><div class="kq">❓ ${esc(k.q)}</div>
+    <p class="kt" id="kt">Zkus odpověď říct nahlas nebo napsat do sešitu. Pak otoč kartičku a zkontroluj se.</p>
+    <div class="ka" id="ka" hidden>${odp}</div>
+    <div class="kbtns" id="kb1"><button class="dalsi" id="ukaz">👀 Otočit kartičku</button></div>
+    <div class="kbtns" id="kb2" hidden><button class="vol tfP" id="vedela">✓ Věděla jsem</button><button class="vol tfV" id="nevedela">✗ Ještě ne</button></div></div>${FOOT}`;
+  $('#ukaz').addEventListener('click',()=>{ $('#ka').hidden=false; $('#kt').hidden=true; $('#kb1').hidden=true; $('#kb2').hidden=false; Snd.tick(); });
+  $('#vedela').addEventListener('click',()=>{ if(st.done) return; $('#kb2').hidden=true; hotovo('✓ Super! Tahle kartička je tvoje.'); });
+  $('#nevedela').addEventListener('click',()=>{ if(st.done) return; $('#kb2').hidden=true; chyba(null); const kolik=(k.opak||0)+1;
+    if(kolik<=2){ st.kroky.push({...k,opak:kolik}); hotovo('Nevadí! Přečti si odpověď ještě jednou – kartička přijde na konci znovu. 🔁',{cls:'bad',bezOdmeny:true,tichy:true}); }
+    else hotovo('Nevadí! Tuhle si ještě jednou přečti v taháku 📝 nahoře.',{cls:'bad',bezOdmeny:true,tichy:true}); });
 };
 
 /* ---------- finále ---------- */
