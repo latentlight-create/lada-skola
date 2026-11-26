@@ -18,11 +18,10 @@ Po každém kroku proběhne zvířátko (pes, kůň, delfín, leopard, velryba),
 
 ## Marie Terezie (`marie-terezie/`)
 
-Vlastivěda pro 5. třídu: osvícenství, Marie Terezie a její reformy, navazující Josef II.
-Osm oddílů – Otázky ze sešitu (přesně podle Ladina školního sešitu), Příběh (9 kapitol s otázkou), Pravda, nebo výmysl?,
-Kdo to zavedl? (Marie Terezie × Josef II.), Časová osa (1717, 1740, 1774, 1780), Do školy! (padací hra s věcmi z roku 1774 + otázky),
-Kartičky na test (otázka → otočit → věděla/nevěděla, co nevěděla, přijde znovu), Velký test (všechny otázky ze sešitu + pár dalších).
-Obsah hlavně podle Ladina sešitu (reforma = zásadní změna systému postupnými kroky, novověk, 18. st., jednotná měna, školská reforma,
-jednotné zákony, sčítání obyvatel, číslování domů, zdravotní reforma, manufaktury, Evropská babička; Josef II.: nevolnictví,
-toleranční patent, povinné příjmení; učebnice s. 14–17, PS s. 10–11), doplněno z Malované vlastivědy 5 a listu Žili byli (ČRo Junior).
+Vlastivěda pro 5. třídu postavená na Ladině školním sešitu (učebnice s. 14–17, PS s. 10–11). Sešit je osnova, ne kopie:
+každé téma má vlastní oddíl s výkladem a hrou a otázky jsou pokaždé jinak položené; otázky ve znění sešitu jsou až na konci.
+Devět oddílů – Kdo byla Marie Terezie (Vídeň, 1740–1780, 16 dětí, Evropská babička), Stroj času (novověk, jak poznat 18. století),
+Co je reforma? (zásadní změna systému, zlepšení, postupnými kroky), Reformy Marie Terezie (procházka rokem 1780 po 7 reformách,
+chytačka, hledání všech sedmi), Do školy! (školská reforma 1774), Josef II. a nevolnictví (příběh nevolníka Honzy, toleranční patent,
+povinné příjmení, kdo co zavedl), Pravda, nebo výmysl?, Velký test (z každého tématu aspoň jedna otázka), Zkoušení jako ve škole (kartičky).
 Používá stejný engine jako `cesky-test/`; zvířátka doplnila císařovna (`ZV.marie`) a portréty `BUSTA` v `zvirata.js`. `?test` zpřístupní `window.__mt`.
